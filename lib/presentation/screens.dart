@@ -1,5 +1,6 @@
-import 'package:antassistant/data/auth.dart';
 import 'package:antassistant/data/user_data.dart';
+import 'package:antassistant/entity/auth_state.dart';
+import 'package:antassistant/entity/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

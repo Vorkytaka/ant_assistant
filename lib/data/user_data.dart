@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:antassistant/entity/credentials.dart';
+import 'package:antassistant/entity/user_data.dart';
+
 abstract class Repository {
   bool isThereAnyAccount();
 
@@ -30,20 +33,4 @@ class RepositoryImpl extends Repository {
   Stream<List<UserData>> getUsersDataStream() {
     return _controller.stream;
   }
-}
-
-class Credential {
-  final String login;
-  final String password;
-
-  Credential(this.login, this.password);
-}
-
-class UserData {
-  final String accountName;
-  final String userId;
-  final String dynDns;
-  final double balance;
-
-  UserData(this.accountName, this.userId, this.dynDns, this.balance);
 }

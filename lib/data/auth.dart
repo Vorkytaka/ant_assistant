@@ -1,3 +1,4 @@
+import 'package:antassistant/entity/auth_state.dart';
 import 'package:dio/dio.dart' as dio;
 
 const String _BASE_URL = "http://cabinet.a-n-t.ru/cabinet.php";
@@ -22,18 +23,5 @@ Future<AuthState> auth(String login, String password) async {
     return AuthState(true, login, password);
   } catch (err) {
     return AuthState(false, login, password);
-  }
-}
-
-class AuthState {
-  final bool isSuccess;
-  String login;
-  String password;
-
-  AuthState(this.isSuccess, this.login, this.password);
-
-  @override
-  String toString() {
-    return "$login, $password, $isSuccess";
   }
 }
