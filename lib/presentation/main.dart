@@ -62,7 +62,7 @@ class UserDataState extends State<UserDataWidget> {
         itemBuilder: (context, pos) {
           return _buildPage(pos);
         },
-        itemCount: _data.length,
+        itemCount: _data.length + 1,
       );
     } else {
       return _buildAddUserScreen();
@@ -77,8 +77,12 @@ class UserDataState extends State<UserDataWidget> {
   }
 
   Widget _buildPage(int pos) {
-    final data = _data[pos];
-    return Text(data.accountName);
+    if (pos >= _data.length) {
+      return _buildAddUserScreen();
+    } else {
+      final data = _data[pos];
+      return Text(data.accountName);
+    }
   }
 
   void _onNextUsersData(List<UserData> data) {
