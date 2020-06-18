@@ -37,9 +37,11 @@ class UserDataState extends State<UserDataWidget> {
   void initState() {
     super.initState();
     this.widget.repo.getUsersDataStream().listen(onNextUsersData);
-//    if (!this.widget.repo.isThereAnyAccount()) {
-//      onAuth();
-//    }
+    if (!this.widget.repo.isThereAnyAccount()) {
+      Future(() {
+        onAuth();
+      });
+    }
   }
 
   @override
@@ -73,7 +75,7 @@ class UserDataState extends State<UserDataWidget> {
     final AuthState state = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AuthScreen()));
 
-    if (state.isSuccess) {
+    if (state != null && state.isSuccess) {
       this.widget.repo.saveUser(state.credentials);
     }
   }
