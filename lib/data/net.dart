@@ -1,3 +1,4 @@
+import 'package:antassistant/data/parser.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/user_data.dart';
@@ -41,10 +42,7 @@ Future<UserData> getUserData(Credentials credentials) async {
   try {
     final response = await dio.Dio(options).post(_BASE_URL, data: httpParams);
     final document = parser.parse(response.data);
-    final balance = double.parse(
-        document.querySelector("td.num").text.replaceAll(" руб.", ""));
-
-    return UserData(credentials.login, null, null, balance);
+    return parseUserData(document);
   } catch (err) {
     return null;
   }
