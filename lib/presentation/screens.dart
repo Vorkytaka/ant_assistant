@@ -74,7 +74,7 @@ class UserDataState extends State<UserDataWidget> {
         context, MaterialPageRoute(builder: (context) => AuthScreen()));
 
     if (state.isSuccess) {
-      this.widget.repo.saveUser(state.login, state.password);
+      this.widget.repo.saveUser(state.credentials);
     }
   }
 }

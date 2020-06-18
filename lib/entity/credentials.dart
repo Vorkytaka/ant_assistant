@@ -1,6 +1,9 @@
-class Credential {
+class Credentials {
   final String login;
   final String password;
 
-  Credential(this.login, this.password);
+  Credentials(this.login, this.password);
+
+  @override
+  String toString() => "($login, ••••••••))";
 }

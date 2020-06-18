@@ -1,12 +1,13 @@
+import 'package:antassistant/entity/credentials.dart';
+
 class AuthState {
   final bool isSuccess;
-  String login;
-  String password;
+  final Credentials credentials;
 
-  AuthState(this.isSuccess, this.login, this.password);
+  AuthState(this.isSuccess, this.credentials);
 
   @override
   String toString() {
-    return "$login, $password, $isSuccess";
+    return "Success: $isSuccess; $credentials";
   }
 }

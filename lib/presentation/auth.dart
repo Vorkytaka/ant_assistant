@@ -1,4 +1,5 @@
 import 'package:antassistant/data/auth.dart';
+import 'package:antassistant/entity/credentials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,8 @@ class AuthWidgetState extends State<AuthWidget> {
   Future<void> _onAuthButtonClicked() async {
     final login = _loginTextController.text;
     final pass = _passwordTextController.text;
-    final state = await auth(login, pass);
+    final credentials = Credentials(login, pass);
+    final state = await auth(credentials);
 
     Navigator.pop(context, state);
   }
