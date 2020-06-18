@@ -5,4 +5,7 @@ class UserData {
   final double balance;
 
   UserData(this.accountName, this.userId, this.dynDns, this.balance);
+
+  @override
+  String toString() => "($accountName, $balance)";
 }

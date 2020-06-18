@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:antassistant/data/net.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/user_data.dart';
 
@@ -21,11 +22,13 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  void saveUser(Credentials credentials) {
+  Future<void> saveUser(Credentials credentials) async {
     _users.add(credentials);
-    // async get data
-    final List<UserData> data =
-        _users.map((e) => UserData(e.login, null, null, null)).toList();
+    final List<UserData> data = List();
+    for (var cr in _users) {
+      final d = await getUserData(cr);
+      data.add(d);
+    }
     _controller.add(data);
   }
 

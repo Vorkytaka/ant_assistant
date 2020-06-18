@@ -1,4 +1,4 @@
-import 'package:antassistant/data/auth.dart';
+import 'package:antassistant/data/net.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

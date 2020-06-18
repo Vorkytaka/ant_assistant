@@ -1,4 +1,4 @@
-import 'package:antassistant/data/user_data.dart';
+import 'package:antassistant/data/repo.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,7 +65,7 @@ class UserDataState extends State<UserDataWidget> {
 
   void onNextUsersData(List<UserData> data) {
     setState(() {
-      _text = data.map((e) => e.accountName).join(", ");
+      _text = data.toString();
     });
   }
 
