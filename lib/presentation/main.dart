@@ -31,12 +31,12 @@ class UserDataWidget extends StatefulWidget {
 }
 
 class UserDataState extends State<UserDataWidget> {
-  String _text = "There is no";
+  List<UserData> _data;
 
   @override
   void initState() {
     super.initState();
-    this.widget.repo.getUsersDataStream().listen(onNextUsersData);
+    this.widget.repo.getUsersDataStream().listen(_onNextUsersData);
     if (!this.widget.repo.isThereAnyAccount()) {
       Future(() {
         onAuth();
@@ -52,22 +52,38 @@ class UserDataState extends State<UserDataWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(_text),
-          FlatButton(
-            onPressed: onAuth,
-            child: Text("Add Account"),
-          ),
-        ],
-      ),
+      child: _getBaseView(),
     );
   }
 
-  void onNextUsersData(List<UserData> data) {
+  Widget _getBaseView() {
+    if (_data != null && _data.isNotEmpty) {
+      return PageView.builder(
+        itemBuilder: (context, pos) {
+          return _buildPage(pos);
+        },
+        itemCount: _data.length,
+      );
+    } else {
+      return _buildAddUserScreen();
+    }
+  }
+
+  Widget _buildAddUserScreen() {
+    return FlatButton(
+      onPressed: onAuth,
+      child: Text("Add user"),
+    );
+  }
+
+  Widget _buildPage(int pos) {
+    final data = _data[pos];
+    return Text(data.accountName);
+  }
+
+  void _onNextUsersData(List<UserData> data) {
     setState(() {
-      _text = data.toString();
+      _data = data;
     });
   }
 
