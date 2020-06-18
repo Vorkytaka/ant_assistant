@@ -1,3 +1,4 @@
+import 'package:antassistant/data/user_data.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/screens.dart';
@@ -15,7 +16,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainScreen(),
+      home: MainScreen(
+        repo: RepositoryImpl(),
+      ),
     );
   }
 }

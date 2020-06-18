@@ -1,4 +1,4 @@
-import 'package:antassistant/data/data.dart';
+import 'package:antassistant/data/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +72,6 @@ class AuthWidgetState extends State<AuthWidget> {
     final pass = _passwordTextController.text;
     final state = await auth(login, pass);
 
-    Navigator.pop(context, state.isSuccess);
+    Navigator.pop(context, state);
   }
 }

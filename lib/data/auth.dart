@@ -31,4 +31,9 @@ class AuthState {
   String password;
 
   AuthState(this.isSuccess, this.login, this.password);
+
+  @override
+  String toString() {
+    return "$login, $password, $isSuccess";
+  }
 }
