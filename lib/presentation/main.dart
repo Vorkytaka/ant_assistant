@@ -58,9 +58,9 @@ class UserDataState extends State<UserDataWidget> {
 
   Widget _getBaseView() {
     if (_data != null && _data.isNotEmpty) {
-      return PageView.builder(
+      return ListView.builder(
         itemBuilder: (context, pos) {
-          return _buildPage(pos);
+          return _buildItem(pos);
         },
         itemCount: _data.length + 1,
       );
@@ -76,13 +76,22 @@ class UserDataState extends State<UserDataWidget> {
     );
   }
 
-  Widget _buildPage(int pos) {
-    if (pos >= _data.length) {
-      return _buildAddUserScreen();
-    } else {
+  Widget _buildItem(int pos) {
+    if (pos < _data.length) {
       final data = _data[pos];
-      return Text(data.accountName);
+      return _buildUserDataItem(data);
+    } else {
+      return _buildAddUserScreen();
     }
+  }
+
+  Widget _buildUserDataItem(UserData data) {
+    return Card(
+      color: Colors.white,
+      shadowColor: Colors.black,
+      elevation: 10,
+      child: Text(data.accountName),
+    );
   }
 
   void _onNextUsersData(List<UserData> data) {
