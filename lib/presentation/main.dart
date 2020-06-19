@@ -93,9 +93,12 @@ class UserDataState extends State<UserDataWidget> {
 
   void onAuth() async {
     final AuthState state = await showModalBottomSheet(
-        context: context,
-        builder: (context) => AuthWidget(),
-        backgroundColor: Colors.transparent);
+      context: context,
+      builder: (context) => AuthWidget(),
+      backgroundColor: Colors.transparent,
+      isDismissible: false,
+//      enableDrag: false,
+    );
 
     if (state != null && state.isSuccess) {
       this.widget.repo.saveUser(state.credentials);
