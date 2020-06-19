@@ -94,10 +94,14 @@ class UserDataState extends State<UserDataWidget> {
   void onAuth() async {
     final AuthState state = await showModalBottomSheet(
       context: context,
-      builder: (context) => AuthWidget(),
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       isDismissible: false,
 //      enableDrag: false,
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: AuthWidget(),
+      ),
     );
 
     if (state != null && state.isSuccess) {
