@@ -74,7 +74,17 @@ class UserDataState extends State<UserDataWidget> {
   Widget _buildAddUserScreen() {
     return FlatButton(
       onPressed: onAuth,
-      child: Text("Add user"),
+      child: Row(
+//        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            onPressed: null,
+            icon: Icon(Icons.add_circle_outline),
+          ),
+          Text("Add account"),
+        ],
+      ),
     );
   }
 
