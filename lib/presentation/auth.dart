@@ -8,7 +8,10 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: AuthWidget(),
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: AuthWidget(),
+      ),
     );
   }
 }
@@ -24,48 +27,45 @@ class AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-        alignment: Alignment.bottomCenter,
-        child: Card(
-            margin: EdgeInsets.only(left: 20, right: 20),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10))),
-            elevation: 10,
-            shadowColor: Colors.black,
-            child: Padding(
-                padding: EdgeInsets.only(
-                  right: 20,
-                  left: 20,
-                  top: 15,
-                  bottom: 10,
+    return Card(
+        margin: EdgeInsets.only(left: 20, right: 20),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+        elevation: 10,
+        shadowColor: Colors.black,
+        child: Padding(
+            padding: EdgeInsets.only(
+              right: 20,
+              left: 20,
+              top: 15,
+              bottom: 10,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  controller: _loginTextController,
+                  decoration: InputDecoration(
+                      hintText: "Login", border: OutlineInputBorder()),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    TextField(
-                      controller: _loginTextController,
-                      decoration: InputDecoration(
-                          hintText: "Login", border: OutlineInputBorder()),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _passwordTextController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: "Password", border: OutlineInputBorder()),
-                    ),
-                    SizedBox(height: 10),
-                    MaterialButton(
-                      minWidth: double.infinity,
-                      color: Colors.blueAccent,
-                      height: 50,
-                      onPressed: _onAuthButtonClicked,
-                      child: Text("Auth"),
-                    )
-                  ],
-                ))));
+                SizedBox(height: 10),
+                TextField(
+                  controller: _passwordTextController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      hintText: "Password", border: OutlineInputBorder()),
+                ),
+                SizedBox(height: 10),
+                MaterialButton(
+                  minWidth: double.infinity,
+                  color: Colors.blueAccent,
+                  height: 50,
+                  onPressed: _onAuthButtonClicked,
+                  child: Text("Auth"),
+                )
+              ],
+            )));
   }
 
   Future<void> _onAuthButtonClicked() async {
