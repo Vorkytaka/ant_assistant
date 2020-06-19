@@ -14,8 +14,10 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UserDataWidget(
-        repo: repo,
+      body: SafeArea(
+        child: UserDataWidget(
+          repo: repo,
+        ),
       ),
     );
   }
