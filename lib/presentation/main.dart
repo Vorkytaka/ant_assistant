@@ -3,6 +3,7 @@ import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'auth.dart';
 
@@ -191,9 +192,46 @@ class DetailedUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        data.userId,
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Код плательщика",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Text(
+                  data.userId,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(
+                      text: data.userId,
+                    ));
+                  },
+                  icon: Icon(
+                    Icons.content_copy,
+                    size: 20,
+                    color: Colors.black54,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
