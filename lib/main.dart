@@ -10,7 +10,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  Database _database;
+  static Database _database;
 
   Future<Database> get database async {
     if (_database != null) return _database;
@@ -28,7 +28,7 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MainScreen(
-        repo: RepositoryImpl(_database),
+        repo: RepositoryImpl(database),
       ),
     );
   }
@@ -39,7 +39,7 @@ class App extends StatelessWidget {
       version: 1,
       onCreate: (Database db, int v) {
         return db.execute(
-          "CREATE TABLE users(id INTEGER PRIMARY KEY, login TEXT, password TEXT)",
+          "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, login TEXT, password TEXT)",
         );
       },
     );

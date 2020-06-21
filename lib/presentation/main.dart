@@ -39,11 +39,11 @@ class UserDataState extends State<UserDataWidget> {
   void initState() {
     super.initState();
     this.widget.repo.getUsersDataStream().listen(_onNextUsersData);
-    if (!this.widget.repo.isThereAnyAccount()) {
-      Future(() {
+    this.widget.repo.isThereAnyAccount().then((value) {
+      if (!value) {
         onAuth();
-      });
-    }
+      }
+    });
   }
 
   @override
