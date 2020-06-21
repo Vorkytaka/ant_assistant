@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:antassistant/data/net.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/user_data.dart';
+import 'package:sqflite/sqflite.dart';
 
 abstract class Repository {
   bool isThereAnyAccount();
@@ -15,6 +16,9 @@ abstract class Repository {
 class RepositoryImpl extends Repository {
   final List<Credentials> _users = List();
   final StreamController<List<UserData>> _controller = StreamController();
+  final Database database;
+
+  RepositoryImpl(this.database);
 
   @override
   bool isThereAnyAccount() {

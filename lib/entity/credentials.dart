@@ -1,4 +1,6 @@
-class Credentials {
+import 'IDEntity.dart';
+
+class Credentials extends Mapped {
   final String login;
   final String password;
 
@@ -6,4 +8,10 @@ class Credentials {
 
   @override
   String toString() => "($login, ••••••••))";
+
+  @override
+  Map<String, dynamic> toMap() => {
+        "login": login,
+        "password": password,
+      };
 }
