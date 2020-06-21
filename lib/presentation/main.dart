@@ -104,33 +104,45 @@ class UserDataState extends State<UserDataWidget> {
       elevation: 3,
       margin: EdgeInsets.all(10),
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 24,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Text(
-                  data.accountName,
-                  style: TextStyle(
-                    fontSize: 20,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    data.accountName,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Text(
-                  data.userId,
-                  style: TextStyle(
-                    fontSize: 20,
+                  SizedBox(
+                    height: 4,
                   ),
-                ),
-              ],
+                  Text(
+                    data.userId,
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Column(
-              children: <Widget>[
-                Text(
-                  "${data.balance} ₽",
-                ),
-                Text("осталось ${data.daysLeft()} дней"),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    "баланс: ${data.balance} ₽",
+                  ),
+                  Text("осталось ${data.daysLeft()} дней"),
+                ],
+              ),
             ),
           ],
         ),
