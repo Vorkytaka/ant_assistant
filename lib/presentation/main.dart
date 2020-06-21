@@ -104,7 +104,13 @@ class UserDataState extends State<UserDataWidget> {
       elevation: 3,
       margin: EdgeInsets.all(10),
       child: FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return DetailedUserData(data: data);
+              });
+        },
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: 16,
@@ -175,5 +181,20 @@ class UserDataState extends State<UserDataWidget> {
     if (state != null && state.isSuccess) {
       this.widget.repo.saveUser(state.credentials);
     }
+  }
+}
+
+class DetailedUserData extends StatelessWidget {
+  final UserData data;
+
+  const DetailedUserData({Key key, @required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        data.userId,
+      ),
+    );
   }
 }
