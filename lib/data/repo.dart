@@ -26,10 +26,7 @@ class RepositoryImpl extends Repository {
     _users.add(credentials);
     final List<UserData> data = List();
     for (var cr in _users) {
-      final d = await getUserData(cr).catchError((e) {
-        print("Got error: ${e.error}"); // Finally, callback fires.
-        return 42; // Future completes with 42.
-      });
+      final d = await getUserData(cr);
       data.add(d);
     }
     _controller.add(data);
