@@ -14,6 +14,8 @@ class UserData {
   final String uploadSpeed;
   final double pricePerMonth;
 
+  final double pricePerDay;
+
   UserData(
       this.accountName,
       this.userId,
@@ -26,8 +28,11 @@ class UserData {
       this.tariffName,
       this.downloadSpeed,
       this.uploadSpeed,
-      this.pricePerMonth);
+      this.pricePerMonth)
+      : pricePerDay = pricePerMonth / 30;
 
   @override
   String toString() => "($accountName)";
+
+  int daysLeft() => (balance.toInt() + credit) ~/ pricePerDay.toInt();
 }

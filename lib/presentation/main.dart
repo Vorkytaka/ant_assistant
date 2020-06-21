@@ -101,8 +101,40 @@ class UserDataState extends State<UserDataWidget> {
     return Card(
       color: Colors.white,
       shadowColor: Colors.black,
-      elevation: 10,
-      child: Text(data.accountName),
+      elevation: 3,
+      margin: EdgeInsets.all(10),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Text(
+                  data.accountName,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  data.userId,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Text(
+                  "${data.balance} ₽",
+                ),
+                Text("осталось ${data.daysLeft()} дней"),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
