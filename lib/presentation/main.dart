@@ -75,6 +75,9 @@ class UserDataState extends State<UserDataWidget> {
   Widget _buildAddUserScreen() {
     return FlatButton(
       onPressed: onAuth,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.zero),
+      ),
       child: Row(
 //        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -105,6 +108,7 @@ class UserDataState extends State<UserDataWidget> {
       elevation: 3,
       margin: EdgeInsets.all(10),
       child: FlatButton(
+        padding: EdgeInsets.all(0),
         onPressed: () {
           showModalBottomSheet(
               context: context,
@@ -117,43 +121,34 @@ class UserDataState extends State<UserDataWidget> {
             vertical: 16,
             horizontal: 24,
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: Column(
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Row(
+              children: <Widget>[
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       data.accountName,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     SizedBox(
-                      height: 4,
+                      height: 6,
                     ),
                     Text(
-                      data.accountId,
+                      "Баланс: ${data.balance} ₽",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    )
                   ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "баланс: ${data.balance} ₽",
-                    ),
-                    Text("осталось ${data.daysLeft()} дней"),
-                  ],
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
