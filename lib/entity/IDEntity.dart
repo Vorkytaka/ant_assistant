@@ -1,17 +1,13 @@
-class IDEntity<T extends Mapped> extends Mapped {
+class IDEntity<T> {
   final int id;
   final T entity;
+  final Function(T) mapper;
 
-  IDEntity(this.id, this.entity);
+  IDEntity(this.id, this.entity, this.mapper);
 
-  @override
   Map<String, dynamic> toMap() {
     final map = {"id": id};
-    map.addAll(entity.toMap());
+    map.addAll(mapper(entity));
     return map;
   }
-}
-
-abstract class Mapped {
-  Map<String, dynamic> toMap();
 }
