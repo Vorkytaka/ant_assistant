@@ -37,10 +37,34 @@ class App extends StatelessWidget {
     return openDatabase(
       join(await getDatabasesPath(), "ant.db"),
       version: 1,
-      onCreate: (Database db, int v) {
-        return db.execute(
-          "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, login TEXT, password TEXT)",
+      onCreate: (Database db, int v) async {
+        await db.execute("""
+        CREATE TABLE users(
+          user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+          login TEXT NOT NULL, 
+          password TEXT NOT NULL
+          );
+        """);
+
+        await db.execute("""
+        CREATE TABLE user_data(
+          accountName TEXT,
+          accountId TEXT,
+          dynDns TEXT,
+          balance REAL,
+          downloaded INTEGER,
+          status TEXT,
+          credit INTEGER,
+          smsInfo TEXT,
+          tariffName TEXT,
+          downloadSpeed TEXT,
+          uploadSpeed TEXT,
+          pricePerMonth REAL,
+          user_id INTEGER NOT NULL,
+          FOREIGN KEY (user_id)
+            REFERENCES users (group_id) 
         );
+        """);
       },
     );
   }
