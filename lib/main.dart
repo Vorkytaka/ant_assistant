@@ -60,7 +60,7 @@ class App extends StatelessWidget {
           downloadSpeed TEXT,
           uploadSpeed TEXT,
           pricePerMonth REAL,
-          user_id INTEGER NOT NULL,
+          user_id INTEGER PRIMARY KEY NOT NULL,
           FOREIGN KEY (user_id)
             REFERENCES users (group_id) 
         );
