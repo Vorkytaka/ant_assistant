@@ -36,3 +36,20 @@ class UserData {
 
   int daysLeft() => (balance.toInt() + credit) ~/ pricePerDay.toInt();
 }
+
+extension DBUserData on UserData {
+  Map<String, dynamic> toMap() => {
+        "accountName": accountName,
+        "accountId": accountId,
+        "dynDns": dynDns,
+        "balance": balance,
+        "downloaded": downloaded,
+        "status": status,
+        "credit": credit,
+        "smsInfo": smsInfo,
+        "tariffName": tariffName,
+        "downloadSpeed": downloadSpeed,
+        "uploadSpeed": uploadSpeed,
+        "pricePerMonth": pricePerMonth,
+      };
+}
