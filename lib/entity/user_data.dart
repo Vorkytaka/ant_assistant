@@ -1,6 +1,6 @@
 class UserData {
   final String accountName;
-  final String userId;
+  final String accountId;
   final String dynDns;
 
   final double balance;
@@ -18,7 +18,7 @@ class UserData {
 
   UserData(
       this.accountName,
-      this.userId,
+      this.accountId,
       this.dynDns,
       this.balance,
       this.downloaded,

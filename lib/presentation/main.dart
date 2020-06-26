@@ -134,7 +134,7 @@ class UserDataState extends State<UserDataWidget> {
                       height: 4,
                     ),
                     Text(
-                      data.userId,
+                      data.accountId,
                       style: TextStyle(
                         fontSize: 24,
                       ),
@@ -210,7 +210,7 @@ class DetailedUserData extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(
-                  data.userId,
+                  data.accountId,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
@@ -219,7 +219,7 @@ class DetailedUserData extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     Clipboard.setData(ClipboardData(
-                      text: data.userId,
+                      text: data.accountId,
                     ));
                   },
                   icon: Icon(

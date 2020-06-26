@@ -8,7 +8,7 @@ void main() {
     final userData = parseUserData(document);
 
     expect(userData.accountName, "NOUA_2_187");
-    expect(userData.userId, "2000053468");
+    expect(userData.accountId, "2000053468");
     expect(userData.dynDns, "2000053468.cl.a-n-t.ru");
     expect(userData.balance, 475.18);
     expect(userData.downloaded, 117311);
