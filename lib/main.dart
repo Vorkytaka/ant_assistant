@@ -46,6 +46,7 @@ class App extends StatelessWidget {
           );
         """);
 
+        /* TODO: Cache UserData
         await db.execute("""
         CREATE TABLE user_data(
           accountName TEXT,
@@ -64,7 +65,7 @@ class App extends StatelessWidget {
           FOREIGN KEY (user_id)
             REFERENCES users (group_id) 
         );
-        """);
+        """);*/
       },
     );
   }

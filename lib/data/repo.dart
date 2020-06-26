@@ -19,7 +19,8 @@ class RepositoryImpl extends Repository {
   final Future<Database> database;
 
   RepositoryImpl(this.database) {
-    _pushCachedData();
+    /* TODO: Cache UserData
+    _pushCachedData();*/
     _update();
   }
 
@@ -45,15 +46,18 @@ class RepositoryImpl extends Repository {
       return getUserData(e.entity);
     }));
     _controller.add(data);
+
+    /* TODO: Cache UserData
     data.forEach((element) {
       _insertUserData(element);
-    });
+    });*/
   }
 
+  /* TODO: Cache UserData
   Future<void> _pushCachedData() async {
-    final cached = await _getUserDatas();
+    final cached = await _getUserData();
     _controller.add(cached);
-  }
+  }*/
 
   Future<List<IDEntity<Credentials>>> _getCredentials() async {
     final db = await database;
@@ -75,7 +79,8 @@ class RepositoryImpl extends Repository {
     );
   }
 
-  Future<List<UserData>> _getUserDatas() async {
+/* TODO: Cache UserData
+  Future<List<UserData>> _getUserData() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query("user_data");
     return List.generate(maps.length, (i) {
@@ -94,8 +99,9 @@ class RepositoryImpl extends Repository {
         maps[i]["pricePerMonth"],
       );
     });
-  }
+  }*/
 
+/* TODO: Cache UserData
   Future<void> _insertUserData(UserData data) async {
     final db = await database;
     // TODO: Don't make query for each insert
@@ -112,5 +118,5 @@ class RepositoryImpl extends Repository {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
-  }
+  }*/
 }
