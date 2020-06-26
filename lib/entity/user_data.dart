@@ -5,9 +5,9 @@ class UserData {
 
   final double balance;
   final int downloaded;
-  final bool status;
+  final String status;
   final int credit;
-  final bool smsInfo;
+  final String smsInfo;
 
   final String tariffName;
   final String downloadSpeed;

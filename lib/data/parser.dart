@@ -14,9 +14,9 @@ UserData parseUserData(Document document) {
   String downloadSpeed;
   String uploadSpeed;
   int credit;
-  bool status;
+  String status;
   int downloaded;
-  bool smsInfo;
+  String smsInfo;
   for (var i = 0; i < tables.length; i += 3) {
     final ch = tables[i].nodes.first.text;
     switch (ch) {
@@ -64,7 +64,7 @@ UserData parseUserData(Document document) {
         break;
 
       case "Статус учетной записи":
-        status = tables[i + 1].text == "Активна";
+        status = tables[i + 1].text;
         break;
 
       case "Скачано за текущий месяц":
@@ -72,7 +72,7 @@ UserData parseUserData(Document document) {
         break;
 
       case "SMS-информирование":
-        smsInfo = tables[i + 1].text != "Отключено";
+        smsInfo = tables[i + 1].text;
         break;
 
       case "Учетная запись":

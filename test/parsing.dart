@@ -12,9 +12,9 @@ void main() {
     expect(userData.dynDns, "2000053468.cl.a-n-t.ru");
     expect(userData.balance, 475.18);
     expect(userData.downloaded, 117311);
-    expect(userData.status, true);
+    expect(userData.status, "Активна");
     expect(userData.credit, 300);
-    expect(userData.smsInfo, false);
+    expect(userData.smsInfo, "Отключено");
     expect(userData.tariffName, "VX-EXTRA");
     expect(userData.downloadSpeed, "100");
     expect(userData.uploadSpeed, "100");
