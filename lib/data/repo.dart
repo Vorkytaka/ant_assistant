@@ -45,6 +45,9 @@ class RepositoryImpl extends Repository {
       return getUserData(e.entity);
     }));
     _controller.add(data);
+    data.forEach((element) {
+      _insertUserData(element);
+    });
   }
 
   Future<void> _pushCachedData() async {
@@ -94,12 +97,20 @@ class RepositoryImpl extends Repository {
   }
 
   Future<void> _insertUserData(UserData data) async {
-    throw Exception("TODO");
-    /*final db = await database;
-    await db.insert(
-      "user_data",
-      data.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );*/
+    final db = await database;
+    // TODO: Don't make query for each insert
+    final maps = (await db.query(
+      "users",
+      where: "login = ? COLLATE NOCASE",
+      whereArgs: [data.accountName],
+    ));
+    if (maps.isNotEmpty) {
+      final int id = maps[0]["user_id"];
+      await db.insert(
+        "user_data",
+        data.toMapWithId(id),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
   }
 }
