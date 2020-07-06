@@ -54,26 +54,52 @@ class UserDataState extends State<UserDataWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: _getBaseView(),
-    );
+    return _getBaseView();
   }
 
   Widget _getBaseView() {
     if (_data != null && _data.isNotEmpty) {
-      return ListView.separated(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        itemBuilder: (context, pos) {
-          return _buildItem(pos);
-        },
-        itemCount: _data.length + 1,
-        separatorBuilder: (context, pos) {
-          return SizedBox(
-            height: 9,
-          );
-        },
+      return Column(
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
+                child: Material(
+                  elevation: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        child: Text(
+                          "Аккаунты",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: _data.length,
+                        itemBuilder: (context, pos) {
+                          return _buildItem(pos);
+                        },
+                        separatorBuilder: (context, pos) {
+                          return Divider();
+                        },
+                        physics: BouncingScrollPhysics(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          _buildAddUserScreen(),
+        ],
       );
     } else {
       return _buildAddUserScreen();
@@ -101,60 +127,50 @@ class UserDataState extends State<UserDataWidget> {
   }
 
   Widget _buildItem(int pos) {
-    if (pos < _data.length) {
-      final data = _data[pos];
-      return _buildUserDataItem(data);
-    } else {
-      return _buildAddUserScreen();
-    }
+    final data = _data[pos];
+    return _buildUserDataItem(data);
   }
 
   Widget _buildUserDataItem(UserData data) {
-    return Card(
-      color: Colors.white,
-      shadowColor: Colors.black,
-      elevation: 3,
-      margin: EdgeInsets.zero,
-      child: FlatButton(
-        padding: EdgeInsets.all(0),
-        onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return DetailedUserData(data: data);
-              });
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 24,
-          ),
-          child: Row(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    data.accountName,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
+    return FlatButton(
+      padding: EdgeInsets.all(0),
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return DetailedUserData(data: data);
+            });
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 24,
+        ),
+        child: Row(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  data.accountName,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
                   ),
-                  SizedBox(
-                    height: 6,
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  "Баланс: ${data.balance} ₽",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
                   ),
-                  Text(
-                    "Баланс: ${data.balance} ₽",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
