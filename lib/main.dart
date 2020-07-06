@@ -38,13 +38,7 @@ class App extends StatelessWidget {
       join(await getDatabasesPath(), "ant.db"),
       version: 1,
       onCreate: (Database db, int v) async {
-        await db.execute("""
-        CREATE TABLE ${UsersDB.TABLE_NAME}(
-          ${UsersDB.COLUMN_NAME_USER_ID} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-          ${UsersDB.COLUMN_NAME_LOGIN} TEXT NOT NULL, 
-          ${UsersDB.COLUMN_NAME_PASSWORD} TEXT NOT NULL
-          );
-        """);
+        await db.execute(UsersDB.EXECUTE_CREATE_TABLE);
       },
     );
   }
@@ -55,4 +49,12 @@ class UsersDB {
   static const String COLUMN_NAME_USER_ID = "user_id";
   static const String COLUMN_NAME_LOGIN = "login";
   static const String COLUMN_NAME_PASSWORD = "password";
+
+  static const String EXECUTE_CREATE_TABLE = """
+        CREATE TABLE ${UsersDB.TABLE_NAME}(
+          ${UsersDB.COLUMN_NAME_USER_ID} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+          ${UsersDB.COLUMN_NAME_LOGIN} TEXT NOT NULL, 
+          ${UsersDB.COLUMN_NAME_PASSWORD} TEXT NOT NULL
+          );
+        """;
 }
