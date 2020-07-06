@@ -39,13 +39,20 @@ class App extends StatelessWidget {
       version: 1,
       onCreate: (Database db, int v) async {
         await db.execute("""
-        CREATE TABLE users(
-          user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-          login TEXT NOT NULL, 
-          password TEXT NOT NULL
+        CREATE TABLE ${UsersDB.TABLE_NAME}(
+          ${UsersDB.COLUMN_NAME_USER_ID} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+          ${UsersDB.COLUMN_NAME_LOGIN} TEXT NOT NULL, 
+          ${UsersDB.COLUMN_NAME_PASSWORD} TEXT NOT NULL
           );
         """);
       },
     );
   }
+}
+
+class UsersDB {
+  static const String TABLE_NAME = "users";
+  static const String COLUMN_NAME_USER_ID = "user_id";
+  static const String COLUMN_NAME_LOGIN = "login";
+  static const String COLUMN_NAME_PASSWORD = "login";
 }

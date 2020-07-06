@@ -6,6 +6,8 @@ import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../main.dart';
+
 abstract class Repository {
   Future<bool> isThereAnyAccount();
 
@@ -48,11 +50,14 @@ class RepositoryImpl extends Repository {
 
   Future<List<IDEntity<Credentials>>> _getCredentials() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query("users");
+    final List<Map<String, dynamic>> maps = await db.query(UsersDB.TABLE_NAME);
     return List.generate(maps.length, (i) {
       return IDEntity(
-        maps[i]["user_id"],
-        Credentials(maps[i]['login'], maps[i]["password"]),
+        maps[i][UsersDB.COLUMN_NAME_USER_ID],
+        Credentials(
+          maps[i][UsersDB.COLUMN_NAME_LOGIN],
+          maps[i][UsersDB.COLUMN_NAME_PASSWORD],
+        ),
       );
     });
   }
@@ -60,7 +65,7 @@ class RepositoryImpl extends Repository {
   Future<void> _insertCredentials(Credentials user) async {
     final db = await database;
     await db.insert(
-      "users",
+      UsersDB.TABLE_NAME,
       user.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
