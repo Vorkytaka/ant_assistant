@@ -19,8 +19,6 @@ class RepositoryImpl extends Repository {
   final Future<Database> database;
 
   RepositoryImpl(this.database) {
-    /* TODO: Cache UserData
-    _pushCachedData();*/
     _update();
   }
 
@@ -46,18 +44,7 @@ class RepositoryImpl extends Repository {
       return getUserData(e.entity);
     }));
     _controller.add(data);
-
-    /* TODO: Cache UserData
-    data.forEach((element) {
-      _insertUserData(element);
-    });*/
   }
-
-  /* TODO: Cache UserData
-  Future<void> _pushCachedData() async {
-    final cached = await _getUserData();
-    _controller.add(cached);
-  }*/
 
   Future<List<IDEntity<Credentials>>> _getCredentials() async {
     final db = await database;
@@ -78,45 +65,4 @@ class RepositoryImpl extends Repository {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
-
-/* TODO: Cache UserData
-  Future<List<UserData>> _getUserData() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query("user_data");
-    return List.generate(maps.length, (i) {
-      return UserData(
-        maps[i]["accountName"],
-        maps[i]["accountId"],
-        maps[i]["dynDns"],
-        maps[i]["balance"],
-        maps[i]["downloaded"],
-        maps[i]["status"],
-        maps[i]["credit"],
-        maps[i]["smsInfo"],
-        maps[i]["tariffName"],
-        maps[i]["downloadSpeed"],
-        maps[i]["uploadSpeed"],
-        maps[i]["pricePerMonth"],
-      );
-    });
-  }*/
-
-/* TODO: Cache UserData
-  Future<void> _insertUserData(UserData data) async {
-    final db = await database;
-    // TODO: Don't make query for each insert
-    final maps = (await db.query(
-      "users",
-      where: "login = ? COLLATE NOCASE",
-      whereArgs: [data.accountName],
-    ));
-    if (maps.isNotEmpty) {
-      final int id = maps[0]["user_id"];
-      await db.insert(
-        "user_data",
-        data.toMapWithId(id),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    }
-  }*/
 }

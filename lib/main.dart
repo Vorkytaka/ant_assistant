@@ -45,27 +45,6 @@ class App extends StatelessWidget {
           password TEXT NOT NULL
           );
         """);
-
-        /* TODO: Cache UserData
-        await db.execute("""
-        CREATE TABLE user_data(
-          accountName TEXT,
-          accountId TEXT,
-          dynDns TEXT,
-          balance REAL,
-          downloaded INTEGER,
-          status TEXT,
-          credit INTEGER,
-          smsInfo TEXT,
-          tariffName TEXT,
-          downloadSpeed TEXT,
-          uploadSpeed TEXT,
-          pricePerMonth REAL,
-          user_id INTEGER PRIMARY KEY NOT NULL,
-          FOREIGN KEY (user_id)
-            REFERENCES users (group_id) 
-        );
-        """);*/
       },
     );
   }
