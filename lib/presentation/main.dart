@@ -233,6 +233,29 @@ class DetailedUserData extends StatelessWidget {
             Text("Учетная запись"),
             Text(data.accountName),
             Divider(),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Баланс"),
+                      Text("${data.balance.toStringAsFixed(1)} ₽"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Дней осталось"),
+                      Text("${data.daysLeft()}"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
             Text("Кредит доверия"),
             Text("${data.credit} ₽"),
             Divider(),
