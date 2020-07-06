@@ -61,11 +61,19 @@ class UserDataState extends State<UserDataWidget> {
 
   Widget _getBaseView() {
     if (_data != null && _data.isNotEmpty) {
-      return ListView.builder(
+      return ListView.separated(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
         itemBuilder: (context, pos) {
           return _buildItem(pos);
         },
         itemCount: _data.length + 1,
+        separatorBuilder: (context, pos) {
+          return SizedBox(
+            height: 9,
+          );
+        },
       );
     } else {
       return _buildAddUserScreen();
@@ -106,7 +114,7 @@ class UserDataState extends State<UserDataWidget> {
       color: Colors.white,
       shadowColor: Colors.black,
       elevation: 3,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.zero,
       child: FlatButton(
         padding: EdgeInsets.all(0),
         onPressed: () {
