@@ -70,16 +70,31 @@ class UserDataState extends State<UserDataWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        child: Text(
-                          "Аккаунты",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
+                              child: Text(
+                                "Аккаунты",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          FlatButton(
+                            onPressed: onAuth,
+                            child: Text(
+                              "Добавить аккаунт",
+                              style: TextStyle(
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       ListView.separated(
                         shrinkWrap: true,
@@ -101,7 +116,6 @@ class UserDataState extends State<UserDataWidget> {
               ),
             ],
           ),
-          _buildAddUserScreen(),
         ],
       );
     } else {
