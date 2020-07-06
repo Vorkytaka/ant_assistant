@@ -229,6 +229,64 @@ class DetailedUserData extends StatelessWidget {
                 )
               ],
             ),
+            Divider(),
+            Text("Учетная запись"),
+            Text(data.accountName),
+            Divider(),
+            Text("Кредит доверия"),
+            Text("${data.credit} ₽"),
+            Divider(),
+            Text("Название тарифа"),
+            Text("${data.tariffName}"),
+            Divider(),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Цена за месяц"),
+                      Text("${data.pricePerMonth.toStringAsFixed(1)} ₽"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Цена за день"),
+                      Text("${data.pricePerDay.toStringAsFixed(1)} ₽"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Скорость скачивания"),
+                      Text("${data.downloadSpeed}"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Скорость отдачи"),
+                      Text("${data.uploadSpeed}"),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
+            Text("Скачано за текущий месяц"),
+            Text("${data.downloaded} Мб"),
           ],
         ),
       ),
