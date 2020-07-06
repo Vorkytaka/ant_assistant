@@ -54,5 +54,5 @@ class UsersDB {
   static const String TABLE_NAME = "users";
   static const String COLUMN_NAME_USER_ID = "user_id";
   static const String COLUMN_NAME_LOGIN = "login";
-  static const String COLUMN_NAME_PASSWORD = "login";
+  static const String COLUMN_NAME_PASSWORD = "password";
 }
