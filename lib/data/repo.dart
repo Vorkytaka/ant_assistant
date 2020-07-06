@@ -14,6 +14,8 @@ abstract class Repository {
   void saveUser(Credentials credentials);
 
   Stream<List<UserData>> getUsersDataStream();
+
+  void removeUser(int id);
 }
 
 class RepositoryImpl extends Repository {
@@ -38,6 +40,11 @@ class RepositoryImpl extends Repository {
   @override
   Stream<List<UserData>> getUsersDataStream() {
     return _controller.stream;
+  }
+
+  @override
+  void removeUser(int id) async {
+    await _removeCredentials(id);
   }
 
   Future<void> _update() async {
@@ -68,6 +75,15 @@ class RepositoryImpl extends Repository {
       UsersDB.TABLE_NAME,
       user.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> _removeCredentials(int id) async {
+    final db = await database;
+    await db.delete(
+      UsersDB.TABLE_NAME,
+      where: "${UsersDB.COLUMN_NAME_USER_ID} = ?",
+      whereArgs: [id],
     );
   }
 }
