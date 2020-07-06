@@ -28,19 +28,11 @@ class AuthWidgetState extends State<AuthWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.only(left: 20, right: 20),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+        margin: EdgeInsets.zero,
         elevation: 10,
         shadowColor: Colors.black,
         child: Padding(
-            padding: EdgeInsets.only(
-              right: 20,
-              left: 20,
-              top: 15,
-              bottom: 10,
-            ),
+            padding: EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

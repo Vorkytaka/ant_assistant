@@ -169,7 +169,6 @@ class UserDataState extends State<UserDataWidget> {
   void onAuth() async {
     final AuthState state = await showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
       isScrollControlled: true,
       isDismissible: false,
 //      enableDrag: false,
