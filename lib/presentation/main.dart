@@ -42,7 +42,7 @@ class UserDataState extends State<UserDataWidget> {
     this.widget.repo.getUsersDataStream().listen(_onNextUsersData);
     this.widget.repo.isThereAnyAccount().then((value) {
       if (!value) {
-        onAuth();
+        _onAuth();
       }
     });
   }
@@ -54,78 +54,20 @@ class UserDataState extends State<UserDataWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _getBaseView();
-  }
-
-  Widget _getBaseView() {
     if (_data != null && _data.isNotEmpty) {
-      return Column(
-        children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Material(
-                  elevation: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 16),
-                              child: Text(
-                                "Аккаунты",
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                          FlatButton(
-                            onPressed: onAuth,
-                            child: Text(
-                              "Добавить аккаунт",
-                              style: TextStyle(
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: _data.length,
-                        itemBuilder: (context, pos) {
-                          return _buildItem(pos);
-                        },
-                        separatorBuilder: (context, pos) {
-                          return Container(
-                            color: Colors.black12,
-                            height: 1,
-                          );
-                        },
-                        physics: BouncingScrollPhysics(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      );
+      if (_data.length > 1) {
+        return _buildListOfUserState();
+      } else {
+        return _buildOneUserState();
+      }
     } else {
-      return _buildAddUserScreen();
+      return _buildNoUserState();
     }
   }
 
-  Widget _buildAddUserScreen() {
+  Widget _buildNoUserState() {
     return FlatButton(
-      onPressed: onAuth,
+      onPressed: _onAuth,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.zero),
       ),
@@ -143,12 +85,74 @@ class UserDataState extends State<UserDataWidget> {
     );
   }
 
-  Widget _buildItem(int pos) {
-    final data = _data[pos];
-    return _buildUserDataItem(data);
+  Widget _buildListOfUserState() {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              child: Material(
+                elevation: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
+                            child: Text(
+                              "Аккаунты",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: _onAuth,
+                          child: Text(
+                            "Добавить аккаунт",
+                            style: TextStyle(
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: _data.length,
+                      itemBuilder: (context, pos) {
+                        return _buildItem(pos);
+                      },
+                      separatorBuilder: (context, pos) {
+                        return Container(
+                          color: Colors.black12,
+                          height: 1,
+                        );
+                      },
+                      physics: BouncingScrollPhysics(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
-  Widget _buildUserDataItem(UserData data) {
+  Widget _buildOneUserState() {
+    return null;
+  }
+
+  Widget _buildItem(int pos) {
+    final data = _data[pos];
     return FlatButton(
       padding: EdgeInsets.all(0),
       onPressed: () {
@@ -199,7 +203,7 @@ class UserDataState extends State<UserDataWidget> {
     });
   }
 
-  void onAuth() async {
+  void _onAuth() async {
     final AuthState state = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
