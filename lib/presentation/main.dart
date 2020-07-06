@@ -88,7 +88,10 @@ class UserDataState extends State<UserDataWidget> {
                           return _buildItem(pos);
                         },
                         separatorBuilder: (context, pos) {
-                          return Divider();
+                          return Container(
+                            color: Colors.black12,
+                            height: 1,
+                          );
                         },
                         physics: BouncingScrollPhysics(),
                       ),
