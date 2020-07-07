@@ -287,10 +287,28 @@ class DetailedUserData extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    // todo: make it smarter
-                    // + user alert dialog
-                    this.repo.removeUser(data.id);
-                    Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Удалить аккаунт?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("Нет"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              RaisedButton(
+                                child: Text("Да"),
+                                onPressed: () {
+                                  // todo: remove account
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          );
+                        });
                   },
                   icon: Icon(
                     Icons.delete_forever,
