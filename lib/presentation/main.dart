@@ -159,7 +159,10 @@ class UserDataState extends State<UserDataWidget> {
         showModalBottomSheet(
             context: context,
             builder: (context) {
-              return DetailedUserData(data: data);
+              return DetailedUserData(
+                data: data,
+                repo: this.widget.repo,
+              );
             });
       },
       child: Padding(
@@ -223,8 +226,10 @@ class UserDataState extends State<UserDataWidget> {
 
 class DetailedUserData extends StatelessWidget {
   final UserData data;
+  final Repository repo;
 
-  const DetailedUserData({Key key, @required this.data}) : super(key: key);
+  const DetailedUserData({Key key, @required this.data, this.repo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -260,6 +265,19 @@ class DetailedUserData extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.content_copy,
+                    size: 20,
+                    color: Colors.black54,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // todo: make it smarter
+                    // + user alert dialog
+                    this.repo.removeUser(data.id);
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.delete_forever,
                     size: 20,
                     color: Colors.black54,
                   ),
