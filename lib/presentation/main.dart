@@ -58,7 +58,7 @@ class UserDataState extends State<UserDataWidget> {
       if (_data.length > 1) {
         return _buildListOfUserState();
       } else {
-        return _buildOneUserState();
+        return _buildOneUserState(_data[0]);
       }
     } else {
       return _buildNoUserState();
@@ -147,8 +147,24 @@ class UserDataState extends State<UserDataWidget> {
     );
   }
 
-  Widget _buildOneUserState() {
-    return null;
+  Widget _buildOneUserState(UserData data) {
+    return Column(
+      children: <Widget>[
+        FlatButton(
+          onPressed: _onAuth,
+          child: Text(
+            "Добавить аккаунт",
+            style: TextStyle(
+              color: Colors.black54,
+            ),
+          ),
+        ),
+        DetailedUserData(
+          data: data,
+          repo: widget.repo,
+        ),
+      ],
+    );
   }
 
   Widget _buildItem(int pos) {
