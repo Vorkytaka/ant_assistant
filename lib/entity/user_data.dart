@@ -1,4 +1,6 @@
 class UserData {
+  final int id;
+
   final String accountName;
   final String accountId;
   final String dynDns;
@@ -16,7 +18,7 @@ class UserData {
 
   final double pricePerDay;
 
-  UserData(
+  UserData(this.id,
       this.accountName,
       this.accountId,
       this.dynDns,

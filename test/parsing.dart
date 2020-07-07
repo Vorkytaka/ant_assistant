@@ -5,8 +5,9 @@ import 'package:test/test.dart';
 void main() {
   test("Parsing test", () {
     final document = parse(_TESTING_BODY);
-    final userData = parseUserData(document);
+    final userData = parseUserData(0, document);
 
+    expect(userData.id, 0);
     expect(userData.accountName, "NOUA_2_187");
     expect(userData.accountId, "2000053468");
     expect(userData.dynDns, "2000053468.cl.a-n-t.ru");

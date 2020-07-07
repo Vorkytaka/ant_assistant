@@ -45,12 +45,13 @@ class RepositoryImpl extends Repository {
   @override
   void removeUser(int id) async {
     await _removeCredentials(id);
+    _update();
   }
 
   Future<void> _update() async {
     final users = await _getCredentials();
     final data = await Future.wait(users.map((e) {
-      return getUserData(e.entity);
+      return getUserData(e);
     }));
     _controller.add(data);
   }

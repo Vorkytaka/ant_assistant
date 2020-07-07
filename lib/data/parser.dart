@@ -1,7 +1,7 @@
 import 'package:antassistant/entity/user_data.dart';
 import 'package:html/dom.dart';
 
-UserData parseUserData(Document document) {
+UserData parseUserData(int id, Document document) {
   final balance = double.parse(
       document.querySelector("td.num").text.replaceAll(" руб.", ""));
 
@@ -82,6 +82,7 @@ UserData parseUserData(Document document) {
   }
 
   return UserData(
+      id,
       accountName,
       userId,
       dynDns,

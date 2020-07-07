@@ -1,4 +1,5 @@
 import 'package:antassistant/data/parser.dart';
+import 'package:antassistant/entity/IDEntity.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/user_data.dart';
@@ -30,19 +31,19 @@ Future<AuthState> auth(Credentials credentials) async {
   }
 }
 
-Future<UserData> getUserData(Credentials credentials) async {
+Future<UserData> getUserData(IDEntity<Credentials> credentials) async {
   final dio.BaseOptions options = dio.BaseOptions(followRedirects: true);
   var params = {
     _KEY_ACTION: _ACTION_INFO,
-    _KEY_USERNAME: credentials.login,
-    _KEY_PASSWORD: credentials.password
+    _KEY_USERNAME: credentials.entity.login,
+    _KEY_PASSWORD: credentials.entity.password
   };
   var httpParams = dio.FormData.fromMap(params);
 
   try {
     final response = await dio.Dio(options).post(_BASE_URL, data: httpParams);
     final document = parser.parse(response.data);
-    return parseUserData(document);
+    return parseUserData(credentials.id, document);
   } catch (err) {
     return null;
   }
