@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:antassistant/data/repo.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
@@ -169,50 +170,50 @@ class UserDataState extends State<UserDataWidget> {
 
   Widget _buildItem(int pos) {
     final data = _data[pos];
-    return FlatButton(
-      padding: EdgeInsets.all(0),
-      onPressed: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return DetailedUserData(
-                data: data,
-                repo: this.widget.repo,
-              );
-            });
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 16,
-          horizontal: 24,
-        ),
-        child: Row(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  data.accountName,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  "Баланс: ${data.balance} ₽",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
+    return OpenContainer(
+      transitionDuration: Duration(
+        milliseconds: 350,
       ),
+      openBuilder: (context, anim) {
+        return DetailedUserData(
+          data: data,
+          repo: this.widget.repo,
+        );
+      },
+      closedBuilder: (context, anim) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 24,
+          ),
+          child: Row(
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    data.accountName,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Баланс: ${data.balance} ₽",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
