@@ -16,10 +16,13 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: UserDataWidget(
-          repo: repo,
+      appBar: AppBar(
+        title: Text(
+          "ANTAssistant",
         ),
+      ),
+      body: UserDataWidget(
+        repo: repo,
       ),
     );
   }
