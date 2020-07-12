@@ -171,6 +171,7 @@ class UserDataState extends State<UserDataWidget> {
   Widget _buildItem(int pos) {
     final data = _data[pos];
     return OpenContainer(
+      transitionType: ContainerTransitionType.fadeThrough,
       transitionDuration: Duration(
         milliseconds: 350,
       ),
