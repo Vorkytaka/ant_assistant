@@ -66,9 +66,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainScreen(
-        repo: Provider.of<Repository>(context),
-      ),
+      home: MainScreen(),
     );
   }
 }

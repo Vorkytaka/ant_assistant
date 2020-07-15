@@ -4,16 +4,15 @@ import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import 'auth.dart';
 
 class MainScreen extends StatelessWidget {
-  final Repository repo;
-
-  const MainScreen({Key key, this.repo}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final repo = Provider.of<Repository>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
