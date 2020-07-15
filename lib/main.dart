@@ -9,6 +9,38 @@ void main() {
   runApp(App());
 }
 
+/*class AppProvider extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => AppProviderState();
+}
+
+class AppProviderState extends State<AppProvider> {
+  bool _initialized = false;
+  Repository repository;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initMainWidget();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_initialized) return Container();
+    return App();
+  }
+
+  Future<void> _initMainWidget() async {
+    if (_initialized) return;
+
+    // init all main things here
+
+    setState(() {
+      _initialized = true;
+    });
+  }
+}*/
+
 class App extends StatelessWidget {
   static Database _database;
 
