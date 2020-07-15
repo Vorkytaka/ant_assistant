@@ -1,15 +1,16 @@
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:provider/provider.dart';
 
+import 'data/repository/repository.dart';
 import 'data/repository/repository_impl.dart';
 import 'presentation/main.dart';
 
 void main() {
-  runApp(App());
+  runApp(AppProvider());
 }
 
-/*class AppProvider extends StatefulWidget {
+class AppProvider extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => AppProviderState();
 }
@@ -26,31 +27,31 @@ class AppProviderState extends State<AppProvider> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_initialized) return Container();
-    return App();
+    if (!_initialized) {
+      return Container();
+    }
+
+    return Provider.value(
+      value: repository,
+      updateShouldNotify: (previous, current) => false,
+      child: App(),
+    );
   }
 
   Future<void> _initMainWidget() async {
     if (_initialized) return;
 
-    // init all main things here
+    final db = await SQLDataSource.initDatabase();
+    final dataSource = SQLDataSource(db);
+    repository = RepositoryImpl(dataSource);
 
     setState(() {
       _initialized = true;
     });
   }
-}*/
+}
 
 class App extends StatelessWidget {
-  static Database _database;
-
-  Future<Database> get database async {
-    if (_database != null) return _database;
-
-    _database = await SQLDataSource.initDatabase();
-    return _database;
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,7 +61,7 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MainScreen(
-        repo: RepositoryImpl(SQLDataSource(database)),
+        repo: Provider.of<Repository>(context),
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'naming/user_scheme.dart';
 class SQLDataSource extends DataSource {
   static const String _DB_FILE_NAME = "ant.db";
 
-  final Future<Database> database;
+  final Database database;
 
   SQLDataSource(this.database);
 
@@ -25,7 +25,7 @@ class SQLDataSource extends DataSource {
 
   @override
   Future<List<IDEntity<Credentials>>> getCredentials() async {
-    final db = await database;
+    final db = database;
     final List<Map<String, dynamic>> maps =
     await db.query(UsersScheme.TABLE_NAME);
     return List.generate(maps.length, (i) {
@@ -41,7 +41,7 @@ class SQLDataSource extends DataSource {
 
   @override
   Future<void> insertCredentials(Credentials credentials) async {
-    final db = await database;
+    final db = database;
     await db.insert(
       UsersScheme.TABLE_NAME,
       credentials.toMap(),
@@ -51,7 +51,7 @@ class SQLDataSource extends DataSource {
 
   @override
   Future<void> removeCredentials(int id) async {
-    final db = await database;
+    final db = database;
     await db.delete(
       UsersScheme.TABLE_NAME,
       where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
