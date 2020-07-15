@@ -1,7 +1,8 @@
-import 'package:antassistant/data/repo.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'file:///C:/Users/Vorkytaka/AndroidStudioProjects/ant_assistant/lib/data/repository/repository_impl.dart';
 
 import 'presentation/main.dart';
 

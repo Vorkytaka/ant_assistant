@@ -1,22 +1,13 @@
 import 'dart:async';
 
 import 'package:antassistant/data/net.dart';
+import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../main.dart';
-
-abstract class Repository {
-  Future<bool> isThereAnyAccount();
-
-  void saveUser(Credentials credentials);
-
-  Stream<List<UserData>> getUsersDataStream();
-
-  void removeUser(int id);
-}
+import '../../main.dart';
 
 class RepositoryImpl extends Repository {
   final StreamController<List<UserData>> _controller = StreamController();

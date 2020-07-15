@@ -1,5 +1,5 @@
 import 'package:animations/animations.dart';
-import 'package:antassistant/data/repo.dart';
+import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:flutter/material.dart';
