@@ -1,5 +1,7 @@
+import 'package:antassistant/data/bloc/auth/bloc.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'data/repository/repository.dart';
@@ -34,7 +36,10 @@ class AppProviderState extends State<AppProvider> {
     return Provider.value(
       value: repository,
       updateShouldNotify: (previous, current) => false,
-      child: App(),
+      child: BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(repository)..add(AppStarted()),
+        child: App(),
+      ),
     );
   }
 
