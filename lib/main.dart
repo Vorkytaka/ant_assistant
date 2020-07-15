@@ -1,5 +1,6 @@
 import 'package:antassistant/data/bloc/auth/bloc.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
+import 'package:antassistant/presentation/home/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'data/bloc/auth/event.dart';
 import 'data/repository/repository.dart';
 import 'data/repository/repository_impl.dart';
-import 'presentation/main.dart';
 
 void main() {
   runApp(AppProvider());
@@ -66,7 +66,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainScreen(),
+      home: HomeScreenProvider(),
     );
   }
 }
