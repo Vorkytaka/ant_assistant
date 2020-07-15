@@ -1,3 +1,4 @@
+import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -30,7 +31,7 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MainScreen(
-        repo: RepositoryImpl(database),
+        repo: RepositoryImpl(SQLDataSource(database)),
       ),
     );
   }
