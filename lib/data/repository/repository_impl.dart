@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:antassistant/data/net.dart';
 import 'package:antassistant/data/repository/repository.dart';
+import 'package:antassistant/data/source/naming/user_scheme.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../../main.dart';
 
 class RepositoryImpl extends Repository {
   final StreamController<List<UserData>> _controller = StreamController();
@@ -49,13 +48,14 @@ class RepositoryImpl extends Repository {
 
   Future<List<IDEntity<Credentials>>> _getCredentials() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(UsersDB.TABLE_NAME);
+    final List<Map<String, dynamic>> maps =
+        await db.query(UsersScheme.TABLE_NAME);
     return List.generate(maps.length, (i) {
       return IDEntity(
-        maps[i][UsersDB.COLUMN_NAME_USER_ID],
+        maps[i][UsersScheme.COLUMN_NAME_USER_ID],
         Credentials(
-          maps[i][UsersDB.COLUMN_NAME_LOGIN],
-          maps[i][UsersDB.COLUMN_NAME_PASSWORD],
+          maps[i][UsersScheme.COLUMN_NAME_LOGIN],
+          maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
       );
     });
@@ -64,7 +64,7 @@ class RepositoryImpl extends Repository {
   Future<void> _insertCredentials(Credentials user) async {
     final db = await database;
     await db.insert(
-      UsersDB.TABLE_NAME,
+      UsersScheme.TABLE_NAME,
       user.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -73,8 +73,8 @@ class RepositoryImpl extends Repository {
   Future<void> _removeCredentials(int id) async {
     final db = await database;
     await db.delete(
-      UsersDB.TABLE_NAME,
-      where: "${UsersDB.COLUMN_NAME_USER_ID} = ?",
+      UsersScheme.TABLE_NAME,
+      where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
       whereArgs: [id],
     );
   }
