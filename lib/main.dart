@@ -1,11 +1,11 @@
-import 'package:antassistant/data/bloc/auth/bloc.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:antassistant/presentation/home/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import 'data/bloc/auth/event.dart';
+import 'bloc/auth/bloc.dart';
+import 'bloc/auth/event.dart';
 import 'data/repository/repository.dart';
 import 'data/repository/repository_impl.dart';
 

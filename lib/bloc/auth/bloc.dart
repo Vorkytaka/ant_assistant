@@ -1,4 +1,4 @@
-import 'package:antassistant/data/bloc/auth/state.dart';
+import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:bloc/bloc.dart';
 
