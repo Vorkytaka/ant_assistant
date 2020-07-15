@@ -26,6 +26,10 @@ dependencies:
   flutter_secure_storage: 3.3.3
   animations: ^1.1.1
 
+  provider:
+  bloc:
+  flutter_bloc:
+
   sqflite:
   path:
 
