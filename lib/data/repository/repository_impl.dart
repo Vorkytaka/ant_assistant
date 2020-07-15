@@ -38,7 +38,9 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<List<Credentials>> getCredentials() async {
-    return (await _dataSource.getCredentials()).map((e) => e.entity);
+    final credentialsWithId = await _dataSource.getCredentials();
+    return List.generate(
+        credentialsWithId.length, (index) => credentialsWithId[index].entity);
   }
 
   Future<void> _update() async {
