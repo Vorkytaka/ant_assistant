@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'data/bloc/auth/event.dart';
 import 'data/repository/repository.dart';
 import 'data/repository/repository_impl.dart';
 import 'presentation/main.dart';

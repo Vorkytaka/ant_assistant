@@ -1,6 +1,8 @@
+import 'package:antassistant/data/bloc/auth/state.dart';
 import 'package:antassistant/data/repository/repository.dart';
-import 'package:antassistant/entity/credentials.dart';
 import 'package:bloc/bloc.dart';
+
+import 'event.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final Repository _repository;
@@ -23,27 +25,4 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       yield Authenticated(credentials);
     }
   }
-}
-
-abstract class AuthBlocEvent {
-  const AuthBlocEvent();
-}
-
-class AppStarted extends AuthBlocEvent {
-  const AppStarted();
-}
-
-// ---
-abstract class AuthBlocState {
-  const AuthBlocState();
-}
-
-class Unauthenticated extends AuthBlocState {
-  const Unauthenticated();
-}
-
-class Authenticated extends AuthBlocState {
-  final List<Credentials> credentials;
-
-  const Authenticated(this.credentials);
 }
