@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:antassistant/data/repo.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
