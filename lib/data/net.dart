@@ -1,7 +1,7 @@
 import 'package:antassistant/data/parser.dart';
-import 'package:antassistant/entity/IDEntity.dart';
 import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/credentials.dart';
+import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:html/parser.dart' as parser;

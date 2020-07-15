@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:antassistant/data/net.dart';
-import 'package:antassistant/entity/IDEntity.dart';
 import 'package:antassistant/entity/credentials.dart';
+import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:sqflite/sqflite.dart';
 
