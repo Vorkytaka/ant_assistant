@@ -2,8 +2,7 @@ import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'file:///C:/Users/Vorkytaka/AndroidStudioProjects/ant_assistant/lib/data/repository/repository_impl.dart';
-
+import 'data/repository/repository_impl.dart';
 import 'presentation/main.dart';
 
 void main() {
