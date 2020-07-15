@@ -10,7 +10,9 @@ class RepositoryImpl extends Repository {
   final StreamController<List<UserData>> _controller = StreamController();
   final DataSource _dataSource;
 
-  RepositoryImpl(this._dataSource);
+  RepositoryImpl(this._dataSource) {
+    _update();
+  }
 
   @override
   Future<bool> isThereAnyAccount() async {
