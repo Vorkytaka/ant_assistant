@@ -20,6 +20,13 @@ class LoginScreen extends StatelessWidget {
               BlocProvider.of<UserDataBloc>(context)
                   .add(UserDataEvent.AddedUser());
               Navigator.of(context).pop();
+            } else if (state is LoginError) {
+              Scaffold.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(
+                  content: Text("Не удалось авторизоваться"),
+                  duration: Duration(hours: 24),
+                ));
             }
           },
           child: LoginForm(),
