@@ -7,7 +7,7 @@ abstract class Repository {
 
   Future<bool> isThereAnyAccount();
 
-  void saveUser(Credentials credentials);
+  Future<int> saveUser(Credentials credentials);
 
   Future<void> removeUser(int id);
 

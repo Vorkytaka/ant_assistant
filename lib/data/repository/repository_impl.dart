@@ -19,8 +19,8 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  Future<void> saveUser(Credentials credentials) async {
-    await _dataSource.insertCredentials(credentials);
+  Future<int> saveUser(Credentials credentials) async {
+    return await _dataSource.insertCredentials(credentials);
   }
 
   @override

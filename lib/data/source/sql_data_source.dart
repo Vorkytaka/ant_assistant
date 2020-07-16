@@ -40,9 +40,9 @@ class SQLDataSource extends DataSource {
   }
 
   @override
-  Future<void> insertCredentials(Credentials credentials) async {
+  Future<int> insertCredentials(Credentials credentials) async {
     final db = database;
-    await db.insert(
+    return await db.insert(
       UsersScheme.TABLE_NAME,
       credentials.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
