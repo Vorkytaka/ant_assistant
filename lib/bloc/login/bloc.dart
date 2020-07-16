@@ -46,9 +46,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginIsLoading();
 
     final credentials = Credentials(event.username, event.password);
-    final authState = await auth(credentials);
+    final isLoginSuccessful = await auth(credentials);
 
-    if (authState.isSuccess) {
+    if (isLoginSuccessful) {
       yield LoginSuccess();
       _repository.saveUser(credentials);
     } else {

@@ -50,4 +50,9 @@ class RepositoryImpl extends Repository {
     }));
     _controller.add(data);
   }
+
+  @override
+  Future<bool> login(Credentials credentials) async {
+    return await auth(credentials);
+  }
 }

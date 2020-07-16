@@ -1,5 +1,4 @@
 import 'package:antassistant/data/parser.dart';
-import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
@@ -14,7 +13,7 @@ const String _KEY_PASSWORD = "user_pass";
 
 const String _ACTION_INFO = "info";
 
-Future<AuthState> auth(Credentials credentials) async {
+Future<bool> auth(Credentials credentials) async {
   final dio.BaseOptions options = dio.BaseOptions(followRedirects: true);
   var params = {
     _KEY_ACTION: _ACTION_INFO,
@@ -25,9 +24,9 @@ Future<AuthState> auth(Credentials credentials) async {
 
   try {
     await dio.Dio(options).post(_BASE_URL, data: httpParams);
-    return AuthState(true, credentials);
+    return true;
   } catch (err) {
-    return AuthState(false, credentials);
+    return false;
   }
 }
 
