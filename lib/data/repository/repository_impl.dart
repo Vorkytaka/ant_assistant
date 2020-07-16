@@ -32,7 +32,7 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  void removeUser(int id) async {
+  Future<void> removeUser(int id) async {
     await _dataSource.removeCredentials(id);
     _update();
   }

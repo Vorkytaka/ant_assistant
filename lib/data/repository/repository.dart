@@ -10,7 +10,7 @@ abstract class Repository {
 
   Stream<List<UserData>> getUsersDataStream();
 
-  void removeUser(int id);
+  Future<void> removeUser(int id);
 
   Future<List<Credentials>> getCredentials();
 }
