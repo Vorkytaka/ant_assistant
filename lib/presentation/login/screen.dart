@@ -62,6 +62,12 @@ class LoginFormState extends State<LoginForm> {
                 decoration: InputDecoration(
                   hintText: "Имя пользователя",
                 ),
+                validator: (str) {
+                  if (str.isEmpty)
+                    return "Имя пользователя не может быть пустым";
+                  else
+                    return null;
+                },
               ),
               SizedBox(height: 10),
               TextFormField(
@@ -78,6 +84,12 @@ class LoginFormState extends State<LoginForm> {
                 decoration: InputDecoration(
                   hintText: "Пароль",
                 ),
+                validator: (str) {
+                  if (str.isEmpty)
+                    return "Пароль не может быть пустым";
+                  else
+                    return null;
+                },
               ),
               SizedBox(height: 10),
               MaterialButton(
