@@ -13,23 +13,6 @@ const String _KEY_PASSWORD = "user_pass";
 
 const String _ACTION_INFO = "info";
 
-Future<bool> auth(Credentials credentials) async {
-  final dio.BaseOptions options = dio.BaseOptions(followRedirects: true);
-  var params = {
-    _KEY_ACTION: _ACTION_INFO,
-    _KEY_USERNAME: credentials.login,
-    _KEY_PASSWORD: credentials.password
-  };
-  var httpParams = dio.FormData.fromMap(params);
-
-  try {
-    await dio.Dio(options).post(_BASE_URL, data: httpParams);
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-
 Future<UserData> getUserData(IDEntity<Credentials> credentials) async {
   final dio.BaseOptions options = dio.BaseOptions(followRedirects: true);
   var params = {
