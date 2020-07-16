@@ -10,7 +10,6 @@ import 'detailed_user_data.dart';
 class AuthenticatedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // todo: New Bloc for User's data
     return BlocBuilder<UserDataBloc, UserDataState>(
       builder: (BuildContext context, UserDataState state) {
         if (state is DataIsLoading) {
