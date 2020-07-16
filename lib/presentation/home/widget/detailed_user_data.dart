@@ -46,11 +46,13 @@ class DetailedUserData extends StatelessWidget {
                           Clipboard.setData(ClipboardData(
                             text: data.accountId,
                           ));
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                "Код плательщика скопирован в буфер обмена"),
-                            duration: Duration(seconds: 5),
-                          ));
+                          Scaffold.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(SnackBar(
+                              content: Text(
+                                  "Код плательщика скопирован в буфер обмена"),
+                              duration: Duration(seconds: 5),
+                            ));
                         },
                         icon: Icon(
                           Icons.content_copy,
