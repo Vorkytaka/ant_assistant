@@ -47,8 +47,20 @@ class HomeScreen extends StatelessWidget {
 class AuthenticatedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("У вас есть аккаунты"),
+    // todo: New Bloc for User's data
+    return BlocBuilder<AuthBloc, AuthBlocState>(
+      builder: (BuildContext context, AuthBlocState state) {
+        final _state = (state as Authenticated);
+        return ListView.separated(
+          itemCount: _state.credentials.length,
+          separatorBuilder: (context, index) => Container(
+            color: Colors.black12,
+            height: 1,
+          ),
+          itemBuilder: (context, index) =>
+              Text(_state.credentials[index].login),
+        );
+      },
     );
   }
 }
