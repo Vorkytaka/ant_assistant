@@ -1,169 +1,79 @@
 import 'package:animations/animations.dart';
-import 'package:antassistant/data/repository/repository.dart';
+import 'package:antassistant/bloc/auth/bloc.dart';
+import 'package:antassistant/bloc/auth/event.dart' as AuthEvent;
+import 'package:antassistant/bloc/auth/state.dart';
+import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
+import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/login/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final repo = Provider.of<Repository>(context);
-
     return Scaffold(
-      body: UserDataWidget(
-        repo: repo,
-      ),
-    );
-  }
-}
-
-class UserDataWidget extends StatefulWidget {
-  final Repository repo;
-
-  const UserDataWidget({Key key, this.repo}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => UserDataState();
-}
-
-class UserDataState extends State<UserDataWidget> {
-  List<UserData> _data;
-
-  @override
-  void initState() {
-    super.initState();
-    this.widget.repo.getUsersDataStream().listen(_onNextUsersData);
-    this.widget.repo.isThereAnyAccount().then((value) {
-      if (!value) {
-        _onAuth();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_data != null && _data.isNotEmpty) {
-      if (_data.length > 1) {
-        return _buildListOfUserState();
-      } else {
-        return _buildOneUserState(_data[0]);
-      }
-    } else {
-      return _buildNoUserState();
-    }
-  }
-
-  Widget _buildNoUserState() {
-    return FlatButton(
-      onPressed: _onAuth,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.zero),
-      ),
-      child: Row(
-//        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          IconButton(
-            onPressed: null,
-            icon: Icon(Icons.add_circle_outline),
-          ),
-          Text("Add account"),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildListOfUserState() {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Expanded(
-              child: Material(
-                elevation: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                            child: Text(
-                              "Аккаунты",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: _onAuth,
-                          child: Text(
-                            "Добавить аккаунт",
-                            style: TextStyle(
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: _data.length,
-                      itemBuilder: (context, pos) {
-                        return _buildItem(pos);
-                      },
-                      separatorBuilder: (context, pos) {
-                        return Container(
-                          color: Colors.black12,
-                          height: 1,
-                        );
-                      },
-                      physics: BouncingScrollPhysics(),
-                    ),
-                  ],
-                ),
+      appBar: AppBar(
+        title: Text("ANTAssistant"),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () async {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LoginScreenProvider()));
+            },
+            child: Text(
+              "Добавить аккаунт",
+              style: TextStyle(
+                color: Colors.black54,
               ),
             ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOneUserState(UserData data) {
-    return Column(
-      children: <Widget>[
-        FlatButton(
-          onPressed: _onAuth,
-          child: Text(
-            "Добавить аккаунт",
-            style: TextStyle(
-              color: Colors.black54,
-            ),
           ),
-        ),
-        DetailedUserData(
-          data: data,
-          repo: widget.repo,
-        ),
-      ],
+        ],
+      ),
+      body: BlocBuilder<AuthBloc, AuthBlocState>(
+        builder: (BuildContext context, AuthBlocState state) {
+          if (state is Authenticated) {
+            return AuthenticatedWidget();
+          } else if (state is Unauthenticated) {
+            return UnauthenticatedWidget();
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class AuthenticatedWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // todo: New Bloc for User's data
+    return BlocBuilder<UserDataBloc, UserDataState>(
+      builder: (BuildContext context, UserDataState state) {
+        if (state is DataIsLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is DataFetched) {
+          return ListView.separated(
+            itemCount: state.data.length,
+            separatorBuilder: (context, i) => Container(
+              color: Colors.grey,
+              height: 1,
+            ),
+            itemBuilder: (context, i) => _buildItem(state.data[i]),
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 
-  Widget _buildItem(int pos) {
-    final data = _data[pos];
+  Widget _buildItem(UserData data) {
     return OpenContainer(
       transitionType: ContainerTransitionType.fadeThrough,
       transitionDuration: Duration(
@@ -172,7 +82,6 @@ class UserDataState extends State<UserDataWidget> {
       openBuilder: (context, anim) {
         return DetailedUserData(
           data: data,
-          repo: this.widget.repo,
         );
       },
       closedBuilder: (context, anim) {
@@ -211,25 +120,21 @@ class UserDataState extends State<UserDataWidget> {
       },
     );
   }
+}
 
-  void _onNextUsersData(List<UserData> data) {
-    setState(() {
-      _data = data;
-    });
-  }
-
-  void _onAuth() async {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => LoginScreenProvider()));
+class UnauthenticatedWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Вы ещё не добавили аккаунт"),
+    );
   }
 }
 
 class DetailedUserData extends StatelessWidget {
   final UserData data;
-  final Repository repo;
 
-  const DetailedUserData({Key key, @required this.data, this.repo})
-      : super(key: key);
+  const DetailedUserData({Key key, @required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +191,10 @@ class DetailedUserData extends StatelessWidget {
                               RaisedButton(
                                 child: Text("Да"),
                                 onPressed: () {
-                                  // todo: remove account
+                                  BlocProvider.of<AuthBloc>(context)
+                                      .add(AuthEvent.DeleteUser(data.id));
+                                  BlocProvider.of<UserDataBloc>(context)
+                                      .add(UserDataEvent.DeleteUser());
                                   Navigator.pop(context);
                                 },
                               )
