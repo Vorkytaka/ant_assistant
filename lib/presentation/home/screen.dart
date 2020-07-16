@@ -32,17 +32,6 @@ class UserDataState extends State<UserDataWidget> {
   List<UserData> _data;
 
   @override
-  void initState() {
-    super.initState();
-    this.widget.repo.getUsersDataStream().listen(_onNextUsersData);
-    this.widget.repo.isThereAnyAccount().then((value) {
-      if (!value) {
-        _onAuth();
-      }
-    });
-  }
-
-  @override
   void dispose() {
     super.dispose();
   }
@@ -210,12 +199,6 @@ class UserDataState extends State<UserDataWidget> {
         );
       },
     );
-  }
-
-  void _onNextUsersData(List<UserData> data) {
-    setState(() {
-      _data = data;
-    });
   }
 
   void _onAuth() async {
