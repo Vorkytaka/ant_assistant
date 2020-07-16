@@ -9,8 +9,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<LoginBloc, LoginState>(
-          builder: (BuildContext context, LoginState state) => LoginForm(),
+        child: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state is LoginSuccess) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: LoginForm(),
         ),
       ),
     );
