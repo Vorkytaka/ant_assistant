@@ -52,8 +52,8 @@ class DetailedUserData extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    showDialog(
+                  onPressed: () async {
+                    final bool isDeleted = await showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
@@ -72,12 +72,15 @@ class DetailedUserData extends StatelessWidget {
                                       .add(AuthEvent.DeleteUser(data.id));
                                   BlocProvider.of<UserDataBloc>(context)
                                       .add(UserDataEvent.DeleteUser());
-                                  Navigator.pop(context);
+                                  Navigator.pop(context, true);
                                 },
                               )
                             ],
                           );
                         });
+                    if (isDeleted != null && isDeleted) {
+                      Navigator.pop(context);
+                    }
                   },
                   icon: Icon(
                     Icons.delete_forever,
