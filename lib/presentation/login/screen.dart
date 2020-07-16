@@ -12,24 +12,30 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Авторизация"),
+      ),
       body: SafeArea(
-        child: BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state is LoginSuccess) {
-              BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
-              BlocProvider.of<UserDataBloc>(context)
-                  .add(UserDataEvent.AddedUser());
-              Navigator.of(context).pop();
-            } else if (state is LoginError) {
-              Scaffold.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(
-                  content: Text("Не удалось авторизоваться"),
-                  duration: Duration(hours: 24),
-                ));
-            }
-          },
-          child: LoginForm(),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
+                BlocProvider.of<UserDataBloc>(context)
+                    .add(UserDataEvent.AddedUser());
+                Navigator.of(context).pop();
+              } else if (state is LoginError) {
+                Scaffold.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(
+                    content: Text("Не удалось авторизоваться"),
+                    duration: Duration(hours: 24),
+                  ));
+              }
+            },
+            child: LoginForm(),
+          ),
         ),
       ),
     );
