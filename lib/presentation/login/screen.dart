@@ -1,5 +1,7 @@
 import 'package:antassistant/bloc/auth/bloc.dart';
-import 'package:antassistant/bloc/auth/event.dart';
+import 'package:antassistant/bloc/auth/event.dart' as AuthEvent;
+import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
 import 'package:antassistant/bloc/login/bloc.dart';
 import 'package:antassistant/bloc/login/event.dart';
 import 'package:antassistant/bloc/login/state.dart';
@@ -14,7 +16,9 @@ class LoginScreen extends StatelessWidget {
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              BlocProvider.of<AuthBloc>(context).add(AddedUser());
+              BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
+              BlocProvider.of<UserDataBloc>(context)
+                  .add(UserDataEvent.AddedUser());
               Navigator.of(context).pop();
             }
           },

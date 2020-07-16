@@ -1,7 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:antassistant/bloc/auth/bloc.dart';
+import 'package:antassistant/bloc/auth/event.dart' as AuthEvent;
 import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/login/provider.dart';
@@ -189,7 +191,10 @@ class DetailedUserData extends StatelessWidget {
                               RaisedButton(
                                 child: Text("Да"),
                                 onPressed: () {
-                                  // todo: remove account
+                                  BlocProvider.of<AuthBloc>(context)
+                                      .add(AuthEvent.DeleteUser(data.id));
+                                  BlocProvider.of<UserDataBloc>(context)
+                                      .add(UserDataEvent.DeleteUser());
                                   Navigator.pop(context);
                                 },
                               )
