@@ -1,5 +1,9 @@
+import 'package:antassistant/data/parser.dart';
 import 'package:antassistant/entity/credentials.dart';
+import 'package:antassistant/entity/id_entity.dart';
+import 'package:antassistant/entity/user_data.dart';
 import 'package:dio/dio.dart';
+import 'package:html/parser.dart';
 
 class Api {
   static const String _BASE_URL = "http://cabinet.a-n-t.ru/cabinet.php";
@@ -24,6 +28,24 @@ class Api {
       return true;
     } catch (err) {
       return false;
+    }
+  }
+
+  Future<UserData> getUserData(IDEntity<Credentials> credentials) async {
+    final BaseOptions options = BaseOptions(followRedirects: true);
+    var params = {
+      _KEY_ACTION: _ACTION_INFO,
+      _KEY_USERNAME: credentials.entity.login,
+      _KEY_PASSWORD: credentials.entity.password
+    };
+    var httpParams = FormData.fromMap(params);
+
+    try {
+      final response = await Dio(options).post(_BASE_URL, data: httpParams);
+      final document = parse(response.data);
+      return parseUserData(credentials.id, document);
+    } catch (err) {
+      return null;
     }
   }
 }

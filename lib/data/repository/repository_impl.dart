@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:antassistant/data/api.dart';
-import 'package:antassistant/data/net.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/data/source/data_source.dart';
 import 'package:antassistant/entity/credentials.dart';
@@ -48,7 +47,7 @@ class RepositoryImpl extends Repository {
   Future<void> _update() async {
     final users = await _dataSource.getCredentials();
     final data = await Future.wait(users.map((e) {
-      return getUserData(e);
+      return _api.getUserData(e);
     }));
     _controller.add(data);
   }
