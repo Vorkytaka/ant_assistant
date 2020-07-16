@@ -6,6 +6,7 @@ import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/login/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -77,7 +78,9 @@ class AuthenticatedWidget extends StatelessWidget {
         milliseconds: 350,
       ),
       openBuilder: (context, anim) {
-        return Container();
+        return DetailedUserData(
+          data: data,
+        );
       },
       closedBuilder: (context, anim) {
         return Padding(
@@ -314,13 +317,12 @@ class UserDataState extends State<UserDataWidget> {
         .push(MaterialPageRoute(builder: (context) => LoginScreenProvider()));
   }
 }
+ */
 
 class DetailedUserData extends StatelessWidget {
   final UserData data;
-  final Repository repo;
 
-  const DetailedUserData({Key key, @required this.data, this.repo})
-      : super(key: key);
+  const DetailedUserData({Key key, @required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -480,4 +482,3 @@ class DetailedUserData extends StatelessWidget {
     );
   }
 }
-*/
