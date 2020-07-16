@@ -11,3 +11,7 @@ class DeleteUser extends AuthBlocEvent {
 
   const DeleteUser(this.id);
 }
+
+class AddedUser extends AuthBlocEvent {
+  const AddedUser();
+}

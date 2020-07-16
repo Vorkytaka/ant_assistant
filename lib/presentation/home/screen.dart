@@ -16,7 +16,10 @@ class HomeScreen extends StatelessWidget {
         title: Text("ANTAssistant"),
         actions: <Widget>[
           FlatButton(
-            onPressed: null,
+            onPressed: () async {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LoginScreenProvider()));
+            },
             child: Text(
               "Добавить аккаунт",
               style: TextStyle(

@@ -15,6 +15,8 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       yield* _mapAppStartedToState(event);
     } else if (event is DeleteUser) {
       yield* _mapDeleteUserToState(event);
+    } else if (event is AddedUser) {
+      yield* _mapAddedUserToState(event);
     }
   }
 
@@ -24,6 +26,10 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
   Stream<AuthBlocState> _mapDeleteUserToState(DeleteUser event) async* {
     await _repository.removeUser(event.id);
+    yield* _credentialsToState();
+  }
+
+  Stream<AuthBlocState> _mapAddedUserToState(AddedUser event) async* {
     yield* _credentialsToState();
   }
 
