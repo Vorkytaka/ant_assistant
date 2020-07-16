@@ -1,20 +1,60 @@
 import 'package:animations/animations.dart';
+import 'package:antassistant/bloc/auth/bloc.dart';
+import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/login/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final repo = Provider.of<Repository>(context);
-
     return Scaffold(
-      body: UserDataWidget(
-        repo: repo,
+      appBar: AppBar(
+        title: Text("ANTAssistant"),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: null,
+            child: Text(
+              "Добавить аккаунт",
+              style: TextStyle(
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        ],
       ),
+      body: BlocBuilder<AuthBloc, AuthBlocState>(
+        builder: (BuildContext context, AuthBlocState state) {
+          if (state is Authenticated) {
+            return AuthenticatedWidget();
+          } else if (state is Unauthenticated) {
+            return UnauthenticatedWidget();
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class AuthenticatedWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("У вас есть аккаунты"),
+    );
+  }
+}
+
+class UnauthenticatedWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Вы ещё не добавили аккаунт"),
     );
   }
 }
