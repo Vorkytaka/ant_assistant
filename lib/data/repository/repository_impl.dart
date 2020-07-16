@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/net.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/data/source/data_source.dart';
@@ -9,8 +10,9 @@ import 'package:antassistant/entity/user_data.dart';
 class RepositoryImpl extends Repository {
   final StreamController<List<UserData>> _controller = StreamController();
   final DataSource _dataSource;
+  final Api _api;
 
-  RepositoryImpl(this._dataSource) {
+  RepositoryImpl(this._dataSource, this._api) {
     _update();
   }
 
@@ -53,6 +55,6 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<bool> login(Credentials credentials) async {
-    return await auth(credentials);
+    return await _api.login(credentials);
   }
 }

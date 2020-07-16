@@ -1,3 +1,4 @@
+import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:antassistant/presentation/home/provider.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,8 @@ class AppProviderState extends State<AppProvider> {
 
     final db = await SQLDataSource.initDatabase();
     final dataSource = SQLDataSource(db);
-    repository = RepositoryImpl(dataSource);
+    final api = Api();
+    repository = RepositoryImpl(dataSource, api);
 
     setState(() {
       _initialized = true;

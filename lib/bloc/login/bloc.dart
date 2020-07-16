@@ -1,6 +1,5 @@
 import 'package:antassistant/bloc/login/event.dart';
 import 'package:antassistant/bloc/login/state.dart';
-import 'package:antassistant/data/net.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:antassistant/entity/credentials.dart';
 import 'package:bloc/bloc.dart';
@@ -46,7 +45,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginIsLoading();
 
     final credentials = Credentials(event.username, event.password);
-    final isLoginSuccessful = await auth(credentials);
+    final isLoginSuccessful = await _repository.login(credentials);
 
     if (isLoginSuccessful) {
       yield LoginSuccess();
