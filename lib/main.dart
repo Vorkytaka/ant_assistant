@@ -1,3 +1,5 @@
+import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:antassistant/presentation/home/provider.dart';
@@ -38,8 +40,15 @@ class AppProviderState extends State<AppProvider> {
     return Provider.value(
       value: repository,
       updateShouldNotify: (previous, current) => false,
-      child: BlocProvider<AuthBloc>(
-        create: (context) => AuthBloc(repository)..add(AppStarted()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(repository)..add(AppStarted()),
+          ),
+          BlocProvider<UserDataBloc>(
+            create: (context) => UserDataBloc(repository)..add(AskForUpdate()),
+          ),
+        ],
         child: App(),
       ),
     );
