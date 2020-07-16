@@ -12,11 +12,6 @@ class HomeScreen extends StatelessWidget {
     final repo = Provider.of<Repository>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "ANTAssistant",
-        ),
-      ),
       body: UserDataWidget(
         repo: repo,
       ),
