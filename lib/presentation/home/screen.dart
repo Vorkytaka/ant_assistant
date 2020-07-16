@@ -1,12 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:antassistant/data/repository/repository.dart';
-import 'package:antassistant/entity/auth_state.dart';
 import 'package:antassistant/entity/user_data.dart';
+import 'package:antassistant/presentation/login/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import '../auth.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -226,20 +224,8 @@ class UserDataState extends State<UserDataWidget> {
   }
 
   void _onAuth() async {
-    final AuthState state = await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      isDismissible: false,
-//      enableDrag: false,
-      builder: (context) => Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: AuthWidget(),
-      ),
-    );
-
-    if (state != null && state.isSuccess) {
-      this.widget.repo.saveUser(state.credentials);
-    }
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginScreenProvider()));
   }
 }
 
