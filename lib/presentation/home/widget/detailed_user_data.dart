@@ -15,6 +15,15 @@ class DetailedUserData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          data.accountName,
+          style: TextStyle(color: Colors.black54),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.grey[50],
+        iconTheme: IconThemeData(color: Colors.black54),
+      ),
       body: Builder(builder: (context) {
         return SafeArea(
           child: Container(
