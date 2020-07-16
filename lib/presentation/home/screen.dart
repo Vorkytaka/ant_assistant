@@ -1,11 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:antassistant/bloc/auth/bloc.dart';
 import 'package:antassistant/bloc/auth/state.dart';
-import 'package:antassistant/data/repository/repository.dart';
+import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/login/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -48,17 +48,69 @@ class AuthenticatedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // todo: New Bloc for User's data
-    return BlocBuilder<AuthBloc, AuthBlocState>(
-      builder: (BuildContext context, AuthBlocState state) {
-        final _state = (state as Authenticated);
-        return ListView.separated(
-          itemCount: _state.credentials.length,
-          separatorBuilder: (context, index) => Container(
-            color: Colors.black12,
-            height: 1,
+    return BlocBuilder<UserDataBloc, UserDataState>(
+      builder: (BuildContext context, UserDataState state) {
+        if (state is DataIsLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is DataFetched) {
+          return ListView.separated(
+            itemCount: state.data.length,
+            separatorBuilder: (context, i) => Container(
+              color: Colors.grey,
+              height: 1,
+            ),
+            itemBuilder: (context, i) => _buildItem(state.data[i]),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  Widget _buildItem(UserData data) {
+    return OpenContainer(
+      transitionType: ContainerTransitionType.fadeThrough,
+      transitionDuration: Duration(
+        milliseconds: 350,
+      ),
+      openBuilder: (context, anim) {
+        return Container();
+      },
+      closedBuilder: (context, anim) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 24,
           ),
-          itemBuilder: (context, index) =>
-              Text(_state.credentials[index].login),
+          child: Row(
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    data.accountName,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Баланс: ${data.balance} ₽",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         );
       },
     );
@@ -74,6 +126,7 @@ class UnauthenticatedWidget extends StatelessWidget {
   }
 }
 
+/*
 class UserDataWidget extends StatefulWidget {
   final Repository repo;
 
@@ -427,3 +480,4 @@ class DetailedUserData extends StatelessWidget {
     );
   }
 }
+*/
