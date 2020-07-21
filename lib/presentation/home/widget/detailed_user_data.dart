@@ -25,7 +25,7 @@ class DetailedUserData extends StatelessWidget {
             icon: Icon(Icons.refresh),
             onPressed: () {
               BlocProvider.of<UserDataBloc>(context)
-                  .add(UserDataEvent.AskForUpdateUser(data.id));
+                  .add(UserDataEvent.AskForUpdateUser(data.credentialsId));
             },
           ),
         ],
@@ -95,11 +95,12 @@ class DetailedUserData extends StatelessWidget {
                                     RaisedButton(
                                       child: Text("Да"),
                                       onPressed: () {
-                                        BlocProvider.of<AuthBloc>(context)
-                                            .add(AuthEvent.DeleteUser(data.id));
+                                        BlocProvider.of<AuthBloc>(context).add(
+                                            AuthEvent.DeleteUser(
+                                                data.credentialsId));
                                         BlocProvider.of<UserDataBloc>(context)
                                             .add(UserDataEvent.DeleteUser(
-                                                data.id));
+                                            data.credentialsId));
                                         Navigator.pop(context, true);
                                       },
                                     )

@@ -30,7 +30,7 @@ class SQLDataSource extends DataSource {
         await db.query(UsersScheme.TABLE_NAME);
     return List.generate(maps.length, (i) {
       return IDEntity(
-        maps[i][UsersScheme.COLUMN_NAME_USER_ID],
+        maps[i][UsersScheme.COLUMN_NAME_ID],
         Credentials(
           maps[i][UsersScheme.COLUMN_NAME_LOGIN],
           maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
@@ -54,7 +54,7 @@ class SQLDataSource extends DataSource {
     final db = database;
     await db.delete(
       UsersScheme.TABLE_NAME,
-      where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
+      where: "${UsersScheme.COLUMN_NAME_ID} = ?",
       whereArgs: [id],
     );
   }
@@ -64,7 +64,7 @@ class SQLDataSource extends DataSource {
     final db = database;
     final maps = await db.query(
       UsersScheme.TABLE_NAME,
-      where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
+      where: "${UsersScheme.COLUMN_NAME_ID} = ?",
       whereArgs: [id],
     );
 
@@ -72,7 +72,7 @@ class SQLDataSource extends DataSource {
       return null;
     } else {
       return IDEntity(
-        maps[0][UsersScheme.COLUMN_NAME_USER_ID],
+        maps[0][UsersScheme.COLUMN_NAME_ID],
         Credentials(
           maps[0][UsersScheme.COLUMN_NAME_LOGIN],
           maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
