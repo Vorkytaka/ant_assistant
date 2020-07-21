@@ -48,8 +48,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final isLoginSuccessful = await _repository.login(credentials);
 
     if (isLoginSuccessful) {
-      yield LoginSuccess();
-      _repository.saveUser(credentials);
+      final id = await _repository.saveUser(credentials);
+      yield LoginSuccess(id);
     } else {
       yield LoginError();
     }
