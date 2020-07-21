@@ -52,11 +52,13 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
 
   Stream<UserDataState> _mapAskForUpdateUserToState(
       AskForUpdateUser event) async* {
-    if (state is DataFetched) {
+    final _state = state;
+
+    if (_state is DataFetched) {
       final credentials = await _repository.getCredentialsById(event.id);
       final newUserData = await _repository.getUserData(credentials);
 
-      final data = (state as DataFetched).data;
+      final data = _state.data;
       yield DataFetched(List.generate(data.length, (index) {
         final element = data[index];
         if (element.credentialsId == event.id) {
