@@ -22,6 +22,9 @@ class HomeScreen extends StatelessWidget {
             },
             child: Text(
               "Добавить аккаунт",
+              style: TextStyle(
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
             ),
           ),
           IconButton(
