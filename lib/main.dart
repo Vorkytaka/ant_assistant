@@ -44,9 +44,11 @@ class AppProviderState extends State<AppProvider> {
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(repository)..add(AppStarted()),
+            lazy: false,
           ),
           BlocProvider<UserDataBloc>(
             create: (context) => UserDataBloc(repository)..add(AskForUpdate()),
+            lazy: false,
           ),
         ],
         child: App(),
