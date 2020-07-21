@@ -14,7 +14,7 @@ class LoginCredentialsValid extends LoginState {
   final String username;
   final String password;
 
-  const LoginCredentialsValid(this.username, this.password);
+  const LoginCredentialsValid({this.username, this.password});
 }
 
 class LoginError extends LoginState {
@@ -24,5 +24,5 @@ class LoginError extends LoginState {
 class LoginSuccess extends LoginState {
   final int id;
 
-  const LoginSuccess(this.id);
+  const LoginSuccess({this.id});
 }

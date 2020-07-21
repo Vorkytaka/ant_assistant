@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               if (state is LoginSuccess) {
                 BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
                 BlocProvider.of<UserDataBloc>(context)
-                    .add(UserDataEvent.AddedUser(state.id));
+                    .add(UserDataEvent.AddedUser(id: state.id));
                 Navigator.of(context).pop();
               } else if (state is LoginError) {
                 Scaffold.of(context)
@@ -67,7 +67,7 @@ class LoginFormState extends State<LoginForm> {
                 autofocus: true,
                 onChanged: (String str) {
                   return BlocProvider.of<LoginBloc>(context)
-                      .add(LoginUsernameChanged(str));
+                      .add(LoginUsernameChanged(username: str));
                 },
                 onSaved: (String str) {
                   _username = str;
@@ -89,7 +89,7 @@ class LoginFormState extends State<LoginForm> {
                 autofocus: true,
                 onChanged: (String str) {
                   return BlocProvider.of<LoginBloc>(context)
-                      .add(LoginPasswordChanged(str));
+                      .add(LoginPasswordChanged(password: str));
                 },
                 onSaved: (String str) {
                   _password = str;
@@ -109,8 +109,10 @@ class LoginFormState extends State<LoginForm> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    BlocProvider.of<LoginBloc>(context)
-                        .add(LoginButtonPressed(_username, _password));
+                    BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
+                      username: _username,
+                      password: _password,
+                    ));
                   }
                 },
                 child: Text("Войти"),

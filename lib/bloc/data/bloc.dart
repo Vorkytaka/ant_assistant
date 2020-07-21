@@ -27,7 +27,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       final data = await _repository.getUserData(credentials);
 
       yield DataFetched(
-        [...(state as DataFetched).data]..add(data),
+        data: [...(state as DataFetched).data]..add(data),
       );
     }
   }
@@ -35,8 +35,9 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   Stream<UserDataState> _mapDeleteUserToState(DeleteUser event) async* {
     if (state is DataFetched) {
       final data = (state as DataFetched).data;
-      yield DataFetched([...data]
-        ..removeWhere((element) => element.credentialsId == event.id));
+      yield DataFetched(
+          data: [...data]
+            ..removeWhere((element) => element.credentialsId == event.id));
     }
   }
 
@@ -47,7 +48,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     final data =
         await Future.wait(credentials.map((e) => _repository.getUserData(e)));
 
-    yield DataFetched(data);
+    yield DataFetched(data: data);
   }
 
   Stream<UserDataState> _mapAskForUpdateUserToState(
@@ -59,14 +60,16 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       final newUserData = await _repository.getUserData(credentials);
 
       final data = _state.data;
-      yield DataFetched(List.generate(data.length, (index) {
-        final element = data[index];
-        if (element.credentialsId == event.id) {
-          return newUserData;
-        } else {
-          return element;
-        }
-      }));
+      yield DataFetched(
+        data: List.generate(data.length, (index) {
+          final element = data[index];
+          if (element.credentialsId == event.id) {
+            return newUserData;
+          } else {
+            return element;
+          }
+        }),
+      );
     }
   }
 }

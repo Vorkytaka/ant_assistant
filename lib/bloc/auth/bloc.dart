@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     if (credentials == null || credentials.isEmpty) {
       yield Unauthenticated();
     } else {
-      yield Authenticated(credentials);
+      yield Authenticated(credentials: credentials);
     }
   }
 }

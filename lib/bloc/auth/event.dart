@@ -9,7 +9,7 @@ class AppStarted extends AuthBlocEvent {
 class DeleteUser extends AuthBlocEvent {
   final int id;
 
-  const DeleteUser(this.id);
+  const DeleteUser({this.id});
 }
 
 class AddedUser extends AuthBlocEvent {

@@ -11,5 +11,5 @@ class Unauthenticated extends AuthBlocState {
 class Authenticated extends AuthBlocState {
   final List<Credentials> credentials;
 
-  const Authenticated(this.credentials);
+  const Authenticated({this.credentials});
 }

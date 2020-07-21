@@ -11,5 +11,5 @@ class DataIsLoading extends UserDataState {
 class DataFetched extends UserDataState {
   final List<UserData> data;
 
-  const DataFetched(this.data);
+  const DataFetched({this.data});
 }

@@ -24,9 +24,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginUsernameChanged event) async* {
     if (state is LoginCredentialsValid) {
       yield LoginCredentialsValid(
-          event.username, (state as LoginCredentialsValid).password);
+        username: event.username,
+        password: (state as LoginCredentialsValid).password,
+      );
     } else {
-      yield LoginCredentialsValid(event.username, null);
+      yield LoginCredentialsValid(
+        username: event.username,
+        password: null,
+      );
     }
   }
 
@@ -34,9 +39,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginPasswordChanged event) async* {
     if (state is LoginCredentialsValid) {
       yield LoginCredentialsValid(
-          (state as LoginCredentialsValid).username, event.password);
+        username: (state as LoginCredentialsValid).username,
+        password: event.password,
+      );
     } else {
-      yield LoginCredentialsValid(null, event.password);
+      yield LoginCredentialsValid(
+        username: null,
+        password: event.password,
+      );
     }
   }
 
@@ -49,7 +59,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     if (isLoginSuccessful) {
       final id = await _repository.saveUser(credentials);
-      yield LoginSuccess(id);
+      yield LoginSuccess(id: id);
     } else {
       yield LoginError();
     }
