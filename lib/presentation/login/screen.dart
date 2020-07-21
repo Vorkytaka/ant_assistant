@@ -105,10 +105,7 @@ class LoginFormState extends State<LoginForm> {
                 },
               ),
               SizedBox(height: 10),
-              MaterialButton(
-                minWidth: double.infinity,
-                color: Colors.blueAccent,
-                height: 50,
+              RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
