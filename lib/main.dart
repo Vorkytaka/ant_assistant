@@ -80,6 +80,7 @@ class App extends StatelessWidget {
       darkTheme: createDarkTheme(),
       themeMode: ThemeMode.system,
       home: HomeScreenProvider(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
