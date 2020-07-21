@@ -3,6 +3,7 @@ import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:antassistant/presentation/home/provider.dart';
+import 'package:antassistant/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -75,11 +76,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ANTAssistant',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.grey[50],
-      ),
+      theme: createLightTheme(),
+      darkTheme: createDarkTheme(),
+      themeMode: ThemeMode.system,
       home: HomeScreenProvider(),
     );
   }
