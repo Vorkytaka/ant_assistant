@@ -16,3 +16,9 @@ class DeleteUser extends UserDataEvent {
 class AskForUpdate extends UserDataEvent {
   const AskForUpdate();
 }
+
+class AskForUpdateUser extends UserDataEvent {
+  final int id;
+
+  const AskForUpdateUser(this.id);
+}
