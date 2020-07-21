@@ -16,6 +16,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       yield* _mapDeleteUserToState(event);
     } else if (event is AskForUpdate) {
       yield* _mapAskForUpdateToState(event);
+    } else if (event is AskForUpdateUser) {
+      yield* _mapAskForUpdateUserToState(event);
     }
   }
 
@@ -33,6 +35,24 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
 
   Stream<UserDataState> _mapAskForUpdateToState(AskForUpdate event) async* {
     yield* _userDataToState();
+  }
+
+  Stream<UserDataState> _mapAskForUpdateUserToState(
+      AskForUpdateUser event) async* {
+    if (state is DataFetched) {
+      final credentials = await _repository.getCredentialsById(event.id);
+      final newUserData = await _repository.getUserData(credentials);
+
+      final data = (state as DataFetched).data;
+      yield DataFetched(List.generate(data.length, (index) {
+        final element = data[index];
+        if (element.id == event.id) {
+          return newUserData;
+        } else {
+          return element;
+        }
+      }));
+    }
   }
 
   Stream<UserDataState> _userDataToState() async* {
