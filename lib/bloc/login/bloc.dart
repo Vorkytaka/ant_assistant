@@ -22,10 +22,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginUsernameChangesToState(
       LoginUsernameChanged event) async* {
-    if (state is LoginCredentialsValid) {
+    final _state = state;
+    if (_state is LoginCredentialsValid) {
       yield LoginCredentialsValid(
         username: event.username,
-        password: (state as LoginCredentialsValid).password,
+        password: _state.password,
       );
     } else {
       yield LoginCredentialsValid(
@@ -37,9 +38,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginPasswordChangedToState(
       LoginPasswordChanged event) async* {
-    if (state is LoginCredentialsValid) {
+    final _state = state;
+    if (_state is LoginCredentialsValid) {
       yield LoginCredentialsValid(
-        username: (state as LoginCredentialsValid).username,
+        username: _state.username,
         password: event.password,
       );
     } else {
