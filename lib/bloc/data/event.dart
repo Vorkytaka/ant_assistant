@@ -3,8 +3,9 @@ abstract class UserDataEvent {
 }
 
 class AddedUser extends UserDataEvent {
-  // todo: id of user
-  const AddedUser();
+  final int id;
+
+  const AddedUser(this.id);
 }
 
 class DeleteUser extends UserDataEvent {
@@ -15,4 +16,10 @@ class DeleteUser extends UserDataEvent {
 
 class AskForUpdate extends UserDataEvent {
   const AskForUpdate();
+}
+
+class AskForUpdateUser extends UserDataEvent {
+  final int id;
+
+  const AskForUpdateUser(this.id);
 }

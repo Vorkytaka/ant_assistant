@@ -20,6 +20,15 @@ class DetailedUserData extends StatelessWidget {
           data.accountName,
           style: TextStyle(color: Colors.black54),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              BlocProvider.of<UserDataBloc>(context)
+                  .add(UserDataEvent.AskForUpdateUser(data.id));
+            },
+          ),
+        ],
         elevation: 0,
         backgroundColor: Colors.grey[50],
         iconTheme: IconThemeData(color: Colors.black54),

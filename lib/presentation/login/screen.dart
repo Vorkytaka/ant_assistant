@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               if (state is LoginSuccess) {
                 BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
                 BlocProvider.of<UserDataBloc>(context)
-                    .add(UserDataEvent.AddedUser());
+                    .add(UserDataEvent.AddedUser(state.id));
                 Navigator.of(context).pop();
               } else if (state is LoginError) {
                 Scaffold.of(context)

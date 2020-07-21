@@ -22,5 +22,7 @@ class LoginError extends LoginState {
 }
 
 class LoginSuccess extends LoginState {
-  const LoginSuccess();
+  final int id;
+
+  const LoginSuccess(this.id);
 }

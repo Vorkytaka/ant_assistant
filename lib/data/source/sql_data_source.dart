@@ -27,7 +27,7 @@ class SQLDataSource extends DataSource {
   Future<List<IDEntity<Credentials>>> getCredentials() async {
     final db = database;
     final List<Map<String, dynamic>> maps =
-    await db.query(UsersScheme.TABLE_NAME);
+        await db.query(UsersScheme.TABLE_NAME);
     return List.generate(maps.length, (i) {
       return IDEntity(
         maps[i][UsersScheme.COLUMN_NAME_USER_ID],
@@ -57,5 +57,27 @@ class SQLDataSource extends DataSource {
       where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
       whereArgs: [id],
     );
+  }
+
+  @override
+  Future<IDEntity<Credentials>> getCredentialsById(int id) async {
+    final db = database;
+    final maps = await db.query(
+      UsersScheme.TABLE_NAME,
+      where: "${UsersScheme.COLUMN_NAME_USER_ID} = ?",
+      whereArgs: [id],
+    );
+
+    if (maps.isEmpty) {
+      return null;
+    } else {
+      return IDEntity(
+        maps[0][UsersScheme.COLUMN_NAME_USER_ID],
+        Credentials(
+          maps[0][UsersScheme.COLUMN_NAME_LOGIN],
+          maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
+        ),
+      );
+    }
   }
 }

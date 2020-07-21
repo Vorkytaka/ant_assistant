@@ -42,4 +42,9 @@ class RepositoryImpl extends Repository {
   Future<UserData> getUserData(IDEntity<Credentials> credentials) async {
     return await _api.getUserData(credentials);
   }
+
+  @override
+  Future<IDEntity<Credentials>> getCredentialsById(int id) async {
+    return await _dataSource.getCredentialsById(id);
+  }
 }

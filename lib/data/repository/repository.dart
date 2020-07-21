@@ -13,5 +13,7 @@ abstract class Repository {
 
   Future<List<IDEntity<Credentials>>> getCredentials();
 
+  Future<IDEntity<Credentials>> getCredentialsById(int id);
+
   Future<UserData> getUserData(IDEntity<Credentials> credentials);
 }
