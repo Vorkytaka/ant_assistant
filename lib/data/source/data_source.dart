@@ -7,4 +7,6 @@ abstract class DataSource {
   Future<int> insertCredentials(Credentials credentials);
 
   Future<void> removeCredentials(int id);
+
+  Future<IDEntity<Credentials>> getCredentialsById(int id);
 }
