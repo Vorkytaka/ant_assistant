@@ -1,5 +1,7 @@
 import 'package:antassistant/bloc/auth/bloc.dart';
 import 'package:antassistant/bloc/auth/state.dart';
+import 'package:antassistant/bloc/data/bloc.dart';
+import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/presentation/home/widget/authenticated.dart';
 import 'package:antassistant/presentation/home/widget/unauthenticated.dart';
 import 'package:antassistant/presentation/login/provider.dart';
@@ -24,6 +26,12 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.black54,
               ),
             ),
+          ),
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              BlocProvider.of<UserDataBloc>(context).add(AskForUpdate());
+            },
           ),
         ],
       ),
