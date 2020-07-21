@@ -8,7 +8,9 @@ class AddedUser extends UserDataEvent {
 }
 
 class DeleteUser extends UserDataEvent {
-  const DeleteUser();
+  final int id;
+
+  const DeleteUser(this.id);
 }
 
 class AskForUpdate extends UserDataEvent {

@@ -24,7 +24,11 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   }
 
   Stream<UserDataState> _mapDeleteUserToState(DeleteUser event) async* {
-    yield* _userDataToState();
+    if (state is DataFetched) {
+      final data = (state as DataFetched).data;
+      yield DataFetched(
+          [...data]..removeWhere((element) => element.id == event.id));
+    }
   }
 
   Stream<UserDataState> _mapAskForUpdateToState(AskForUpdate event) async* {

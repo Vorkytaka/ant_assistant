@@ -89,7 +89,8 @@ class DetailedUserData extends StatelessWidget {
                                         BlocProvider.of<AuthBloc>(context)
                                             .add(AuthEvent.DeleteUser(data.id));
                                         BlocProvider.of<UserDataBloc>(context)
-                                            .add(UserDataEvent.DeleteUser());
+                                            .add(UserDataEvent.DeleteUser(
+                                                data.id));
                                         Navigator.pop(context, true);
                                       },
                                     )
