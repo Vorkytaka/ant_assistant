@@ -44,36 +44,39 @@ class AuthenticatedWidget extends StatelessWidget {
         );
       },
       closedBuilder: (context, anim) {
-        return Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 24,
-          ),
-          child: Row(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    data.accountName,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
+        return Card(
+          margin: EdgeInsets.zero,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 24,
+            ),
+            child: Row(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      data.accountName,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    "Баланс: ${data.balance} ₽",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                    SizedBox(
+                      height: 6,
                     ),
-                  )
-                ],
-              )
-            ],
+                    Text(
+                      "Баланс: ${data.balance} ₽",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },

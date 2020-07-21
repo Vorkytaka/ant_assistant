@@ -18,7 +18,6 @@ class DetailedUserData extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           data.accountName,
-          style: TextStyle(color: Colors.black54),
         ),
         actions: <Widget>[
           IconButton(
@@ -29,9 +28,6 @@ class DetailedUserData extends StatelessWidget {
             },
           ),
         ],
-        elevation: 0,
-        backgroundColor: Colors.grey[50],
-        iconTheme: IconThemeData(color: Colors.black54),
       ),
       body: Builder(builder: (context) {
         return SafeArea(
@@ -100,7 +96,7 @@ class DetailedUserData extends StatelessWidget {
                                                 data.credentialsId));
                                         BlocProvider.of<UserDataBloc>(context)
                                             .add(UserDataEvent.DeleteUser(
-                                            data.credentialsId));
+                                                data.credentialsId));
                                         Navigator.pop(context, true);
                                       },
                                     )
