@@ -71,7 +71,6 @@ class DetailedUserData extends StatelessWidget {
                         icon: Icon(
                           Icons.content_copy,
                           size: 20,
-                          color: Colors.black54,
                         ),
                       ),
                       IconButton(
@@ -112,7 +111,6 @@ class DetailedUserData extends StatelessWidget {
                         icon: Icon(
                           Icons.delete_forever,
                           size: 20,
-                          color: Colors.black54,
                         ),
                       )
                     ],
