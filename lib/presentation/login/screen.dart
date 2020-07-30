@@ -16,26 +16,23 @@ class LoginScreen extends StatelessWidget {
         title: Text("Авторизация"),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              if (state is LoginSuccess) {
-                BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
-                BlocProvider.of<UserDataBloc>(context)
-                    .add(UserDataEvent.AddedUser(id: state.id));
-                Navigator.of(context).pop();
-              } else if (state is LoginError) {
-                Scaffold.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(
-                    content: Text("Не удалось авторизоваться"),
-                    duration: Duration(hours: 24),
-                  ));
-              }
-            },
-            child: LoginForm(),
-          ),
+        child: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state is LoginSuccess) {
+              BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
+              BlocProvider.of<UserDataBloc>(context)
+                  .add(UserDataEvent.AddedUser(id: state.id));
+              Navigator.of(context).pop();
+            } else if (state is LoginError) {
+              Scaffold.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(
+                  content: Text("Не удалось авторизоваться"),
+                  duration: Duration(hours: 24),
+                ));
+            }
+          },
+          child: LoginForm(),
         ),
       ),
     );
@@ -60,6 +57,7 @@ class LoginFormState extends State<LoginForm> {
         return Form(
           key: _formKey,
           child: ListView(
+            padding: EdgeInsets.all(16),
             children: <Widget>[
               TextFormField(
                 keyboardType: TextInputType.text,
