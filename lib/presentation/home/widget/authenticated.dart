@@ -23,7 +23,7 @@ class AuthenticatedWidget extends StatelessWidget {
               color: Colors.grey,
               height: 1,
             ),
-            itemBuilder: (context, i) => _buildItem(state.data[i]),
+            itemBuilder: (context, i) => _buildItem(state.data[i], context),
           );
         } else {
           return Container();
@@ -32,17 +32,21 @@ class AuthenticatedWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(UserData data) {
+  Widget _buildItem(UserData data, BuildContext context) {
     return OpenContainer(
-      transitionType: ContainerTransitionType.fadeThrough,
+      transitionType: ContainerTransitionType.fade,
       transitionDuration: Duration(
         milliseconds: 350,
       ),
+      openColor: Theme.of(context).cardColor,
       openBuilder: (context, anim) {
         return DetailedUserData(
           data: data,
         );
       },
+      closedColor: Theme
+          .of(context)
+          .cardColor,
       closedBuilder: (context, anim) {
         return Card(
           margin: EdgeInsets.zero,
