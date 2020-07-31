@@ -41,10 +41,10 @@ class LoginScreen extends StatelessWidget {
 
 class LoginForm extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => LoginFormState();
+  State<StatefulWidget> createState() => _LoginFormState();
 }
 
-class LoginFormState extends State<LoginForm> {
+class _LoginFormState extends State<LoginForm> {
   String _username;
   String _password;
 
