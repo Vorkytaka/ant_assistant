@@ -2,6 +2,7 @@ import 'package:antassistant/bloc/auth/bloc.dart';
 import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
+import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/presentation/home/widget/authenticated.dart';
 import 'package:antassistant/presentation/home/widget/unauthenticated.dart';
 import 'package:antassistant/presentation/login/provider.dart';
@@ -27,10 +28,17 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              BlocProvider.of<UserDataBloc>(context).add(AskForUpdate());
+          BlocBuilder<UserDataBloc, UserDataState>(
+            builder: (BuildContext context, UserDataState state) {
+              return IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: (state is DataFetched)
+                    ? () {
+                        BlocProvider.of<UserDataBloc>(context)
+                            .add(AskForUpdate());
+                      }
+                    : null,
+              );
             },
           ),
         ],
