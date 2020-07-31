@@ -16,17 +16,13 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("ANTAssistant"),
         actions: <Widget>[
-          FlatButton(
+          IconButton(
+            icon: Icon(Icons.add),
             onPressed: () async {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => LoginScreenProvider()));
             },
-            child: Text(
-              "Добавить аккаунт",
-              style: TextStyle(
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-            ),
+            tooltip: "Добавить пользователя",
           ),
           BlocBuilder<UserDataBloc, UserDataState>(
             builder: (BuildContext context, UserDataState state) {
@@ -38,6 +34,7 @@ class HomeScreen extends StatelessWidget {
                             .add(AskForUpdate());
                       }
                     : null,
+                tooltip: "Обновить данные",
               );
             },
           ),
