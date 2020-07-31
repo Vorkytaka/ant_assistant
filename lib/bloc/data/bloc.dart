@@ -56,6 +56,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     final _state = state;
 
     if (_state is DataFetched) {
+      yield DataIsLoading();
+
       final credentials = await _repository.getCredentialsById(event.id);
       final newUserData = await _repository.getUserData(credentials);
 
