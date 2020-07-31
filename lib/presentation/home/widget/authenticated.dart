@@ -35,7 +35,7 @@ class AuthenticatedWidget extends StatelessWidget {
     return OpenContainer(
       transitionType: ContainerTransitionType.fade,
       transitionDuration: Duration(
-        milliseconds: 350,
+        milliseconds: 300,
       ),
       openColor: Theme.of(context).cardColor,
       openBuilder: (context, anim) {
