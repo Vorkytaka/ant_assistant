@@ -9,28 +9,88 @@ ThemeData createLightTheme() {
   const Color _lightCardColor = Color(0xffeceff1);
 
   return ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: _lightThemeColor,
-    primaryColor: _lightThemeColor.shade600,
-    primaryColorLight: _lightThemeColor.shade400,
-    primaryColorDark: _lightThemeColor.shade900,
-    primaryColorBrightness: _lightPrimaryColorBrightness,
-    accentColor: _lightThemeColor.shade500,
-    accentColorBrightness: _lightAccentColorBrightness,
-    canvasColor: _lightCardColor,
-    cardColor: _lightCardColor,
-    scaffoldBackgroundColor: _lightCardColor,
-    focusColor: ThemeData.light().focusColor,
-    hoverColor: ThemeData.light().hoverColor,
-    highlightColor: ThemeData.light().highlightColor,
-    splashColor: ThemeData.light().splashColor,
-    splashFactory: InkSplash.splashFactory,
-    buttonTheme: ButtonThemeData(
-      buttonColor: _lightThemeColor.shade600,
-      height: 50,
-      textTheme: ButtonTextTheme.primary,
-    ),
-  );
+      brightness: Brightness.light,
+      primarySwatch: _lightThemeColor,
+      primaryColor: _lightThemeColor.shade600,
+      primaryColorLight: _lightThemeColor.shade400,
+      primaryColorDark: _lightThemeColor.shade900,
+      primaryColorBrightness: _lightPrimaryColorBrightness,
+      accentColor: _lightThemeColor.shade500,
+      accentColorBrightness: _lightAccentColorBrightness,
+      canvasColor: _lightCardColor,
+      cardColor: _lightCardColor,
+      scaffoldBackgroundColor: _lightCardColor,
+      focusColor: ThemeData.light().focusColor,
+      hoverColor: ThemeData.light().hoverColor,
+      highlightColor: ThemeData.light().highlightColor,
+      splashColor: ThemeData.light().splashColor,
+      splashFactory: InkSplash.splashFactory,
+      buttonTheme: ButtonThemeData(
+        buttonColor: _lightThemeColor.shade600,
+        height: 50,
+        textTheme: ButtonTextTheme.primary,
+      ),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        bodyText2: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        button: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        subtitle1: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        subtitle2: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline1: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline2: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline3: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline4: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline5: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        headline6: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        overline: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+        caption: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        hintStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w300,
+        ),
+        border: OutlineInputBorder(),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        contentTextStyle: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+      ));
 }
 
 ThemeData createDarkTheme() {
