@@ -24,22 +24,22 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   Stream<UserDataState> _mapAddedUserToState(AddedUser event) async* {
     final _state = state;
 
-    if (_state is DataFetched) {
+    if (_state is DataLoaded) {
       yield DataIsLoading();
 
       final credentials = await _repository.getCredentialsById(event.id);
       final data = await _repository.getUserData(credentials);
 
-      yield DataFetched(
+      yield DataLoaded(
         data: [..._state.data]..add(data),
       );
     }
   }
 
   Stream<UserDataState> _mapDeleteUserToState(DeleteUser event) async* {
-    if (state is DataFetched) {
-      final data = (state as DataFetched).data;
-      yield DataFetched(
+    if (state is DataLoaded) {
+      final data = (state as DataLoaded).data;
+      yield DataLoaded(
           data: [...data]
             ..removeWhere((element) => element.credentialsId == event.id));
     }
@@ -52,21 +52,21 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     final data =
         await Future.wait(credentials.map((e) => _repository.getUserData(e)));
 
-    yield DataFetched(data: data);
+    yield DataLoaded(data: data);
   }
 
   Stream<UserDataState> _mapAskForUpdateUserToState(
       AskForUpdateUser event) async* {
     final _state = state;
 
-    if (_state is DataFetched) {
+    if (_state is DataLoaded) {
       yield DataIsLoading();
 
       final credentials = await _repository.getCredentialsById(event.id);
       final newUserData = await _repository.getUserData(credentials);
 
       final data = _state.data;
-      yield DataFetched(
+      yield DataLoaded(
         data: List.generate(data.length, (index) {
           final element = data[index];
           if (element.credentialsId == event.id) {

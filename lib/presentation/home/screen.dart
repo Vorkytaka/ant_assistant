@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context, UserDataState state) {
               return IconButton(
                 icon: Icon(Icons.refresh),
-                onPressed: (state is DataFetched)
+                onPressed: (state is DataLoaded)
                     ? () {
                         BlocProvider.of<UserDataBloc>(context)
                             .add(AskForUpdate());

@@ -16,7 +16,7 @@ class AuthenticatedWidget extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is DataFetched) {
+        } else if (state is DataLoaded) {
           return ListView.separated(
             itemCount: state.data.length,
             separatorBuilder: (context, i) => Container(

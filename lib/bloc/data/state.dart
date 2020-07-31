@@ -8,8 +8,8 @@ class DataIsLoading extends UserDataState {
   const DataIsLoading();
 }
 
-class DataFetched extends UserDataState {
+class DataLoaded extends UserDataState {
   final List<UserData> data;
 
-  const DataFetched({this.data});
+  const DataLoaded({this.data});
 }
