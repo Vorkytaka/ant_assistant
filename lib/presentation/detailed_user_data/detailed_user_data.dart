@@ -21,13 +21,18 @@ class DetailedUserDataScreen extends StatelessWidget {
           "Аккаунт",
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              BlocProvider.of<UserDataBloc>(context)
-                  .add(UserDataEvent.AskForUpdateUser(id: credentialsId));
-            },
-          ),
+          BlocBuilder<UserDataBloc, UserDataState>(
+              builder: (BuildContext context, UserDataState state) {
+            return IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: (state is DataLoaded)
+                  ? () {
+                      BlocProvider.of<UserDataBloc>(context).add(
+                          UserDataEvent.AskForUpdateUser(id: credentialsId));
+                    }
+                  : null,
+            );
+          }),
         ],
       ),
       body: BlocBuilder<UserDataBloc, UserDataState>(
