@@ -2,10 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
+import 'package:antassistant/presentation/detailed_user_data/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'detailed_user_data.dart';
 
 class AuthenticatedWidget extends StatelessWidget {
   @override
@@ -40,13 +39,11 @@ class AuthenticatedWidget extends StatelessWidget {
       ),
       openColor: Theme.of(context).cardColor,
       openBuilder: (context, anim) {
-        return DetailedUserData(
-          data: data,
+        return DetailedUserDataScreenProvider(
+          credentialsId: data.credentialsId,
         );
       },
-      closedColor: Theme
-          .of(context)
-          .cardColor,
+      closedColor: Theme.of(context).cardColor,
       closedBuilder: (context, anim) {
         return Card(
           margin: EdgeInsets.zero,
