@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
                   _username = str;
                 },
                 decoration: InputDecoration(
-                  hintText: "Имя пользователя",
+                  labelText: "Имя пользователя",
                 ),
                 validator: (str) {
                   if (str.isEmpty)
@@ -93,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   _password = str;
                 },
                 decoration: InputDecoration(
-                  hintText: "Пароль",
+                  labelText: "Пароль",
                 ),
                 validator: (str) {
                   if (str.isEmpty)
@@ -104,16 +104,23 @@ class _LoginFormState extends State<LoginForm> {
               ),
               SizedBox(height: 10),
               RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
-                      username: _username,
-                      password: _password,
-                    ));
-                  }
-                },
-                child: Text("Войти"),
+                onPressed: (state is LoginIsLoading)
+                    ? null
+                    : () {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          BlocProvider.of<LoginBloc>(context)
+                              .add(LoginButtonPressed(
+                            username: _username,
+                            password: _password,
+                          ));
+                        }
+                      },
+                child: (state is LoginIsLoading)
+                    ? CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      )
+                    : Text("Войти"),
               )
             ],
           ),
