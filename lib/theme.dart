@@ -25,6 +25,11 @@ ThemeData createLightTheme() {
     highlightColor: ThemeData.light().highlightColor,
     splashColor: ThemeData.light().splashColor,
     splashFactory: InkSplash.splashFactory,
+    buttonTheme: ButtonThemeData(
+      buttonColor: _lightThemeColor.shade600,
+      height: 50,
+      textTheme: ButtonTextTheme.primary,
+    ),
   );
 }
 
