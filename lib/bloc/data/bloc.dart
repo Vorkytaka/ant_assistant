@@ -22,12 +22,16 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   }
 
   Stream<UserDataState> _mapAddedUserToState(AddedUser event) async* {
-    if (state is DataFetched) {
+    final _state = state;
+
+    if (_state is DataFetched) {
+      yield DataIsLoading();
+
       final credentials = await _repository.getCredentialsById(event.id);
       final data = await _repository.getUserData(credentials);
 
       yield DataFetched(
-        data: [...(state as DataFetched).data]..add(data),
+        data: [..._state.data]..add(data),
       );
     }
   }
