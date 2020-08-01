@@ -77,7 +77,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'ANTAssistant',
       theme: createLightTheme(),
-      darkTheme: createDarkTheme(),
       themeMode: ThemeMode.system,
       home: HomeScreenProvider(),
       debugShowCheckedModeBanner: false,

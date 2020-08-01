@@ -93,12 +93,6 @@ ThemeData createLightTheme() {
       ));
 }
 
-ThemeData createDarkTheme() {
-  return ThemeData.dark().copyWith(
-    splashFactory: InkSplash.splashFactory,
-  );
-}
-
 // ------------
 // ---
 // ------------
