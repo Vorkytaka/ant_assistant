@@ -117,9 +117,7 @@ class _LoginFormState extends State<LoginForm> {
                         }
                       },
                 child: (state is LoginIsLoading)
-                    ? CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      )
+                    ? CircularProgressIndicator()
                     : Text("Войти"),
               )
             ],
