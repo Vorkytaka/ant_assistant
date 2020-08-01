@@ -8,6 +8,50 @@ ThemeData createLightTheme() {
   const Brightness _lightAccentColorBrightness = Brightness.dark;
   const Color _lightCardColor = Color(0xffeceff1);
 
+  // User w300 as Normal weight, w400 as medium and w200 as thin
+  final primaryTextTheme = TextTheme(
+    bodyText1: TextStyle(
+      fontWeight: FontWeight.w400,
+    ),
+    bodyText2: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    button: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    subtitle1: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    subtitle2: TextStyle(
+      fontWeight: FontWeight.w400,
+    ),
+    headline1: TextStyle(
+      fontWeight: FontWeight.w200,
+    ),
+    headline2: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    headline3: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    headline4: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    headline5: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    headline6: TextStyle(
+      fontWeight: FontWeight.w400,
+    ),
+    overline: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+    caption: TextStyle(
+      fontWeight: FontWeight.w300,
+    ),
+  );
+
   return ThemeData(
       brightness: Brightness.light,
       primarySwatch: _lightThemeColor,
@@ -30,58 +74,15 @@ ThemeData createLightTheme() {
         height: 50,
         textTheme: ButtonTextTheme.primary,
       ),
-      textTheme: TextTheme(
-        bodyText1: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w300,
-        ),
-        bodyText2: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w300,
-        ),
-        button: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w300,
-        ),
-        subtitle1: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w300,
-        ),
-        subtitle2: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline1: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline2: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline3: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline4: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline5: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        headline6: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        overline: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-        caption: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-      ),
+      textTheme: primaryTextTheme,
+      primaryTextTheme: primaryTextTheme,
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
         hintStyle: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
         border: OutlineInputBorder(),
