@@ -27,30 +27,24 @@ class UnauthenticatedWidget extends StatelessWidget {
               children: <Widget>[
                 Text(
                   "Добро пожаловать\nв ANTAssistant",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w300,
-                  ),
+                  style: Theme.of(context).textTheme.headline4,
                 ),
                 SizedBox(
                   height: 32,
                 ),
                 RichText(
                   text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .subtitle1,
                     children: [
                       TextSpan(
                         text: "Ваш карманный помощник в работе с провайдером ",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
                       ),
                       TextSpan(
                         text: "«‎Альфа Нет Телеком»",
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
                           decoration: TextDecoration.underline,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -76,10 +70,6 @@ class UnauthenticatedWidget extends StatelessWidget {
                       },
                       child: Text(
                         "Добавить аккаунт",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
                       ),
                     ),
                   )
@@ -98,10 +88,6 @@ class UnauthenticatedWidget extends StatelessWidget {
                       child: Text(
                         "Звонок в службу поддержки",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
                       ),
                     ),
                   )
