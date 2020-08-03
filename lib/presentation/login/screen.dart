@@ -31,6 +31,7 @@ class LoginScreen extends StatelessWidget {
                   duration: Duration(hours: 24),
                 ));
             }
+            // todo: on error request focus to username field
           },
           child: LoginForm(),
         ),
@@ -48,7 +49,17 @@ class _LoginFormState extends State<LoginForm> {
   String _username;
   String _password;
 
+  final FocusNode _usernameFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _usernameFocus.dispose();
+    _passwordFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 autofocus: true,
+                focusNode: _usernameFocus,
                 onChanged: (String str) {
                   return BlocProvider.of<LoginBloc>(context)
                       .add(LoginUsernameChanged(username: str));
@@ -79,43 +91,39 @@ class _LoginFormState extends State<LoginForm> {
                   else
                     return null;
                 },
+                onFieldSubmitted: (String str) {
+                  _usernameFocus.unfocus();
+                  _passwordFocus.requestFocus();
+                },
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 8),
               TextFormField(
-                obscureText: true,
-                textInputAction: TextInputAction.next,
-                autofocus: true,
-                onChanged: (String str) {
-                  return BlocProvider.of<LoginBloc>(context)
-                      .add(LoginPasswordChanged(password: str));
-                },
-                onSaved: (String str) {
-                  _password = str;
-                },
-                decoration: InputDecoration(
-                  labelText: "Пароль",
-                ),
-                validator: (str) {
-                  if (str.isEmpty)
-                    return "Пароль не может быть пустым";
-                  else
-                    return null;
-                },
-              ),
-              SizedBox(height: 10),
+                  obscureText: true,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _passwordFocus,
+                  onChanged: (String str) {
+                    return BlocProvider.of<LoginBloc>(context)
+                        .add(LoginPasswordChanged(password: str));
+                  },
+                  onSaved: (String str) {
+                    _password = str;
+                  },
+                  decoration: InputDecoration(
+                    labelText: "Пароль",
+                  ),
+                  validator: (str) {
+                    if (str.isEmpty)
+                      return "Пароль не может быть пустым";
+                    else
+                      return null;
+                  },
+                  onFieldSubmitted: (String str) {
+                    _askForLogin();
+                  }),
+              SizedBox(height: 8),
               RaisedButton(
                 onPressed: (state is LoginIsLoading)
-                    ? null
-                    : () {
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
-                          BlocProvider.of<LoginBloc>(context)
-                              .add(LoginButtonPressed(
-                            username: _username,
-                            password: _password,
-                          ));
-                        }
-                      },
+                    ? null : _askForLogin,
                 child: (state is LoginIsLoading)
                     ? CircularProgressIndicator()
                     : Text("Войти"),
@@ -125,5 +133,16 @@ class _LoginFormState extends State<LoginForm> {
         );
       },
     );
+  }
+
+  void _askForLogin() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      BlocProvider.of<LoginBloc>(context)
+          .add(LoginButtonPressed(
+        username: _username,
+        password: _password,
+      ));
+    }
   }
 }
