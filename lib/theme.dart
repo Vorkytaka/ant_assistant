@@ -86,6 +86,10 @@ ThemeData createLightTheme() {
           fontWeight: FontWeight.w300,
         ),
         border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 18,
+          horizontal: 16,
+        ),
       ),
       snackBarTheme: SnackBarThemeData(
         contentTextStyle: TextStyle(
