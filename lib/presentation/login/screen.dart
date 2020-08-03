@@ -16,25 +16,7 @@ class LoginScreen extends StatelessWidget {
         title: Text("Авторизация"),
       ),
       body: SafeArea(
-        child: BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state is LoginSuccess) {
-              BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
-              BlocProvider.of<UserDataBloc>(context)
-                  .add(UserDataEvent.AddedUser(id: state.id));
-              Navigator.of(context).pop();
-            } else if (state is LoginError) {
-              Scaffold.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(
-                  content: Text("Не удалось авторизоваться"),
-                  duration: Duration(hours: 24),
-                ));
-            }
-            // todo: on error request focus to username field
-          },
-          child: LoginForm(),
-        ),
+        child: LoginForm(),
       ),
     );
   }
@@ -63,7 +45,24 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          BlocProvider.of<AuthBloc>(context).add(AuthEvent.AddedUser());
+          BlocProvider.of<UserDataBloc>(context)
+              .add(UserDataEvent.AddedUser(id: state.id));
+          Navigator.of(context).pop();
+        } else if (state is LoginError) {
+          Scaffold.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+              content: Text("Не удалось авторизоваться"),
+              duration: Duration(hours: 24),
+            ));
+
+          _usernameFocus.requestFocus();
+        }
+      },
       builder: (BuildContext context, LoginState state) {
         return Form(
           key: _formKey,
@@ -122,8 +121,7 @@ class _LoginFormState extends State<LoginForm> {
                   }),
               SizedBox(height: 8),
               RaisedButton(
-                onPressed: (state is LoginIsLoading)
-                    ? null : _askForLogin,
+                onPressed: (state is LoginIsLoading) ? null : _askForLogin,
                 child: (state is LoginIsLoading)
                     ? CircularProgressIndicator()
                     : Text("Войти"),
@@ -138,8 +136,7 @@ class _LoginFormState extends State<LoginForm> {
   void _askForLogin() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      BlocProvider.of<LoginBloc>(context)
-          .add(LoginButtonPressed(
+      BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
         username: _username,
         password: _password,
       ));
