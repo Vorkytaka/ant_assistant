@@ -85,6 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                 },
                 decoration: InputDecoration(
                   labelText: "Имя пользователя",
+                  prefixIcon: Icon(Icons.account_circle),
                 ),
                 validator: (str) {
                   if (str.isEmpty)
@@ -111,6 +112,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   decoration: InputDecoration(
                     labelText: "Пароль",
+                    prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(_hidePassword
                           ? Icons.visibility_off
