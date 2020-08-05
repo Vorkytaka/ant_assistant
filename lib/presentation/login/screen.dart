@@ -36,6 +36,8 @@ class _LoginFormState extends State<LoginForm> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool _hidePassword = true;
+
   @override
   void dispose() {
     _usernameFocus.dispose();
@@ -97,7 +99,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               SizedBox(height: 8),
               TextFormField(
-                  obscureText: true,
+                  obscureText: _hidePassword,
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
                   onChanged: (String str) {
@@ -109,6 +111,16 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   decoration: InputDecoration(
                     labelText: "Пароль",
+                    suffixIcon: IconButton(
+                      icon: Icon(_hidePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          _hidePassword = !_hidePassword;
+                        });
+                      },
+                    ),
                   ),
                   validator: (str) {
                     if (str.isEmpty)
