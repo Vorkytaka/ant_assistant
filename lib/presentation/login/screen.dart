@@ -126,6 +126,9 @@ class _LoginFormState extends State<LoginForm> {
                               _hidePassword = !_hidePassword;
                             });
                           },
+                          tooltip: _hidePassword
+                              ? "Показать пароль"
+                              : "Скрыть пароль",
                         ),
                       ),
                       validator: (str) {
