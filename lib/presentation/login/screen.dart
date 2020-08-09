@@ -71,75 +71,84 @@ class _LoginFormState extends State<LoginForm> {
           child: ListView(
             padding: EdgeInsets.all(16),
             children: <Widget>[
-              TextFormField(
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                autofocus: true,
-                focusNode: _usernameFocus,
-                onChanged: (String str) {
-                  return BlocProvider.of<LoginBloc>(context)
-                      .add(LoginUsernameChanged(username: str));
-                },
-                onSaved: (String str) {
-                  _username = str;
-                },
-                decoration: InputDecoration(
-                  labelText: "Имя пользователя",
-                  prefixIcon: Icon(Icons.account_circle),
-                ),
-                validator: (str) {
-                  if (str.isEmpty)
-                    return "Имя пользователя не может быть пустым";
-                  else
-                    return null;
-                },
-                onFieldSubmitted: (String str) {
-                  _usernameFocus.unfocus();
-                  _passwordFocus.requestFocus();
-                },
-              ),
-              SizedBox(height: 8),
-              TextFormField(
-                  obscureText: _hidePassword,
-                  textInputAction: TextInputAction.done,
-                  focusNode: _passwordFocus,
-                  onChanged: (String str) {
-                    return BlocProvider.of<LoginBloc>(context)
-                        .add(LoginPasswordChanged(password: str));
-                  },
-                  onSaved: (String str) {
-                    _password = str;
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Пароль",
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(_hidePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _hidePassword = !_hidePassword;
-                        });
+              AutofillGroup(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      autofocus: true,
+                      focusNode: _usernameFocus,
+                      onChanged: (String str) {
+                        return BlocProvider.of<LoginBloc>(context)
+                            .add(LoginUsernameChanged(username: str));
                       },
+                      onSaved: (String str) {
+                        _username = str;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Имя пользователя",
+                        prefixIcon: Icon(Icons.account_circle),
+                      ),
+                      validator: (str) {
+                        if (str.isEmpty)
+                          return "Имя пользователя не может быть пустым";
+                        else
+                          return null;
+                      },
+                      onFieldSubmitted: (String str) {
+                        _usernameFocus.unfocus();
+                        _passwordFocus.requestFocus();
+                      },
+                      autofillHints: [AutofillHints.username],
                     ),
-                  ),
-                  validator: (str) {
-                    if (str.isEmpty)
-                      return "Пароль не может быть пустым";
-                    else
-                      return null;
-                  },
-                  onFieldSubmitted: (String str) {
-                    _askForLogin();
-                  }),
+                    SizedBox(height: 8),
+                    TextFormField(
+                      obscureText: _hidePassword,
+                      textInputAction: TextInputAction.done,
+                      focusNode: _passwordFocus,
+                      onChanged: (String str) {
+                        return BlocProvider.of<LoginBloc>(context)
+                            .add(LoginPasswordChanged(password: str));
+                      },
+                      onSaved: (String str) {
+                        _password = str;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Пароль",
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(_hidePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () {
+                            setState(() {
+                              _hidePassword = !_hidePassword;
+                            });
+                          },
+                        ),
+                      ),
+                      validator: (str) {
+                        if (str.isEmpty)
+                          return "Пароль не может быть пустым";
+                        else
+                          return null;
+                      },
+                      onFieldSubmitted: (String str) {
+                        _askForLogin();
+                      },
+                      autofillHints: [AutofillHints.password],
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: 8),
               RaisedButton(
                 onPressed: (state is LoginIsLoading) ? null : _askForLogin,
                 child: (state is LoginIsLoading)
                     ? CircularProgressIndicator()
                     : Text("Войти"),
-              )
+              ),
             ],
           ),
         );
