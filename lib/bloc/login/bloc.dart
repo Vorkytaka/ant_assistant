@@ -57,7 +57,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginIsLoading();
 
     final credentials = Credentials(
-      login: event.username,
+      username: event.username,
       password: event.password,
     );
     final isLoginSuccessful = await _repository.login(credentials);

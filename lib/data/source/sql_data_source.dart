@@ -32,7 +32,7 @@ class SQLDataSource extends DataSource {
       return IDEntity(
         maps[i][UsersScheme.COLUMN_NAME_ID],
         Credentials(
-          login: maps[i][UsersScheme.COLUMN_NAME_LOGIN],
+          username: maps[i][UsersScheme.COLUMN_NAME_LOGIN],
           password: maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
       );
@@ -74,7 +74,7 @@ class SQLDataSource extends DataSource {
       return IDEntity(
         maps[0][UsersScheme.COLUMN_NAME_ID],
         Credentials(
-          login: maps[0][UsersScheme.COLUMN_NAME_LOGIN],
+          username: maps[0][UsersScheme.COLUMN_NAME_LOGIN],
           password: maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
       );

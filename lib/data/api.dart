@@ -18,7 +18,7 @@ class Api {
     final BaseOptions options = BaseOptions(followRedirects: true);
     var params = {
       _KEY_ACTION: _ACTION_INFO,
-      _KEY_USERNAME: credentials.login,
+      _KEY_USERNAME: credentials.username,
       _KEY_PASSWORD: credentials.password
     };
     var httpParams = FormData.fromMap(params);
@@ -35,7 +35,7 @@ class Api {
     final BaseOptions options = BaseOptions(followRedirects: true);
     var params = {
       _KEY_ACTION: _ACTION_INFO,
-      _KEY_USERNAME: credentials.entity.login,
+      _KEY_USERNAME: credentials.entity.username,
       _KEY_PASSWORD: credentials.entity.password
     };
     var httpParams = FormData.fromMap(params);
