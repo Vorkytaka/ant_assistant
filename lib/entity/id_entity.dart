@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+@immutable
 class IDEntity<T> {
   final int id;
   final T entity;

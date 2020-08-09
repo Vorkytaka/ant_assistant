@@ -1,3 +1,6 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class UserData {
   final int credentialsId;
 
@@ -18,8 +21,7 @@ class UserData {
 
   final double pricePerDay;
 
-  UserData(
-      this.credentialsId,
+  UserData(this.credentialsId,
       this.accountName,
       this.accountId,
       this.dynDns,
@@ -42,33 +44,33 @@ class UserData {
 
 extension DBUserData on UserData {
   Map<String, dynamic> toMap() => {
-        "accountName": accountName,
-        "accountId": accountId,
-        "dynDns": dynDns,
-        "balance": balance,
-        "downloaded": downloaded,
-        "status": status,
-        "credit": credit,
-        "smsInfo": smsInfo,
-        "tariffName": tariffName,
-        "downloadSpeed": downloadSpeed,
-        "uploadSpeed": uploadSpeed,
-        "pricePerMonth": pricePerMonth,
-      };
+    "accountName": accountName,
+    "accountId": accountId,
+    "dynDns": dynDns,
+    "balance": balance,
+    "downloaded": downloaded,
+    "status": status,
+    "credit": credit,
+    "smsInfo": smsInfo,
+    "tariffName": tariffName,
+    "downloadSpeed": downloadSpeed,
+    "uploadSpeed": uploadSpeed,
+    "pricePerMonth": pricePerMonth,
+  };
 
   Map<String, dynamic> toMapWithId(int id) => {
-        "user_id": id,
-        "accountName": accountName,
-        "accountId": accountId,
-        "dynDns": dynDns,
-        "balance": balance,
-        "downloaded": downloaded,
-        "status": status,
-        "credit": credit,
-        "smsInfo": smsInfo,
-        "tariffName": tariffName,
-        "downloadSpeed": downloadSpeed,
-        "uploadSpeed": uploadSpeed,
-        "pricePerMonth": pricePerMonth,
-      };
+    "user_id": id,
+    "accountName": accountName,
+    "accountId": accountId,
+    "dynDns": dynDns,
+    "balance": balance,
+    "downloaded": downloaded,
+    "status": status,
+    "credit": credit,
+    "smsInfo": smsInfo,
+    "tariffName": tariffName,
+    "downloadSpeed": downloadSpeed,
+    "uploadSpeed": uploadSpeed,
+    "pricePerMonth": pricePerMonth,
+  };
 }

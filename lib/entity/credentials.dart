@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+@immutable
 class Credentials {
   final String username;
   final String password;
