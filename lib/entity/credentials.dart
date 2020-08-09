@@ -1,8 +1,10 @@
+import 'package:meta/meta.dart';
+
 class Credentials {
   final String login;
   final String password;
 
-  Credentials(this.login, this.password);
+  Credentials({@required this.login, @required this.password});
 
   @override
   String toString() => "($login, ••••••••))";
@@ -10,7 +12,7 @@ class Credentials {
 
 extension DBCredentials on Credentials {
   Map<String, dynamic> toMap() => {
-        "login": login,
-        "password": password,
-      };
+    "login": login,
+    "password": password,
+  };
 }

@@ -32,8 +32,8 @@ class SQLDataSource extends DataSource {
       return IDEntity(
         maps[i][UsersScheme.COLUMN_NAME_ID],
         Credentials(
-          maps[i][UsersScheme.COLUMN_NAME_LOGIN],
-          maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
+          login: maps[i][UsersScheme.COLUMN_NAME_LOGIN],
+          password: maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
       );
     });
@@ -74,8 +74,8 @@ class SQLDataSource extends DataSource {
       return IDEntity(
         maps[0][UsersScheme.COLUMN_NAME_ID],
         Credentials(
-          maps[0][UsersScheme.COLUMN_NAME_LOGIN],
-          maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
+          login: maps[0][UsersScheme.COLUMN_NAME_LOGIN],
+          password: maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
       );
     }
