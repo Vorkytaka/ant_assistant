@@ -12,5 +12,9 @@ void main() {
       expect(() => Credentials(username: "username", password: null),
           throwsAssertionError);
     });
+
+    test("Credentials creating properly", () {
+      Credentials(username: "username", password: "password");
+    });
   });
 }

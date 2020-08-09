@@ -10,5 +10,9 @@ void main() {
     test("Requires a non-null entity", () {
       expect(() => IDEntity(id: 1, entity: null), throwsAssertionError);
     });
+
+    test("IDEntity creating properly", () {
+      IDEntity(id: 1, entity: "");
+    });
   });
 }
