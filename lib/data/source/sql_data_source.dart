@@ -30,8 +30,8 @@ class SQLDataSource extends DataSource {
         await db.query(UsersScheme.TABLE_NAME);
     return List.generate(maps.length, (i) {
       return IDEntity(
-        maps[i][UsersScheme.COLUMN_NAME_ID],
-        Credentials(
+        id: maps[i][UsersScheme.COLUMN_NAME_ID],
+        entity: Credentials(
           username: maps[i][UsersScheme.COLUMN_NAME_LOGIN],
           password: maps[i][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
@@ -72,8 +72,8 @@ class SQLDataSource extends DataSource {
       return null;
     } else {
       return IDEntity(
-        maps[0][UsersScheme.COLUMN_NAME_ID],
-        Credentials(
+        id: maps[0][UsersScheme.COLUMN_NAME_ID],
+        entity: Credentials(
           username: maps[0][UsersScheme.COLUMN_NAME_LOGIN],
           password: maps[0][UsersScheme.COLUMN_NAME_PASSWORD],
         ),
