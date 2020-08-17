@@ -3,6 +3,7 @@ import 'package:antassistant/entity/credentials.dart';
 import 'package:antassistant/entity/id_entity.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/parser.dart';
 
 class Api {
@@ -43,7 +44,7 @@ class Api {
     try {
       final response = await Dio(options).post(_BASE_URL, data: httpParams);
       final document = parse(response.data);
-      return parseUserData(credentials.id, document);
+      return compute(parseUserData, ParsingData(credentials.id, document));
     } catch (err) {
       return null;
     }
