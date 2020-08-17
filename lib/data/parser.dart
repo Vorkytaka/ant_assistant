@@ -1,7 +1,17 @@
 import 'package:antassistant/entity/user_data.dart';
 import 'package:html/dom.dart';
 
-UserData parseUserData(int id, Document document) {
+class ParsingData {
+  final int id;
+  final Document document;
+
+  const ParsingData(this.id, this.document);
+}
+
+UserData parseUserData(ParsingData data) {
+  int id = data.id;
+  Document document = data.document;
+
   final balance = double.parse(
       document.querySelector("td.num").text.replaceAll(" руб.", ""));
 

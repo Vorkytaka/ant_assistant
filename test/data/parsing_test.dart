@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
   test("Parsing test", () {
     final document = parse(_TESTING_BODY);
-    final userData = parseUserData(0, document);
+    final userData = parseUserData(ParsingData(0, document));
 
     expect(userData.credentialsId, 0);
     expect(userData.accountName, "NOUA_2_187");
