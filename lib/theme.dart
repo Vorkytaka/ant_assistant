@@ -53,49 +53,55 @@ ThemeData createLightTheme() {
   );
 
   return ThemeData(
-      brightness: Brightness.light,
-      primarySwatch: _lightThemeColor,
-      primaryColor: _lightThemeColor.shade600,
-      primaryColorLight: _lightThemeColor.shade400,
-      primaryColorDark: _lightThemeColor.shade900,
-      primaryColorBrightness: _lightPrimaryColorBrightness,
-      accentColor: _lightThemeColor.shade500,
-      accentColorBrightness: _lightAccentColorBrightness,
-      canvasColor: _lightCardColor,
-      cardColor: _lightCardColor,
-      scaffoldBackgroundColor: _lightCardColor,
-      focusColor: ThemeData.light().focusColor,
-      hoverColor: ThemeData.light().hoverColor,
-      highlightColor: ThemeData.light().highlightColor,
-      splashColor: ThemeData.light().splashColor,
-      splashFactory: InkSplash.splashFactory,
-      buttonTheme: ButtonThemeData(
-        buttonColor: _lightThemeColor.shade600,
-        height: 50,
-        textTheme: ButtonTextTheme.primary,
+    brightness: Brightness.light,
+    primarySwatch: _lightThemeColor,
+    primaryColor: _lightThemeColor.shade600,
+    primaryColorLight: _lightThemeColor.shade400,
+    primaryColorDark: _lightThemeColor.shade900,
+    primaryColorBrightness: _lightPrimaryColorBrightness,
+    accentColor: _lightThemeColor.shade500,
+    accentColorBrightness: _lightAccentColorBrightness,
+    canvasColor: _lightCardColor,
+    cardColor: _lightCardColor,
+    scaffoldBackgroundColor: _lightCardColor,
+    focusColor: ThemeData.light().focusColor,
+    hoverColor: ThemeData.light().hoverColor,
+    highlightColor: ThemeData.light().highlightColor,
+    splashColor: ThemeData.light().splashColor,
+    splashFactory: InkSplash.splashFactory,
+    buttonTheme: ButtonThemeData(
+      buttonColor: _lightThemeColor.shade600,
+      height: 50,
+      textTheme: ButtonTextTheme.primary,
+    ),
+    textTheme: primaryTextTheme,
+    primaryTextTheme: primaryTextTheme,
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
       ),
-      textTheme: primaryTextTheme,
-      primaryTextTheme: primaryTextTheme,
-      inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w300,
-        ),
-        hintStyle: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w300,
-        ),
-        border: OutlineInputBorder(),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 18,
-          horizontal: 16,
-        ),
+      hintStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
       ),
-      snackBarTheme: SnackBarThemeData(
-        contentTextStyle: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
-      ));
+      border: OutlineInputBorder(),
+      contentPadding: EdgeInsets.symmetric(
+        vertical: 18,
+        horizontal: 16,
+      ),
+    ),
+    snackBarTheme: SnackBarThemeData(
+      contentTextStyle: TextStyle(
+        fontWeight: FontWeight.w300,
+      ),
+    ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      },
+    ),
+  );
 }
 
 // ------------
