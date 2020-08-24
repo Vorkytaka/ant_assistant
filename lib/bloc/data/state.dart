@@ -12,7 +12,6 @@ class DataIsLoading extends UserDataState {
 class DataLoaded extends UserDataState {
   final List<UserData> data;
 
-  const DataLoaded({@required this.data})
-      : assert(data != null),
-        assert(data.length > 0);
+  // todo: another state for empty data?
+  const DataLoaded({@required this.data}) : assert(data != null);
 }
