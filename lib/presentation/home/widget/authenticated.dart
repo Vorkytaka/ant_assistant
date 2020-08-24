@@ -45,9 +45,11 @@ class AuthenticatedWidget extends StatelessWidget {
           credentialsId: data.credentialsId,
         );
       },
+      closedShape: const RoundedRectangleBorder(),
       closedColor: Theme.of(context).cardColor,
       closedBuilder: (context, openContainer) {
         return Card(
+          shape: const RoundedRectangleBorder(),
           margin: EdgeInsets.zero,
           child: InkWell(
             onTap: openContainer,
