@@ -3,6 +3,7 @@ import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/presentation/detailed_user_data/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,6 +38,7 @@ class AuthenticatedWidget extends StatelessWidget {
       transitionDuration: Duration(
         milliseconds: 300,
       ),
+      tappable: false,
       openColor: Theme.of(context).cardColor,
       openBuilder: (context, anim) {
         return DetailedUserDataScreenProvider(
@@ -44,39 +46,42 @@ class AuthenticatedWidget extends StatelessWidget {
         );
       },
       closedColor: Theme.of(context).cardColor,
-      closedBuilder: (context, anim) {
+      closedBuilder: (context, openContainer) {
         return Card(
           margin: EdgeInsets.zero,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 16,
-              horizontal: 24,
-            ),
-            child: Row(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      data.accountName,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+          child: InkWell(
+            onTap: openContainer,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 16,
+                horizontal: 24,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        data.accountName,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Text(
-                      "Баланс: ${data.balance} ₽",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(
+                        height: 6,
                       ),
-                    )
-                  ],
-                )
-              ],
+                      Text(
+                        "Баланс: ${data.balance} ₽",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         );
