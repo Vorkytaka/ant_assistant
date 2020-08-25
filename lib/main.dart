@@ -1,8 +1,10 @@
+import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
 import 'package:antassistant/presentation/home/provider.dart';
+import 'package:antassistant/presentation/home/widget/unauthenticated.dart';
 import 'package:antassistant/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +80,17 @@ class App extends StatelessWidget {
       title: 'ANTAssistant',
       theme: createLightTheme(),
       themeMode: ThemeMode.system,
-      home: HomeScreenProvider(),
+      home: BlocBuilder<AuthBloc, AuthBlocState>(
+        builder: (BuildContext context, AuthBlocState state) {
+          if (state is Authenticated) {
+            return HomeScreenProvider();
+          } else if (state is Unauthenticated) {
+            return UnauthenticatedWidget();
+          } else {
+            return Container();
+          }
+        },
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
