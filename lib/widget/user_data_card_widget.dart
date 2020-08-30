@@ -19,6 +19,7 @@ class UserDataCardWidget extends StatelessWidget {
       elevation: elevation,
       child: InkWell(
         onTap: onTap,
+        customBorder: Theme.of(context).cardTheme.shape,
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 24,
