@@ -25,15 +25,15 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            BlocBuilder<UserDataBloc, UserDataState>(
-              builder: (BuildContext context, UserDataState state) {
-                if (state is DataIsLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is DataLoaded) {
-                  return Expanded(
-                    child: ListView.builder(
+            Expanded(
+              child: BlocBuilder<UserDataBloc, UserDataState>(
+                builder: (BuildContext context, UserDataState state) {
+                  if (state is DataIsLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is DataLoaded) {
+                    return ListView.builder(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
                       ),
@@ -52,12 +52,12 @@ class HomeScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
           ],
         ),
