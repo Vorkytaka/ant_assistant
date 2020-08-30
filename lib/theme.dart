@@ -101,6 +101,11 @@ ThemeData createLightTheme() {
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
       },
     ),
+    cardTheme: CardTheme(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      ),
+    ),
   );
 }
 
