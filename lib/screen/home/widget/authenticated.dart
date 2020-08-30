@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
-import 'package:antassistant/presentation/detailed_user_data/provider.dart';
+import 'package:antassistant/screen/detailed_user_data/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,8 +1,8 @@
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/bloc/data/state.dart';
-import 'package:antassistant/presentation/home/widget/authenticated.dart';
-import 'package:antassistant/presentation/login/provider.dart';
+import 'package:antassistant/screen/home/widget/authenticated.dart';
+import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

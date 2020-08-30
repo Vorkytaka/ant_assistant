@@ -1,4 +1,4 @@
-import 'package:antassistant/presentation/detailed_user_data/detailed_user_data.dart';
+import 'package:antassistant/screen/detailed_user_data/detailed_user_data.dart';
 import 'package:flutter/material.dart';
 
 class DetailedUserDataScreenProvider extends StatelessWidget {

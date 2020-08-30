@@ -1,4 +1,4 @@
-import 'package:antassistant/presentation/home/screen.dart';
+import 'package:antassistant/screen/home/screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenProvider extends StatelessWidget {
