@@ -6,7 +6,7 @@ ThemeData createLightTheme() {
   const MaterialColor _lightThemeColor = Colors.red;
   const Brightness _lightPrimaryColorBrightness = Brightness.dark;
   const Brightness _lightAccentColorBrightness = Brightness.dark;
-  const Color _lightCardColor = Color(0xffeceff1);
+  const Color _lightCardColor = Colors.white;
 
   // User w300 as Normal weight, w400 as medium and w200 as thin
   final primaryTextTheme = TextTheme(
@@ -98,7 +98,7 @@ ThemeData createLightTheme() {
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
       },
     ),
   );
