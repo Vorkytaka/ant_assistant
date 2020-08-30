@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 class UserDataCardWidget extends StatelessWidget {
   final UserData data;
   final GestureTapCallback onTap;
+  final double elevation;
 
   const UserDataCardWidget({
     Key key,
     @required this.data,
     this.onTap,
+    this.elevation,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      elevation: elevation,
       child: InkWell(
         onTap: onTap,
         child: Padding(
