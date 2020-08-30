@@ -21,15 +21,18 @@ class AuthenticatedWidget extends StatelessWidget {
               horizontal: 16,
             ),
             itemCount: state.data.length,
-            itemBuilder: (context, i) => UserDataCardWidget(
-              data: state.data[i],
-              onTap: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return DetailedScreenProvider(data: state.data[i]);
-                  },
-                ));
-              },
+            itemBuilder: (context, i) => Hero(
+              tag: "user_data_${state.data[i].accountId}",
+              child: UserDataCardWidget(
+                data: state.data[i],
+                onTap: () async {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return DetailedScreenProvider(data: state.data[i]);
+                    },
+                  ));
+                },
+              ),
             ),
           );
         } else {
