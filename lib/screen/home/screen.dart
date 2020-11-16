@@ -37,6 +37,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       itemCount: state.data.length,
                       itemBuilder: (context, i) => Text("${state.data[i].accountName}"),
+                      physics: ScrollPhysics(),
                     );
                   } else {
                     return Container();
