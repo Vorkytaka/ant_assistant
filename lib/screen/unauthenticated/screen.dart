@@ -1,5 +1,4 @@
 import 'package:antassistant/global.dart';
-import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -60,8 +59,7 @@ class UnauthenticatedScreen extends StatelessWidget {
                     Expanded(
                       child: RaisedButton(
                         onPressed: () async {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginScreenProvider()));
+                          Navigator.of(context).pushNamed("/auth");
                         },
                         child: Text(
                           "Добавить аккаунт",
