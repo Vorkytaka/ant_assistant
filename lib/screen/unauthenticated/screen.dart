@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class UnauthenticatedWidget extends StatelessWidget {
+class UnauthenticatedScreen extends StatelessWidget {
   static final supportPhoneUri = Uri(
     scheme: "tel",
     path: "+7 495 940-92-11",
