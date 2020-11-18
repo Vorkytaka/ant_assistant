@@ -1,3 +1,4 @@
+import 'package:antassistant/global.dart';
 import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -5,11 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UnauthenticatedScreen extends StatelessWidget {
-  static final supportPhoneUri = Uri(
-    scheme: "tel",
-    path: "+7 495 940-92-11",
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +35,7 @@ class UnauthenticatedScreen extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                              "Ваш карманный помощник в работе с провайдером ",
+                          "Ваш карманный помощник в работе с провайдером ",
                         ),
                         TextSpan(
                           text: "«‎Альфа Нет Телеком»",
@@ -82,7 +78,7 @@ class UnauthenticatedScreen extends StatelessWidget {
                     Expanded(
                       child: OutlineButton(
                         onPressed: () async {
-                          await launch(supportPhoneUri.toString());
+                          await launch(URIs.SUPPORT_PHONE.toString());
                         },
                         child: Text(
                           "Звонок в службу поддержки",
