@@ -1,6 +1,7 @@
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/bloc/data/state.dart';
+import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +40,11 @@ class HomeScreen extends StatelessWidget {
                     );
                   } else if (state is DataLoaded) {
                     return ListView.builder(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
                       itemCount: state.data.length,
-                      itemBuilder: (context, i) =>
-                          Text("${state.data[i].accountName}"),
+                      itemBuilder: (context, i) => _buildItem(
+                        context,
+                        state.data[i],
+                      ),
                       physics: ScrollPhysics(),
                     );
                   } else {
@@ -54,6 +54,30 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildItem(
+    BuildContext context,
+    UserData data,
+  ) {
+    return Card(
+      elevation: 3,
+      margin: EdgeInsets.zero,
+      shape: const RoundedRectangleBorder(),
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 16,
+          ),
+          child: Text(
+            "${data.accountName}",
+            style: Theme.of(context).textTheme.headline6,
+          ),
         ),
       ),
     );
