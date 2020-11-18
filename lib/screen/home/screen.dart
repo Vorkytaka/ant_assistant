@@ -1,6 +1,7 @@
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/bloc/data/state.dart';
+import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,16 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("ANTAssistant"),
         actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              return Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => LoginScreenProvider(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
