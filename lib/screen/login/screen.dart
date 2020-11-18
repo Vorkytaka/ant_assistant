@@ -9,7 +9,10 @@ class LoginScreen extends StatelessWidget {
         title: Text("Авторизация"),
       ),
       body: SafeArea(
-        child: LoginFormProvider(),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: LoginFormProvider(),
+        ),
       ),
     );
   }

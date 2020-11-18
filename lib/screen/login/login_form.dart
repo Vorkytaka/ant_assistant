@@ -67,8 +67,7 @@ class _LoginFormState extends State<LoginForm> {
       builder: (BuildContext context, LoginState state) {
         return Form(
           key: _formKey,
-          child: ListView(
-            padding: EdgeInsets.all(16),
+          child: Column(
             children: <Widget>[
               AutofillGroup(
                 child: Column(
@@ -145,11 +144,14 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: 8),
-              RaisedButton(
-                onPressed: (state is LoginIsLoading) ? null : _askForLogin,
-                child: (state is LoginIsLoading)
-                    ? CircularProgressIndicator()
-                    : Text("Войти"),
+              SizedBox(
+                width: double.infinity,
+                child: RaisedButton(
+                  onPressed: (state is LoginIsLoading) ? null : _askForLogin,
+                  child: (state is LoginIsLoading)
+                      ? CircularProgressIndicator()
+                      : Text("Войти"),
+                ),
               ),
             ],
           ),
