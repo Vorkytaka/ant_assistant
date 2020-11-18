@@ -43,6 +43,7 @@ ThemeData createLightTheme() {
     ),
     headline6: TextStyle(
       fontWeight: FontWeight.w400,
+      color: Colors.black,
     ),
     overline: TextStyle(
       fontWeight: FontWeight.w300,
@@ -104,6 +105,17 @@ ThemeData createLightTheme() {
     cardTheme: CardTheme(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      ),
+    ),
+    appBarTheme: AppBarTheme(
+      actionsIconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+      color: Colors.white,
+      elevation: 0,
+      brightness: Brightness.light,
+      iconTheme: IconThemeData(
+        color: Colors.black,
       ),
     ),
   );

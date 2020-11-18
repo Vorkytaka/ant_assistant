@@ -9,20 +9,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("ANTAssistant"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              BlocProvider.of<UserDataBloc>(context).add(AskForUpdate());
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    BlocProvider.of<UserDataBloc>(context).add(AskForUpdate());
-                  },
-                ),
-              ],
-            ),
             Expanded(
               child: BlocBuilder<UserDataBloc, UserDataState>(
                 builder: (BuildContext context, UserDataState state) {
@@ -36,7 +36,8 @@ class HomeScreen extends StatelessWidget {
                         horizontal: 16,
                       ),
                       itemCount: state.data.length,
-                      itemBuilder: (context, i) => Text("${state.data[i].accountName}"),
+                      itemBuilder: (context, i) =>
+                          Text("${state.data[i].accountName}"),
                       physics: ScrollPhysics(),
                     );
                   } else {
