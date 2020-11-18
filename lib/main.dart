@@ -82,9 +82,9 @@ class App extends StatelessWidget {
       theme: createLightTheme(),
       themeMode: ThemeMode.system,
       routes: {
-        "/home": (context) => HomeScreenProvider(),
-        "/auth": (context) => LoginScreenProvider(),
-        "/start": (context) => UnauthenticatedScreen(),
+        HomeScreenProvider.ROUTE: (context) => HomeScreenProvider(),
+        LoginScreenProvider.ROUTE: (context) => LoginScreenProvider(),
+        UnauthenticatedScreen.ROUTE: (context) => UnauthenticatedScreen(),
       },
       home: BlocBuilder<AuthBloc, AuthBlocState>(
         builder: (BuildContext context, AuthBlocState state) {

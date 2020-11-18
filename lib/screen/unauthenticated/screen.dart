@@ -1,10 +1,13 @@
 import 'package:antassistant/global.dart';
+import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UnauthenticatedScreen extends StatelessWidget {
+  static const String ROUTE = "/start";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +62,8 @@ class UnauthenticatedScreen extends StatelessWidget {
                     Expanded(
                       child: RaisedButton(
                         onPressed: () async {
-                          Navigator.of(context).pushNamed("/auth");
+                          Navigator.of(context)
+                              .pushNamed(LoginScreenProvider.ROUTE);
                         },
                         child: Text(
                           "Добавить аккаунт",
