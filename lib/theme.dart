@@ -103,9 +103,9 @@ ThemeData createLightTheme() {
       },
     ),
     cardTheme: CardTheme(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      ),
+      shape: const RoundedRectangleBorder(),
+      elevation: 3,
+      margin: EdgeInsets.zero,
     ),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(

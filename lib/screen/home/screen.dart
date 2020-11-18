@@ -64,9 +64,6 @@ class HomeScreen extends StatelessWidget {
     UserData data,
   ) {
     return Card(
-      elevation: 3,
-      margin: EdgeInsets.zero,
-      shape: const RoundedRectangleBorder(),
       child: InkWell(
         onTap: () {},
         child: Padding(
