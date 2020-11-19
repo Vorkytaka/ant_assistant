@@ -109,13 +109,29 @@ class DetailedUserDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserDataBloc, UserDataState>(
+    return BlocConsumer<UserDataBloc, UserDataState>(
+      listener: (context, state) {
+        if (state is DataLoaded) {
+          final data = state.data.firstWhere(
+            (element) => element.accountId == accountId,
+            orElse: () => null,
+          );
+          if (data == null) {
+            Navigator.of(context).pop();
+          }
+        }
+      },
       builder: (context, state) {
         if (state is DataLoaded) {
           final data = state.data.firstWhere(
-              (element) => element.accountId == accountId,
-              orElse: null);
-          assert(data != null);
+            (element) => element.accountId == accountId,
+            orElse: () => null,
+          );
+
+          // show empty container if there is no data
+          // for case when data was deleted
+          // and we close dialog
+          if (data == null) return Container();
 
           return Container(
             color: Theme.of(context).cardColor,
