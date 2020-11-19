@@ -61,38 +61,3 @@ class StatusInfo {
     @required this.smsInfo,
   });
 }
-
-/*
-extension DBUserData on UserData {
-  Map<String, dynamic> toMap() => {
-        "accountName": accountName,
-        "accountId": accountId,
-        "dynDns": dynDns,
-        "balance": balance,
-        "downloaded": downloaded,
-        "status": status,
-        "credit": credit,
-        "smsInfo": smsInfo,
-        "tariffName": tariffName,
-        "downloadSpeed": downloadSpeed,
-        "uploadSpeed": uploadSpeed,
-        "pricePerMonth": pricePerMonth,
-      };
-
-  Map<String, dynamic> toMapWithId(int id) => {
-        "user_id": id,
-        "accountName": accountName,
-        "accountId": accountId,
-        "dynDns": dynDns,
-        "balance": balance,
-        "downloaded": downloaded,
-        "status": status,
-        "credit": credit,
-        "smsInfo": smsInfo,
-        "tariffName": tariffName,
-        "downloadSpeed": downloadSpeed,
-        "uploadSpeed": uploadSpeed,
-        "pricePerMonth": pricePerMonth,
-      };
-}
-*/
