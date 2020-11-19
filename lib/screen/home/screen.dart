@@ -150,28 +150,8 @@ class DetailedUserDataWidget extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
+              verticalDirection: VerticalDirection.up,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "${data.accountName}",
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete_forever_rounded),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              _buildRemoveAccountDialog(context, data),
-                        );
-                      },
-                    ),
-                  ],
-                ),
                 Flexible(
                   child: ListView(
                     controller: controller,
@@ -240,6 +220,30 @@ class DetailedUserDataWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Material(
+                  elevation: 3,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "${data.accountName}",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete_forever_rounded),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) =>
+                                _buildRemoveAccountDialog(context, data),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -274,12 +278,18 @@ class DetailedUserDataWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .subtitle1,
               ),
               SizedBox(width: 8),
               Text(
                 value,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline6,
               )
             ],
           ),
