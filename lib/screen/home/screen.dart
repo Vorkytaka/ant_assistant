@@ -5,6 +5,7 @@ import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -227,9 +228,16 @@ class DetailedUserDataWidget extends StatelessWidget {
                     "${data.accountName}",
                     // style: Theme.of(context).textTheme.headline5,
                   ),
+                  automaticallyImplyLeading: false,
                   actions: [
                     IconButton(
+                      icon: Icon(Icons.edit),
+                      tooltip: "Изменить данные аккаунта",
+                      onPressed: null,
+                    ),
+                    IconButton(
                       icon: Icon(Icons.delete_forever_rounded),
+                      tooltip: "Удалить аккаунт",
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -278,10 +286,7 @@ class DetailedUserDataWidget extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 value,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline6,
+                style: Theme.of(context).textTheme.headline6,
               )
             ],
           ),
