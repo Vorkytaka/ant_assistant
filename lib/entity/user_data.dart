@@ -8,39 +8,25 @@ class UserData {
   final String accountId;
   final String dynDns;
 
-  final double balance;
-  final int downloaded;
-  final String status;
-  final int credit;
-  final String smsInfo;
+  final TariffInfo tariffInfo;
 
-  final String tariffName;
-  final String downloadSpeed;
-  final String uploadSpeed;
-  final double pricePerMonth;
-
-  final double pricePerDay;
+  final StatusInfo statusInfo;
 
   UserData(
     this.credentialsId,
     this.accountName,
     this.accountId,
     this.dynDns,
-    this.balance,
-    this.downloaded,
-    this.status,
-    this.credit,
-    this.smsInfo,
-    this.tariffName,
-    this.downloadSpeed,
-    this.uploadSpeed,
-    this.pricePerMonth,
-  ) : pricePerDay = pricePerMonth / 30;
+    this.tariffInfo,
+    this.statusInfo,
+  );
 
   @override
   String toString() => "($accountName)";
 
-  int daysLeft() => (balance.toInt() + credit) ~/ pricePerDay.toInt();
+  int daysLeft() =>
+      (statusInfo.balance.toInt() + statusInfo.credit) ~/
+      tariffInfo.pricePerDay.toInt();
 }
 
 @immutable
@@ -76,6 +62,7 @@ class StatusInfo {
   });
 }
 
+/*
 extension DBUserData on UserData {
   Map<String, dynamic> toMap() => {
         "accountName": accountName,
@@ -108,3 +95,4 @@ extension DBUserData on UserData {
         "pricePerMonth": pricePerMonth,
       };
 }
+*/

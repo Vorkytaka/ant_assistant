@@ -151,27 +151,65 @@ class DetailedUserDataWidget extends StatelessWidget {
                     children: [
                       SizedBox(width: 16),
                       _buildInfoCard(
-                          context, "Баланс", data.balance.toString()),
+                        context,
+                        "Баланс",
+                        data.statusInfo.balance.toString(),
+                      ),
                       _buildInfoCard(
-                          context, "Дней осталось", data.daysLeft().toString()),
+                        context,
+                        "Дней осталось",
+                        data.daysLeft().toString(),
+                      ),
                       _buildInfoCard(
-                          context, "Кредит доверия", data.credit.toString()),
+                        context,
+                        "Кредит доверия",
+                        data.statusInfo.credit.toString(),
+                      ),
                       _buildInfoCard(
-                          context, "Код плательщика", data.accountId),
-                      _buildInfoCard(context, "Состояние", data.status),
+                        context,
+                        "Код плательщика",
+                        data.accountId,
+                      ),
                       _buildInfoCard(
-                          context, "Название тарифа", data.tariffName),
-                      _buildInfoCard(context, "Цена за месяц",
-                          data.pricePerMonth.toString()),
+                        context,
+                        "Состояние",
+                        data.statusInfo.status,
+                      ),
                       _buildInfoCard(
-                          context, "Цена за день", data.pricePerDay.toString()),
-                      _buildInfoCard(context, "Скачано за текущий месяц",
-                          data.downloaded.toString()),
+                        context,
+                        "Название тарифа",
+                        data.tariffInfo.tariffName,
+                      ),
                       _buildInfoCard(
-                          context, "Скорость загрузки", data.downloadSpeed),
+                        context,
+                        "Цена за месяц",
+                        data.tariffInfo.pricePerMonth.toString(),
+                      ),
                       _buildInfoCard(
-                          context, "Скорость отдачи", data.uploadSpeed),
-                      _buildInfoCard(context, "Ваш DynDNS", data.dynDns),
+                        context,
+                        "Цена за день",
+                        data.tariffInfo.pricePerDay.toString(),
+                      ),
+                      _buildInfoCard(
+                        context,
+                        "Скачано за текущий месяц",
+                        data.statusInfo.downloaded.toString(),
+                      ),
+                      _buildInfoCard(
+                        context,
+                        "Скорость загрузки",
+                        data.tariffInfo.downloadSpeed,
+                      ),
+                      _buildInfoCard(
+                        context,
+                        "Скорость отдачи",
+                        data.tariffInfo.uploadSpeed,
+                      ),
+                      _buildInfoCard(
+                        context,
+                        "Ваш DynDNS",
+                        data.dynDns,
+                      ),
                     ],
                   ),
                 )
@@ -213,10 +251,7 @@ class DetailedUserDataWidget extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 value,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline4,
+                style: Theme.of(context).textTheme.headline4,
               )
             ],
           ),

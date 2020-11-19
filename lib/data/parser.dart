@@ -92,17 +92,22 @@ UserData parseUserData(ParsingData data) {
   }
 
   return UserData(
-      id,
-      accountName,
-      userId,
-      dynDns,
-      balance,
-      downloaded,
-      status,
-      credit,
-      smsInfo,
-      tariffName,
-      downloadSpeed,
-      uploadSpeed,
-      tariffPricePerMonth);
+    id,
+    accountName,
+    userId,
+    dynDns,
+    TariffInfo(
+      tariffName: tariffName,
+      downloadSpeed: downloadSpeed,
+      uploadSpeed: uploadSpeed,
+      pricePerMonth: tariffPricePerMonth,
+    ),
+    StatusInfo(
+      balance: balance,
+      downloaded: downloaded,
+      status: status,
+      credit: credit,
+      smsInfo: smsInfo,
+    ),
+  );
 }

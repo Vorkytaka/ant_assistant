@@ -11,15 +11,15 @@ void main() {
     expect(userData.accountName, "NOUA_2_187");
     expect(userData.accountId, "2000053468");
     expect(userData.dynDns, "2000053468.cl.a-n-t.ru");
-    expect(userData.balance, 475.18);
-    expect(userData.downloaded, 117311);
-    expect(userData.status, "Активна");
-    expect(userData.credit, 300);
-    expect(userData.smsInfo, "Отключено");
-    expect(userData.tariffName, "VX-EXTRA");
-    expect(userData.downloadSpeed, "100");
-    expect(userData.uploadSpeed, "100");
-    expect(userData.pricePerMonth, 739);
+    expect(userData.statusInfo.balance, 475.18);
+    expect(userData.statusInfo.downloaded, 117311);
+    expect(userData.statusInfo.status, "Активна");
+    expect(userData.statusInfo.credit, 300);
+    expect(userData.statusInfo.smsInfo, "Отключено");
+    expect(userData.tariffInfo.tariffName, "VX-EXTRA");
+    expect(userData.tariffInfo.downloadSpeed, "100");
+    expect(userData.tariffInfo.uploadSpeed, "100");
+    expect(userData.tariffInfo.pricePerMonth, 739);
   });
 }
 
