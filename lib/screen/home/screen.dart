@@ -158,7 +158,7 @@ class DetailedUserDataWidget extends StatelessWidget {
                       _buildInfoCard(
                         context,
                         "Дней осталось",
-                        data.daysLeft().toString(),
+                        data.daysLeft.toString(),
                       ),
                       _buildInfoCard(
                         context,

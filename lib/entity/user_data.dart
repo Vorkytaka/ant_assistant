@@ -12,6 +12,8 @@ class UserData {
 
   final StatusInfo statusInfo;
 
+  final int daysLeft;
+
   UserData({
     @required this.credentialsId,
     @required this.accountName,
@@ -19,14 +21,11 @@ class UserData {
     @required this.dynDns,
     @required this.tariffInfo,
     @required this.statusInfo,
-  });
+  }) : daysLeft =
+            (statusInfo.balance + statusInfo.credit) ~/ tariffInfo.pricePerDay;
 
   @override
   String toString() => "UserData($accountName)";
-
-  int daysLeft() =>
-      (statusInfo.balance.toInt() + statusInfo.credit) ~/
-      tariffInfo.pricePerDay.toInt();
 }
 
 @immutable
