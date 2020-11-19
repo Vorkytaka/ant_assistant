@@ -123,9 +123,26 @@ class DetailedUserDataWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "${data.accountName}",
-                  style: Theme.of(context).textTheme.headline4,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${data.accountName}",
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete_forever_rounded),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              _buildRemoveAccountDialog(context, data),
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 Flexible(
                   child: ListView(
@@ -196,12 +213,47 @@ class DetailedUserDataWidget extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 value,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline4,
               )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildRemoveAccountDialog(BuildContext context, UserData data) {
+    return AlertDialog(
+      title: Text("Удаление аккаунта"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Вы уверены, что хотите удалить аккаунт ${data.accountName}?"),
+          SizedBox(height: 8),
+          Text("Это действие нельзя отменить"),
+        ],
+      ),
+      actions: [
+        FlatButton(
+          child: Text("Нет"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        RaisedButton(
+          child: Text("Да"),
+          onPressed: () {
+            BlocProvider.of<UserDataBloc>(context).add(
+              DeleteUser(id: data.credentialsId),
+            );
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
     );
   }
 }
