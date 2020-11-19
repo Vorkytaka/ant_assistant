@@ -49,13 +49,14 @@ class TariffInfo {
   final String downloadSpeed;
   final String uploadSpeed;
   final double pricePerMonth;
+  final double pricePerDay;
 
   TariffInfo({
     @required this.tariffName,
     @required this.downloadSpeed,
     @required this.uploadSpeed,
     @required this.pricePerMonth,
-  });
+  }) : pricePerDay = pricePerMonth / 30;
 }
 
 @immutable
