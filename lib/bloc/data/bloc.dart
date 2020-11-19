@@ -40,8 +40,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     if (state is DataLoaded) {
       final data = (state as DataLoaded).data;
       yield DataLoaded(
-          data: [...data]
-            ..removeWhere((element) => element.credentialsId == event.id));
+          data: [...data]..removeWhere(
+              (element) => element.credentialsId == event.credentialsId));
     }
   }
 

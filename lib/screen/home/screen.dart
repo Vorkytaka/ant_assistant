@@ -248,7 +248,7 @@ class DetailedUserDataWidget extends StatelessWidget {
           child: Text("Да"),
           onPressed: () {
             BlocProvider.of<UserDataBloc>(context).add(
-              DeleteUser(id: data.credentialsId),
+              DeleteUser(credentialsId: data.credentialsId),
             );
             Navigator.of(context).pop();
           },
