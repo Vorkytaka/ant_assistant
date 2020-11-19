@@ -121,17 +121,29 @@ class DetailedUserDataWidget extends StatelessWidget {
           }
         }
       },
+      buildWhen: (prev, curr) {
+        // we not do a rebuild, if there is no current data
+        // cuz it's happening only when we delete this account
+        // and hide current dialog
+        if (curr is DataLoaded) {
+          final data = curr.data.firstWhere(
+            (element) => element.accountId == accountId,
+            orElse: () => null,
+          );
+          if (data == null) {
+            return false;
+          }
+        }
+
+        return true;
+      },
       builder: (context, state) {
         if (state is DataLoaded) {
           final data = state.data.firstWhere(
             (element) => element.accountId == accountId,
             orElse: () => null,
           );
-
-          // show empty container if there is no data
-          // for case when data was deleted
-          // and we close dialog
-          if (data == null) return Container();
+          assert(data != null);
 
           return Container(
             color: Theme.of(context).cardColor,
