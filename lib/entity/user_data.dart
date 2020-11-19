@@ -43,6 +43,38 @@ class UserData {
   int daysLeft() => (balance.toInt() + credit) ~/ pricePerDay.toInt();
 }
 
+@immutable
+class TariffInfo {
+  final String tariffName;
+  final String downloadSpeed;
+  final String uploadSpeed;
+  final double pricePerMonth;
+
+  TariffInfo({
+    @required this.tariffName,
+    @required this.downloadSpeed,
+    @required this.uploadSpeed,
+    @required this.pricePerMonth,
+  });
+}
+
+@immutable
+class StatusInfo {
+  final double balance;
+  final int downloaded;
+  final String status;
+  final int credit;
+  final String smsInfo;
+
+  StatusInfo({
+    @required this.balance,
+    @required this.downloaded,
+    @required this.status,
+    @required this.credit,
+    @required this.smsInfo,
+  });
+}
+
 extension DBUserData on UserData {
   Map<String, dynamic> toMap() => {
         "accountName": accountName,
