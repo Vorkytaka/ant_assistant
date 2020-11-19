@@ -12,17 +12,17 @@ class UserData {
 
   final StatusInfo statusInfo;
 
-  UserData(
-    this.credentialsId,
-    this.accountName,
-    this.accountId,
-    this.dynDns,
-    this.tariffInfo,
-    this.statusInfo,
-  );
+  UserData({
+    @required this.credentialsId,
+    @required this.accountName,
+    @required this.accountId,
+    @required this.dynDns,
+    @required this.tariffInfo,
+    @required this.statusInfo,
+  });
 
   @override
-  String toString() => "($accountName)";
+  String toString() => "UserData($accountName)";
 
   int daysLeft() =>
       (statusInfo.balance.toInt() + statusInfo.credit) ~/
