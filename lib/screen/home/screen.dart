@@ -157,6 +157,9 @@ class DetailedUserDataWidget extends StatelessWidget {
                   child: ListView(
                     controller: controller,
                     physics: const ScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
                     children: [
                       SizedBox(width: 16),
                       _buildInfoCard(
@@ -269,27 +272,25 @@ class DetailedUserDataWidget extends StatelessWidget {
   ) {
     return SizedBox(
       width: double.infinity,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              SizedBox(width: 8),
-              Text(
-                value,
-                style: Theme.of(context).textTheme.headline6,
-              )
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            SizedBox(width: 8),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.headline6,
+            )
+          ],
         ),
       ),
     );
