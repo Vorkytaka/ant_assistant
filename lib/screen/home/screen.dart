@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                 maxChildSize: 0.9,
                 initialChildSize: 0.5,
                 builder: (context, controller) => DetailedUserDataWidget(
-                  accountId: data.accountId,
+                  credentialsId: data.credentialsId,
                   controller: controller,
                 ),
               );
@@ -103,12 +103,14 @@ class HomeScreen extends StatelessWidget {
 }
 
 class DetailedUserDataWidget extends StatelessWidget {
-  final String accountId;
+  final int credentialsId;
   final ScrollController controller;
 
-  const DetailedUserDataWidget(
-      {Key key, @required this.accountId, this.controller})
-      : assert(accountId != null),
+  const DetailedUserDataWidget({
+    Key key,
+    @required this.credentialsId,
+    this.controller,
+  })  : assert(credentialsId != null),
         super(key: key);
 
   @override
@@ -117,7 +119,7 @@ class DetailedUserDataWidget extends StatelessWidget {
       listener: (context, state) {
         if (state is DataLoaded) {
           final data = state.data.firstWhere(
-            (element) => element.accountId == accountId,
+            (element) => element.credentialsId == credentialsId,
             orElse: () => null,
           );
           if (data == null) {
@@ -131,7 +133,7 @@ class DetailedUserDataWidget extends StatelessWidget {
         // and hide current dialog
         if (curr is DataLoaded) {
           final data = curr.data.firstWhere(
-            (element) => element.accountId == accountId,
+            (element) => element.credentialsId == credentialsId,
             orElse: () => null,
           );
           if (data == null) {
@@ -144,7 +146,7 @@ class DetailedUserDataWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is DataLoaded) {
           final data = state.data.firstWhere(
-            (element) => element.accountId == accountId,
+            (element) => element.credentialsId == credentialsId,
             orElse: () => null,
           );
           assert(data != null);
