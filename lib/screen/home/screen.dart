@@ -164,61 +164,73 @@ class DetailedUserDataWidget extends StatelessWidget {
                       SizedBox(width: 16),
                       _buildInfoCard(
                         context,
+                        Icons.account_balance_wallet,
                         "Баланс",
                         data.statusInfo.balance.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.calendar_today_outlined,
                         "Дней осталось",
                         data.daysLeft.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.volunteer_activism,
                         "Кредит доверия",
                         data.statusInfo.credit.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.credit_card_rounded,
                         "Код плательщика",
                         data.accountId,
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.wb_sunny_rounded,
                         "Состояние",
                         data.statusInfo.status,
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.label_important,
                         "Название тарифа",
                         data.tariffInfo.tariffName,
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.attach_money_outlined,
                         "Цена за месяц",
                         data.tariffInfo.pricePerMonth.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.attach_money_outlined,
                         "Цена за день",
                         data.tariffInfo.pricePerDay.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.download_rounded,
                         "Скачано за текущий месяц",
                         data.statusInfo.downloaded.toString(),
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.arrow_forward,
                         "Скорость загрузки",
                         data.tariffInfo.downloadSpeed,
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.arrow_back,
                         "Скорость отдачи",
                         data.tariffInfo.uploadSpeed,
                       ),
                       _buildInfoCard(
                         context,
+                        Icons.dynamic_feed,
                         "Ваш DynDNS",
                         data.dynDns,
                       ),
@@ -267,6 +279,7 @@ class DetailedUserDataWidget extends StatelessWidget {
 
   Widget _buildInfoCard(
     BuildContext context,
+    IconData icon,
     String title,
     String value,
   ) {
@@ -277,19 +290,31 @@ class DetailedUserDataWidget extends StatelessWidget {
           horizontal: 16,
           vertical: 8,
         ),
-        child: Column(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.subtitle1,
+            Icon(icon),
+            SizedBox(width: 16),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  direction: Axis.horizontal,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
+                SizedBox(width: 8),
+                Text(
+                  value,
+                  style: Theme.of(context).textTheme.headline6,
+                )
+              ],
             ),
-            SizedBox(width: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headline6,
-            )
           ],
         ),
       ),
