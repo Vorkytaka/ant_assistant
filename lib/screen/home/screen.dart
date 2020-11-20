@@ -1,5 +1,7 @@
+import 'package:antassistant/bloc/auth/bloc.dart';
+import 'package:antassistant/bloc/auth/event.dart' as AuthBlocEvent;
 import 'package:antassistant/bloc/data/bloc.dart';
-import 'package:antassistant/bloc/data/event.dart';
+import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
 import 'package:antassistant/screen/login/provider.dart';
@@ -24,7 +26,8 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
-              BlocProvider.of<UserDataBloc>(context).add(AskForUpdate());
+              BlocProvider.of<UserDataBloc>(context)
+                  .add(UserDataEvent.AskForUpdate());
             },
           ),
         ],
@@ -344,8 +347,9 @@ class DetailedUserDataWidget extends StatelessWidget {
           child: Text("Да"),
           onPressed: () {
             BlocProvider.of<UserDataBloc>(context).add(
-              DeleteUser(credentialsId: data.credentialsId),
-            );
+                UserDataEvent.DeleteUser(credentialsId: data.credentialsId));
+            BlocProvider.of<AuthBloc>(context)
+                .add(AuthBlocEvent.DeleteUser(id: data.credentialsId));
             Navigator.of(context).pop();
           },
         ),

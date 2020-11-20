@@ -8,6 +8,9 @@ class AddedUser extends UserDataEvent {
   const AddedUser({this.id});
 }
 
+// todo: research
+// maybe should delete this event?
+// looks like AuthBloc DeleteUser event enough
 class DeleteUser extends UserDataEvent {
   final int credentialsId;
 
