@@ -8,7 +8,9 @@ import 'event.dart';
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final Repository _repository;
 
-  AuthBloc(this._repository) : super(Unauthenticated());
+  AuthBloc(this._repository)
+      : assert(_repository != null),
+        super(Unauthenticated());
 
   @override
   Stream<AuthBlocState> mapEventToState(AuthBlocEvent event) async* {
