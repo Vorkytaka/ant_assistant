@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/auth/bloc.dart';
-import 'bloc/auth/event.dart';
 import 'data/repository/repository.dart';
 import 'data/repository/repository_impl.dart';
 
@@ -47,7 +46,7 @@ class AppProviderState extends State<AppProvider> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(repository)..add(AppStarted()),
+            create: (context) => AuthBloc(repository),
             lazy: false,
           ),
           BlocProvider<UserDataBloc>(

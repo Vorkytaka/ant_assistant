@@ -10,7 +10,9 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
   AuthBloc(this._repository)
       : assert(_repository != null),
-        super(Unauthenticated());
+        super(Unauthenticated()) {
+    this.add(AppStarted());
+  }
 
   @override
   Stream<AuthBlocState> mapEventToState(AuthBlocEvent event) async* {
