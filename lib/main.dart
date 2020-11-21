@@ -46,7 +46,7 @@ class AppProviderState extends State<AppProvider> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(repository),
+            create: (context) => AuthBloc(repository: repository),
             lazy: false,
           ),
           BlocProvider<UserDataBloc>(

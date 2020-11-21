@@ -21,7 +21,7 @@ void main() {
       "AuthBloc throw error if repository is null",
       () {
         expect(
-          () => AuthBloc(null),
+          () => AuthBloc(repository: null),
           throwsA(isAssertionError),
         );
       },
@@ -31,7 +31,7 @@ void main() {
       "AuthBloc send Unauthenticated state when there is no credentials",
       build: () {
         when(repository.getCredentials()).thenAnswer((_) async => null);
-        return AuthBloc(repository);
+        return AuthBloc(repository: repository);
       },
       expect: [isA<Unauthenticated>()],
     );
@@ -40,7 +40,7 @@ void main() {
       "AuthBloc send Unauthenticated state when there is no credentials",
       build: () {
         when(repository.getCredentials()).thenAnswer((_) async => List());
-        return AuthBloc(repository);
+        return AuthBloc(repository: repository);
       },
       expect: [isA<Unauthenticated>()],
     );
@@ -56,7 +56,7 @@ void main() {
               password: "",
             ),
           )));
-        return AuthBloc(repository);
+        return AuthBloc(repository: repository);
       },
       expect: [isA<Authenticated>()],
     );

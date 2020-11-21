@@ -5,10 +5,10 @@ import 'package:bloc/bloc.dart';
 import 'event.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  final Repository _repository;
+  final Repository repository;
 
-  AuthBloc(this._repository)
-      : assert(_repository != null),
+  AuthBloc({this.repository})
+      : assert(repository != null),
         super(Unauthenticated()) {
     this.add(AppStarted());
   }
@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   }
 
   Stream<AuthBlocState> _mapDeleteUserToState(DeleteUser event) async* {
-    await _repository.removeUser(event.id);
+    await repository.removeUser(event.id);
     yield* _credentialsToState();
   }
 
@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   }
 
   Stream<AuthBlocState> _credentialsToState() async* {
-    final credentials = await _repository.getCredentials();
+    final credentials = await repository.getCredentials();
     if (credentials == null || credentials.isEmpty) {
       yield Unauthenticated();
     } else {
