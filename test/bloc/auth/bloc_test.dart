@@ -30,6 +30,15 @@ void main() {
     blocTest<AuthBloc, AuthBlocState>(
       "AuthBloc send Unauthenticated state when there is no credentials",
       build: () {
+        when(repository.getCredentials()).thenAnswer((_) async => null);
+        return AuthBloc(repository);
+      },
+      expect: [isA<Unauthenticated>()],
+    );
+
+    blocTest<AuthBloc, AuthBlocState>(
+      "AuthBloc send Unauthenticated state when there is no credentials",
+      build: () {
         when(repository.getCredentials()).thenAnswer((_) async => List());
         return AuthBloc(repository);
       },

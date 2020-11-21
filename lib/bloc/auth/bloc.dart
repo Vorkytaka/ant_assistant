@@ -1,6 +1,5 @@
 import 'package:antassistant/bloc/auth/state.dart';
 import 'package:antassistant/data/repository/repository.dart';
-import 'package:antassistant/entity/credentials.dart';
 import 'package:bloc/bloc.dart';
 
 import 'event.dart';
@@ -39,12 +38,12 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   }
 
   Stream<AuthBlocState> _credentialsToState() async* {
-    final List<Credentials> credentials =
-        (await _repository.getCredentials()).map((e) => e.entity).toList();
+    final credentials = await _repository.getCredentials();
     if (credentials == null || credentials.isEmpty) {
       yield Unauthenticated();
     } else {
-      yield Authenticated(credentials: credentials);
+      final mappedCredentials = credentials.map((e) => e.entity).toList();
+      yield Authenticated(credentials: mappedCredentials);
     }
   }
 }
