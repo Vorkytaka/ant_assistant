@@ -75,13 +75,16 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             isScrollControlled: true,
             builder: (context) {
-              return DraggableScrollableSheet(
-                minChildSize: 0.3,
-                maxChildSize: 0.9,
-                initialChildSize: 0.5,
-                builder: (context, controller) => DetailedUserDataWidget(
-                  credentialsId: data.credentialsId,
-                  controller: controller,
+              return Flexible(
+                child: DraggableScrollableSheet(
+                  minChildSize: 0.3,
+                  maxChildSize: 0.9,
+                  initialChildSize: 0.5,
+                  expand: false,
+                  builder: (context, controller) => DetailedUserDataWidget(
+                    credentialsId: data.credentialsId,
+                    controller: controller,
+                  ),
                 ),
               );
             },
