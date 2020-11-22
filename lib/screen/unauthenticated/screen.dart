@@ -37,7 +37,7 @@ class UnauthenticatedScreen extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                          "Ваш карманный помощник в работе с провайдером ",
+                              "Ваш карманный помощник в работе с провайдером ",
                         ),
                         TextSpan(
                           text: "«‎Альфа Нет Телеком»",
@@ -57,38 +57,32 @@ class UnauthenticatedScreen extends StatelessWidget {
             ),
             Column(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: RaisedButton(
-                        onPressed: () async {
-                          Navigator.of(context)
-                              .pushNamed(LoginScreenProvider.ROUTE);
-                        },
-                        child: Text(
-                          "Добавить аккаунт",
-                        ),
-                      ),
-                    )
-                  ],
+                SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton(
+                    onPressed: () async {
+                      Navigator.of(context)
+                          .pushNamed(LoginScreenProvider.ROUTE);
+                    },
+                    child: Text(
+                      "Добавить аккаунт",
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: OutlineButton(
-                        onPressed: () async {
-                          await launch(URIs.SUPPORT_PHONE.toString());
-                        },
-                        child: Text(
-                          "Звонок в службу поддержки",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )
-                  ],
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlineButton(
+                    onPressed: () async {
+                      await launch(URIs.SUPPORT_PHONE.toString());
+                    },
+                    child: Text(
+                      "Звонок в службу поддержки",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 80,
