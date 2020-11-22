@@ -25,10 +25,7 @@ class DetailedUserDataScreen extends StatelessWidget {
     return BlocConsumer<UserDataBloc, UserDataState>(
       listener: (context, state) {
         if (state is DataLoaded) {
-          final data = state.data.firstWhere(
-            (element) => element.credentialsId == credentialsId,
-            orElse: () => null,
-          );
+          final data = state._byCredentialsId(credentialsId);
           if (data == null) {
             Navigator.of(context).pop();
           }
@@ -39,10 +36,7 @@ class DetailedUserDataScreen extends StatelessWidget {
         // cuz it's happening only when we delete this account
         // and hide current dialog
         if (curr is DataLoaded) {
-          final data = curr.data.firstWhere(
-            (element) => element.credentialsId == credentialsId,
-            orElse: () => null,
-          );
+          final data = curr._byCredentialsId(credentialsId);
           if (data == null) {
             return false;
           }
@@ -52,10 +46,7 @@ class DetailedUserDataScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is DataLoaded) {
-          final data = state.data.firstWhere(
-            (element) => element.credentialsId == credentialsId,
-            orElse: () => null,
-          );
+          final data = state._byCredentialsId(credentialsId);
           assert(data != null);
 
           return Container(
@@ -264,5 +255,16 @@ class DetailedUserDataScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+extension DataLoadedUtils on DataLoaded {
+  static final _orElseNull = () => null;
+
+  UserData _byCredentialsId(int id) {
+    return this.data.firstWhere(
+          (e) => e.credentialsId == id,
+          orElse: _orElseNull,
+        );
   }
 }
