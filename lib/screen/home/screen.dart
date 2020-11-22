@@ -92,9 +92,32 @@ class HomeScreen extends StatelessWidget {
             horizontal: 24,
             vertical: 16,
           ),
-          child: Text(
-            "${data.accountName}",
-            style: Theme.of(context).textTheme.headline6,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${data.accountName}",
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "${data.accountId}",
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                "${data.statusInfo.balance} ₽",
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ],
           ),
         ),
       ),
