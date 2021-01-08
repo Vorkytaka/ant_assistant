@@ -2,7 +2,7 @@ import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
 import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/entity/user_data.dart';
-import 'package:antassistant/screen/detailed/screen.dart';
+import 'package:antassistant/screen/detailed/provider.dart';
 import 'package:antassistant/screen/login/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -79,10 +79,12 @@ class HomeScreen extends StatelessWidget {
                 maxChildSize: 0.9,
                 initialChildSize: 0.5,
                 expand: false,
-                builder: (context, controller) => DetailedUserDataScreen(
-                  credentialsId: data.credentialsId,
-                  controller: controller,
-                ),
+                builder: (context, controller) {
+                  return DetailedUserDataScreenProvider(
+                    credentialsId: data.credentialsId,
+                    controller: controller,
+                  );
+                },
               );
             },
           );
