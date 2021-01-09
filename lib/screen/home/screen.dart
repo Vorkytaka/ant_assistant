@@ -69,24 +69,11 @@ class HomeScreen extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            builder: (context) {
-              return DraggableScrollableSheet(
-                minChildSize: 0.3,
-                maxChildSize: 0.9,
-                initialChildSize: 0.5,
-                expand: false,
-                builder: (context, controller) {
-                  return DetailedUserDataScreenProvider(
-                    credentialsId: data.credentialsId,
-                    controller: controller,
-                  );
-                },
-              );
-            },
+          Navigator.of(context).pushNamed(
+            DetailedUserDataScreenProvider.ROUTE,
+            arguments: DetailedUserDataScreenArguments(
+              credentialsId: data.credentialsId,
+            ),
           );
         },
         child: Padding(

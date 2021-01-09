@@ -3,6 +3,7 @@ import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart';
 import 'package:antassistant/data/api.dart';
 import 'package:antassistant/data/source/sql_data_source.dart';
+import 'package:antassistant/screen/detailed/provider.dart';
 import 'package:antassistant/screen/home/provider.dart';
 import 'package:antassistant/screen/login/provider.dart';
 import 'package:antassistant/screen/unauthenticated/screen.dart';
@@ -84,6 +85,8 @@ class App extends StatelessWidget {
         HomeScreenProvider.ROUTE: (context) => HomeScreenProvider(),
         LoginScreenProvider.ROUTE: (context) => LoginScreenProvider(),
         UnauthenticatedScreen.ROUTE: (context) => UnauthenticatedScreen(),
+        DetailedUserDataScreenProvider.ROUTE: (context) =>
+            DetailedUserDataScreenProvider(),
       },
       home: BlocBuilder<AuthBloc, AuthBlocState>(
         builder: (BuildContext context, AuthBlocState state) {

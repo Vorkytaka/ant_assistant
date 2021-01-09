@@ -5,19 +5,26 @@ import 'package:antassistant/screen/detailed/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DetailedUserDataScreenProvider extends StatelessWidget {
+class DetailedUserDataScreenArguments {
   final int credentialsId;
   final ScrollController controller;
 
-  const DetailedUserDataScreenProvider({
-    Key key,
-    this.credentialsId,
+  const DetailedUserDataScreenArguments({
+    @required this.credentialsId,
     this.controller,
-  })  : assert(credentialsId != null),
-        super(key: key);
+  }) : assert(credentialsId != null);
+}
+
+class DetailedUserDataScreenProvider extends StatelessWidget {
+  static const String ROUTE = "detailed_user_data";
 
   @override
   Widget build(BuildContext context) {
+    final DetailedUserDataScreenArguments args =
+        ModalRoute.of(context).settings.arguments;
+    final int credentialsId = args.credentialsId;
+    final ScrollController controller = args.controller;
+
     return BlocConsumer<UserDataBloc, UserDataState>(
       listener: (context, state) {
         if (state is DataLoaded) {
