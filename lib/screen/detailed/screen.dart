@@ -3,7 +3,6 @@ import 'package:antassistant/bloc/auth/event.dart' as AuthBlocEvent;
 import 'package:antassistant/bloc/data/bloc.dart';
 import 'package:antassistant/bloc/data/event.dart' as UserDataEvent;
 import 'package:antassistant/entity/user_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,46 +20,32 @@ class DetailedUserDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).cardColor,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        verticalDirection: VerticalDirection.up,
-        children: [
-          Flexible(
-            child: DetailedUserDataBody(
-              data: data,
-              controller: controller,
-            ),
-          ),
-          AppBar(
-            elevation: 3,
-            title: Text(
-              "${data.accountName}",
-              // style: Theme.of(context).textTheme.headline5,
-            ),
-            automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.edit),
-                tooltip: "Изменить данные аккаунта",
-                onPressed: null,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Theme.of(context).cardColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: DetailedUserDataHeaderWidget(
+                    data: data,
+                  ),
+                ),
               ),
-              IconButton(
-                icon: Icon(Icons.delete_forever_rounded),
-                tooltip: "Удалить аккаунт",
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) =>
-                        _buildRemoveAccountDialog(context, data),
-                  );
-                },
+              Flexible(
+                child: DetailedUserDataBody(
+                  data: data,
+                  controller: controller,
+                ),
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -231,6 +216,75 @@ class DetailedUserDataBody extends StatelessWidget {
                 Text(
                   value,
                   style: Theme.of(context).textTheme.headline6,
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailedUserDataHeaderWidget extends StatelessWidget {
+  final UserData data;
+
+  const DetailedUserDataHeaderWidget({
+    Key key,
+    @required this.data,
+  })  : assert(data != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "На счету",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "${data.statusInfo.balance}",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Дней осталось",
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "${data.daysLeft}",
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Кредит доверия",
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "${data.statusInfo.credit}",
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ],
                 )
               ],
             ),

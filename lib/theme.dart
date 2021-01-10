@@ -42,7 +42,7 @@ ThemeData createLightTheme() {
       fontWeight: FontWeight.w300,
     ),
     headline6: TextStyle(
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w300,
       color: Colors.black,
     ),
     overline: TextStyle(
