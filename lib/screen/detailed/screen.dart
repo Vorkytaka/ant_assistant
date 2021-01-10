@@ -239,57 +239,74 @@ class DetailedUserDataHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "На счету",
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            SizedBox(height: 8),
-            Text(
-              "${data.statusInfo.balance}",
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                Text(
+                  "На счету",
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "${data.statusInfo.balance}",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      "Дней осталось",
-                      style: Theme.of(context).textTheme.headline6,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Дней осталось",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "${data.daysLeft}",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      "${data.daysLeft}",
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Кредит доверия",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "${data.statusInfo.credit}",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ],
+                    )
                   ],
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Кредит доверия",
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "${data.statusInfo.credit}",
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  ],
-                )
               ],
             ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(icon: Icon(Icons.refresh), onPressed: null),
+                  IconButton(icon: Icon(Icons.refresh), onPressed: null),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
