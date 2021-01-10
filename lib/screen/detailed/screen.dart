@@ -228,15 +228,31 @@ class DetailedUserDataBody extends StatelessWidget {
 
 class DetailedUserDataHeaderWidget extends StatelessWidget {
   final UserData data;
+  final List<Widget> actions;
+  final bool automaticallyImplyLeading;
 
   const DetailedUserDataHeaderWidget({
     Key key,
     @required this.data,
+    this.actions,
+    this.automaticallyImplyLeading = true,
   })  : assert(data != null),
+        assert(automaticallyImplyLeading != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Widget leading;
+    if (automaticallyImplyLeading) {
+      if (Navigator.of(context).canPop()) {
+        leading = BackButton();
+      }
+    }
+
+    if (leading == null) {
+      leading = Container();
+    }
+
     return Card(
       elevation: 3,
       child: Stack(
@@ -296,14 +312,12 @@ class DetailedUserDataHeaderWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(icon: Icon(Icons.refresh), onPressed: null),
-                  IconButton(icon: Icon(Icons.refresh), onPressed: null),
-                ],
-              ),
+              leading,
+              if (actions != null && actions.isNotEmpty)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: actions,
+                ),
             ],
           ),
         ],
