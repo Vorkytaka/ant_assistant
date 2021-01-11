@@ -35,8 +35,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: BlocBuilder<UserDataBloc, NewUserDataState>(
-                builder: (BuildContext context, NewUserDataState state) {
+              child: BlocBuilder<UserDataBloc, UserDataState>(
+                builder: (BuildContext context, UserDataState state) {
                   if (state.status == UserDataStateStatus.LOADING) {
                     return Center(
                       child: CircularProgressIndicator(),

@@ -19,7 +19,7 @@ class DetailedUserDataPageViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<UserDataBloc, NewUserDataState>(
+      body: BlocBuilder<UserDataBloc, UserDataState>(
         builder: (context, state) {
           if (state.status == UserDataStateStatus.SUCCESS) {
             int initialPage = 0;

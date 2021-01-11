@@ -25,7 +25,7 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
     final int credentialsId = args.credentialsId;
     final ScrollController controller = args.controller;
 
-    return BlocConsumer<UserDataBloc, NewUserDataState>(
+    return BlocConsumer<UserDataBloc, UserDataState>(
       listener: (context, state) {
         if (state.status == UserDataStateStatus.SUCCESS) {
           final data = state._byCredentialsId(credentialsId);
@@ -67,7 +67,7 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
   }
 }
 
-extension DataLoadedUtils on NewUserDataState {
+extension DataLoadedUtils on UserDataState {
   static final _orElseNull = () => null;
 
   UserData _byCredentialsId(int id) {

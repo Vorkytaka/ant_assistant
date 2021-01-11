@@ -3,14 +3,14 @@ import 'package:antassistant/bloc/data/state.dart';
 import 'package:antassistant/data/repository/repository.dart';
 import 'package:bloc/bloc.dart';
 
-class UserDataBloc extends Bloc<UserDataEvent, NewUserDataState> {
+class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   final Repository _repository;
 
   UserDataBloc(this._repository)
-      : super(NewUserDataState(status: UserDataStateStatus.INITIAL));
+      : super(UserDataState(status: UserDataStateStatus.INITIAL));
 
   @override
-  Stream<NewUserDataState> mapEventToState(UserDataEvent event) async* {
+  Stream<UserDataState> mapEventToState(UserDataEvent event) async* {
     if (event is AddedUser) {
       yield* _mapAddedUserToState(event);
     } else if (event is DeleteUser) {
@@ -22,7 +22,7 @@ class UserDataBloc extends Bloc<UserDataEvent, NewUserDataState> {
     }
   }
 
-  Stream<NewUserDataState> _mapAddedUserToState(AddedUser event) async* {
+  Stream<UserDataState> _mapAddedUserToState(AddedUser event) async* {
     yield state.copyWith(status: UserDataStateStatus.LOADING);
 
     final credentials = await _repository.getCredentialsById(event.id);
@@ -34,7 +34,7 @@ class UserDataBloc extends Bloc<UserDataEvent, NewUserDataState> {
     );
   }
 
-  Stream<NewUserDataState> _mapDeleteUserToState(DeleteUser event) async* {
+  Stream<UserDataState> _mapDeleteUserToState(DeleteUser event) async* {
     yield state.copyWith(
       status: UserDataStateStatus.SUCCESS,
       data: [
@@ -43,7 +43,7 @@ class UserDataBloc extends Bloc<UserDataEvent, NewUserDataState> {
     );
   }
 
-  Stream<NewUserDataState> _mapAskForUpdateToState(AskForUpdate event) async* {
+  Stream<UserDataState> _mapAskForUpdateToState(AskForUpdate event) async* {
     yield state.copyWith(status: UserDataStateStatus.LOADING);
 
     final credentials = await _repository.getCredentials();
@@ -53,7 +53,7 @@ class UserDataBloc extends Bloc<UserDataEvent, NewUserDataState> {
     yield state.copyWith(status: UserDataStateStatus.SUCCESS, data: data);
   }
 
-  Stream<NewUserDataState> _mapAskForUpdateUserToState(
+  Stream<UserDataState> _mapAskForUpdateUserToState(
     AskForUpdateUser event,
   ) async* {
     yield state.copyWith(status: UserDataStateStatus.LOADING);
