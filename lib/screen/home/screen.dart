@@ -37,11 +37,11 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: BlocBuilder<UserDataBloc, UserDataState>(
                 builder: (BuildContext context, UserDataState state) {
-                  if (state is DataIsLoading) {
+                  if (state.status == UserDataStateStatus.LOADING) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state is DataLoaded) {
+                  } else if (state.status == UserDataStateStatus.SUCCESS) {
                     return ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, i) => _buildItem(

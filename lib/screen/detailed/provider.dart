@@ -27,7 +27,7 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
 
     return BlocConsumer<UserDataBloc, UserDataState>(
       listener: (context, state) {
-        if (state is DataLoaded) {
+        if (state.status == UserDataStateStatus.SUCCESS) {
           final data = state._byCredentialsId(credentialsId);
           if (data == null) {
             Navigator.of(context).pop();
@@ -38,7 +38,7 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
         // we not do a rebuild, if there is no current data
         // cuz it's happening only when we delete this account
         // and hide current dialog
-        if (curr is DataLoaded) {
+        if (curr.status == UserDataStateStatus.SUCCESS) {
           final data = curr._byCredentialsId(credentialsId);
           if (data == null) {
             return false;
@@ -48,14 +48,14 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
         return true;
       },
       builder: (context, state) {
-        if (state is DataLoaded) {
+        if (state.status == UserDataStateStatus.SUCCESS) {
           final data = state._byCredentialsId(credentialsId);
           assert(data != null);
           return DetailedUserDataScreen(
             data: data,
             controller: controller,
           );
-        } else if (state is DataIsLoading) {
+        } else if (state.status == UserDataStateStatus.LOADING) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -67,7 +67,7 @@ class DetailedUserDataScreenProvider extends StatelessWidget {
   }
 }
 
-extension DataLoadedUtils on DataLoaded {
+extension DataLoadedUtils on UserDataState {
   static final _orElseNull = () => null;
 
   UserData _byCredentialsId(int id) {
